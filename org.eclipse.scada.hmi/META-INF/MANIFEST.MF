@@ -1,11 +1,11 @@
 Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: Eclipse SCADA Human Machine Interface
-Bundle-SymbolicName: org.eclipse.scada.hmi;singleton:=true
-Bundle-Version: 0.1.0.qualifier
-Bundle-Activator: org.eclipse.scada.hmi.Activator
+Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime
 Bundle-Vendor: Eclipse SCADA Project
-Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
+Bundle-Version: 0.1.0.v20131023-1107
+Bundle-Name: Eclipse SCADA Human Machine Interface
+Bundle-Activator: org.eclipse.scada.hmi.Activator
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.eclipse.scada.hmi;singleton:=true
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+
