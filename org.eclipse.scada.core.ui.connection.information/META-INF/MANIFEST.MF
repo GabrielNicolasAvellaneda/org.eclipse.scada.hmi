@@ -1,24 +1,24 @@
 Manifest-Version: 1.0
-Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.eclipse.jf
- ace.databinding;bundle-version="1.5.0",org.eclipse.core.databinding;b
- undle-version="1.4.0",org.eclipse.core.databinding.beans;bundle-versi
- on="1.2.100",org.eclipse.core.databinding.observable;bundle-version="
- 1.4.0",org.eclipse.core.databinding.property;bundle-version="1.4.0",o
- rg.eclipse.scada.ui.databinding;bundle-version="0.1.0"
-Bundle-Vendor: Eclipse SCADA Project
-Bundle-ActivationPolicy: lazy
-Bundle-Version: 0.1.0.v20131213-1406
-Bundle-Name: Connection Information
-Bundle-Activator: org.eclipse.scada.core.ui.connection.information.Act
- ivator
 Bundle-ManifestVersion: 2
-Import-Package: org.eclipse.scada.core.client;version="0.1.0",org.ecli
- pse.scada.core.connection.provider;version="0.1.0",org.eclipse.scada.
- core.connection.provider.info;version="0.1.0",org.eclipse.scada.utils
- .stats;version="0.1.0",org.eclipse.scada.utils.beans;version="0.1.0",
- org.eclipse.scada.utils.osgi;version="0.1.0",org.slf4j;version="1.5.0
- "
-Bundle-SymbolicName: org.eclipse.scada.core.ui.connection.information;
- singleton:=true
+Bundle-Name: Connection Information
+Bundle-SymbolicName: org.eclipse.scada.core.ui.connection.information;singleton:=true
+Bundle-Version: 0.1.0.qualifier
+Bundle-Activator: org.eclipse.scada.core.ui.connection.information.Activator
+Bundle-Vendor: Eclipse SCADA Project
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.jface.databinding;bundle-version="1.5.0",
+ org.eclipse.core.databinding;bundle-version="1.4.0",
+ org.eclipse.core.databinding.beans;bundle-version="1.2.100",
+ org.eclipse.core.databinding.observable;bundle-version="1.4.0",
+ org.eclipse.core.databinding.property;bundle-version="1.4.0",
+ org.eclipse.scada.ui.databinding;bundle-version="0.1.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-
+Import-Package: org.eclipse.scada.core.client;version="0.1.0",
+ org.eclipse.scada.core.connection.provider;version="0.1.0",
+ org.eclipse.scada.core.connection.provider.info;version="0.1.0",
+ org.eclipse.scada.utils.stats;version="0.1.0",
+ org.eclipse.scada.utils.beans;version="0.1.0",
+ org.eclipse.scada.utils.osgi;version="0.1.0",
+ org.slf4j;version="1.5.0"
+Bundle-ActivationPolicy: lazy
