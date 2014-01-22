@@ -1,7 +1,8 @@
 Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: Documentation for Eclipse SCADA HMI
-Bundle-SymbolicName: org.eclipse.scada.hmi.doc.isv;singleton:=true
-Bundle-Version: 0.1.0.qualifier
-Bundle-Vendor: Eclipse SCADA Project
 Require-Bundle: org.eclipse.pde.core
+Bundle-Vendor: Eclipse SCADA Project
+Bundle-Version: 0.1.0.v20131218-1351
+Bundle-Name: Documentation for Eclipse SCADA HMI
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.eclipse.scada.hmi.doc.isv;singleton:=true
+
