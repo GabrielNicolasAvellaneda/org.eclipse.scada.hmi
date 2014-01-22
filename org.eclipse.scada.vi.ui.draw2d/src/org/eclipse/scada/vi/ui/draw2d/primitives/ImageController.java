@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2013 TH4 SYSTEMS GmbH and others.
+ * Copyright (c) 2011, 2014 TH4 SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -8,6 +8,7 @@
  * Contributors:
  *     TH4 SYSTEMS GmbH - initial API and implementation
  *     Jens Reimann - additional work
+ *     IBH SYSTEMS - extend image alignment
  *******************************************************************************/
 package org.eclipse.scada.vi.ui.draw2d.primitives;
 
@@ -17,6 +18,7 @@ import java.net.URL;
 import org.eclipse.draw2d.FigureCanvas;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
+import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ResourceManager;
 import org.eclipse.scada.vi.model.Image;
@@ -56,6 +58,13 @@ public class ImageController extends FigureController
 
         applyCommon ( element );
         setImage ( element.getUri () );
+    }
+
+    protected void applyCommon ( final Image image )
+    {
+        super.applyCommon ( image );
+
+        this.figure.setIconAlignment ( Helper.convertAlignment ( image.getImageAlignment (), PositionConstants.CENTER ) );
     }
 
     @Override

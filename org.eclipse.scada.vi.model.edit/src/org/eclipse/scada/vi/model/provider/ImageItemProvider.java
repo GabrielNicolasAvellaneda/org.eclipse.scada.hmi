@@ -60,6 +60,7 @@ public class ImageItemProvider extends FigureItemProvider implements IEditingDom
             super.getPropertyDescriptors ( object );
 
             addUriPropertyDescriptor ( object );
+            addImageAlignmentPropertyDescriptor ( object );
         }
         return itemPropertyDescriptors;
     }
@@ -83,7 +84,30 @@ public class ImageItemProvider extends FigureItemProvider implements IEditingDom
                         false,
                         false,
                         ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-                        null,
+                        getString ( "_UI_imagePropertyCategory" ), //$NON-NLS-1$
+                        null ) );
+    }
+
+    /**
+     * This adds a property descriptor for the Image Alignment feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected void addImageAlignmentPropertyDescriptor ( Object object )
+    {
+        itemPropertyDescriptors.add
+                ( createItemPropertyDescriptor
+                ( ( (ComposeableAdapterFactory)adapterFactory ).getRootAdapterFactory (),
+                        getResourceLocator (),
+                        getString ( "_UI_Image_imageAlignment_feature" ), //$NON-NLS-1$
+                        getString ( "_UI_PropertyDescriptor_description", "_UI_Image_imageAlignment_feature", "_UI_Image_type" ), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                        VisualInterfacePackage.Literals.IMAGE__IMAGE_ALIGNMENT,
+                        true,
+                        false,
+                        false,
+                        ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+                        getString ( "_UI_imagePropertyCategory" ), //$NON-NLS-1$
                         null ) );
     }
 
@@ -129,6 +153,7 @@ public class ImageItemProvider extends FigureItemProvider implements IEditingDom
         switch ( notification.getFeatureID ( Image.class ) )
         {
             case VisualInterfacePackage.IMAGE__URI:
+            case VisualInterfacePackage.IMAGE__IMAGE_ALIGNMENT:
                 fireNotifyChanged ( new ViewerNotification ( notification, notification.getNotifier (), false, true ) );
                 return;
         }

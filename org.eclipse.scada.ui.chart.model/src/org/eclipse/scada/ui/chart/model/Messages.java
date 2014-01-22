@@ -7,6 +7,7 @@
  *
  * Contributors:
  *     TH4 SYSTEMS GmbH - initial API and implementation
+ *     IBH SYSTEMS GmbH - bug fixing, Eclipse migration
  *******************************************************************************/
 package org.eclipse.scada.ui.chart.model;
 
@@ -14,7 +15,7 @@ import org.eclipse.osgi.util.NLS;
 
 public class Messages extends NLS
 {
-    private static final String BUNDLE_NAME = "org.eclipse.scada.ui.chart.model.model.messages"; //$NON-NLS-1$
+    private static final String BUNDLE_NAME = "org.eclipse.scada.ui.chart.model.messages"; //$NON-NLS-1$
 
     public static String Charts_Label_Time;
 

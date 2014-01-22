@@ -7,7 +7,7 @@
       <view
             allowMultiple="true"
             category="org.eclipse.scada.da.ui.category"
-            class="org.eclipse.scada.da.client.test.views.realtime.RealTimeList"
+            class="org.eclipse.scada.da.ui.client.test.views.realtime.RealTimeList"
             id="org.eclipse.scada.da.test.views.RealTimeList"
             name="%view.realtimeList.name"
             restorable="true"/>
@@ -16,10 +16,15 @@
          point="org.eclipse.ui.commands">
       <command
             categoryId="org.eclipse.scada.da.ui.category"
-            defaultHandler="org.eclipse.scada.da.client.test.commands.OpenNewRealtimeList"
+            defaultHandler="org.eclipse.scada.da.ui.client.test.commands.OpenNewRealtimeList"
             description="%command.openNewRealtimeList.description"
             id="org.eclipse.scada.da.client.test.NewRealtimeList"
             name="%command.openNewRealtimeList.name">
+      </command>
+      <command
+            categoryId="org.eclipse.scada.da.ui.category"
+            id="org.eclipse.scada.da.ui.client.test.itemTrace"
+            name="Trace Data Item Changes">
       </command>
    </extension>
    <extension
@@ -28,7 +33,7 @@
             id="org.eclipse.scada.da.test.views.RealTimeList.vc1"
             targetID="org.eclipse.scada.da.test.views.RealTimeList">
             <action
-               class="org.eclipse.scada.da.client.test.actions.WriteOperationAction"
+               class="org.eclipse.scada.da.ui.client.test.actions.WriteOperationAction"
                icon="icons/16x16/write_obj.gif"
                id="org.eclipse.scada.da.client.test.actions.WriteOperationAction"
                label="Write"
@@ -40,7 +45,7 @@
             </enablement>
          </action>
          <action
-               class="org.eclipse.scada.da.client.test.actions.WriteAttributesOperationAction"
+               class="org.eclipse.scada.da.ui.client.test.actions.WriteAttributesOperationAction"
                icon="icons/16x16/write_obj.gif"
                id="org.eclipse.scada.da.client.test.actions.WriteAttributesOperationAction"
                label="Write Attributes"
@@ -60,13 +65,13 @@
             id="org.eclipse.scada.da.client.test.popupMenus.oc3"
             objectClass="org.eclipse.scada.da.ui.widgets.realtime.ListEntry">
          <action
-               class="org.eclipse.scada.da.client.test.actions.WriteOperationAction"
+               class="org.eclipse.scada.da.ui.client.test.actions.WriteOperationAction"
                icon="icons/16x16/write_obj.gif"
                id="org.eclipse.scada.da.client.test.actions.WriteOperationAction"
                label="Write Operation"
                menubarPath="additions"/>
          <action
-               class="org.eclipse.scada.da.client.test.actions.WriteAttributesOperationAction"
+               class="org.eclipse.scada.da.ui.client.test.actions.WriteAttributesOperationAction"
                icon="icons/16x16/write_obj.gif"
                id="org.eclipse.scada.da.client.test.actions.WriteAttributesOperationAction"
                label="Write Attributes Operation"
@@ -77,7 +82,7 @@
             id="org.eclipse.scada.da.client.test.popupMenus.oc4"
             objectClass="org.eclipse.scada.da.ui.widgets.realtime.AttributePair">
          <action
-               class="org.eclipse.scada.da.client.test.actions.WriteAttributesOperationAction"
+               class="org.eclipse.scada.da.ui.client.test.actions.WriteAttributesOperationAction"
                icon="icons/16x16/write_obj.gif"
                id="org.eclipse.scada.da.client.test.actions.WriteAttributesOperationAction"
                label="Write Attributes Operation"
@@ -89,7 +94,7 @@
          point="org.eclipse.ui.newWizards">
       <wizard
             category="org.eclipse.scada.da.ui.category"
-            class="org.eclipse.scada.da.client.test.wizards.WriteOperationWizard"
+            class="org.eclipse.scada.da.ui.client.test.wizards.WriteOperationWizard"
             hasPages="true"
             icon="icons/16x16/write_obj.gif"
             id="org.eclipse.scada.da.client.test.newWizards.NewWriteOperation"
@@ -98,7 +103,7 @@
       </wizard>
       <wizard
             category="org.eclipse.scada.da.ui.category"
-            class="org.eclipse.scada.da.client.test.wizards.WriteAttributesOperationWizard"
+            class="org.eclipse.scada.da.ui.client.test.wizards.WriteAttributesOperationWizard"
             hasPages="true"
             icon="icons/16x16/write_obj.gif"
             id="org.eclipse.scada.da.client.test.newWizards.NewWriteAttributesOperation"
@@ -124,12 +129,65 @@
                   tooltip="%command.openNewRealtimeList.description">
             </command>
       </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <command
+               commandId="org.eclipse.scada.da.ui.client.test.itemTrace"
+               style="push">
+            <visibleWhen
+                  checkEnabled="true">
+            </visibleWhen>
+         </command>
+      </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
       <perspectiveExtension
             targetID="org.eclipse.scada.da.ui.perspective">
       </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.eclipse.scada.da.ui.client.test.commands.StartItemTrace"
+            commandId="org.eclipse.scada.da.ui.client.test.itemTrace">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <or>
+                     <adapt
+                           type="org.eclipse.scada.da.ui.connection.data.Item">
+                     </adapt>
+                     <instanceof
+                           value="org.eclipse.scada.da.ui.connection.data.Item">
+                     </instanceof>
+                  </or>
+               </iterate>
+            </with>
+         </enabledWhen>
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commandImages">
+      <image
+            commandId="org.eclipse.scada.da.ui.client.test.itemTrace"
+            icon="icons/16x16/item_trace.gif">
+      </image>
+   </extension>
+   <extension
+         point="org.eclipse.ui.console.consolePageParticipants">
+      <consolePageParticipant
+            class="org.eclipse.scada.da.ui.client.test.console.ItemTraceConsolePageParticipant"
+            id="org.eclipse.scada.da.ui.client.test.itemTraceParticipant">
+         <enablement>
+            <instanceof
+                  value="org.eclipse.scada.da.ui.client.test.console.ItemTraceIOConsole">
+            </instanceof></enablement>
+      </consolePageParticipant>
    </extension>
    
 </plugin>

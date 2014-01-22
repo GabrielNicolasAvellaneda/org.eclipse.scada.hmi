@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2013 TH4 SYSTEMS GmbH and others.
+ * Copyright (c) 2012, 2014 TH4 SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,6 +7,7 @@
  *
  * Contributors:
  *     TH4 SYSTEMS GmbH - initial API and implementation
+ *     IBH SYSTEMS GmbH - change handling of invalid parameters
  *******************************************************************************/
 package org.eclipse.scada.ui.chart.view.command;
 
@@ -16,29 +17,33 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.scada.da.ui.connection.data.Item;
 import org.eclipse.scada.da.ui.connection.data.Item.Type;
-import org.eclipse.scada.ui.chart.model.Charts;
 import org.eclipse.scada.ui.chart.model.Chart;
 import org.eclipse.scada.ui.chart.model.ChartFactory;
+import org.eclipse.scada.ui.chart.model.Charts;
 import org.eclipse.scada.ui.chart.model.CompositeArchiveQualitySeries;
 
+/**
+ * Open a chart view with parameters <br/>
+ * The querySpec string format is: <code>startTimeOffset:endTimeOffset</code> or
+ * <code>startTimeOffset:endTimeOffset:minValue:maxValue</code>
+ */
 public class OpenChartViewWithParameters extends AbstractChartHandler
 {
-
     @Override
     public Object execute ( final ExecutionEvent event ) throws ExecutionException
     {
-        final String connectionId = event.getParameter ( "org.eclipse.scada.ui.chart.model.connectionId" ); //$NON-NLS-1$
-        final String connectionString = event.getParameter ( "org.eclipse.scada.ui.chart.model.connectionString" ); //$NON-NLS-1$
-        final String itemId = event.getParameter ( "org.eclipse.scada.ui.chart.model.itemId" ); //$NON-NLS-1$
-        final String itemType = event.getParameter ( "org.eclipse.scada.ui.chart.model.itemType" ); //$NON-NLS-1$
+        final String connectionId = event.getParameter ( "org.eclipse.scada.ui.chart.connectionId" ); //$NON-NLS-1$
+        final String connectionString = event.getParameter ( "org.eclipse.scada.ui.chart.connectionString" ); //$NON-NLS-1$
+        final String itemId = event.getParameter ( "org.eclipse.scada.ui.chart.itemId" ); //$NON-NLS-1$
+        final String itemType = event.getParameter ( "org.eclipse.scada.ui.chart.itemType" ); //$NON-NLS-1$
 
         if ( connectionId == null && connectionString == null )
         {
-            return null;
+            throw new ExecutionException ( "No connection ID or string set" );
         }
         if ( itemType == null )
         {
-            return null;
+            throw new ExecutionException ( "Item type is not set" );
         }
 
         final Chart configuration = makeConfiguration ( event );
@@ -51,13 +56,17 @@ public class OpenChartViewWithParameters extends AbstractChartHandler
         {
             openHdChartView ( Arrays.asList ( new org.eclipse.scada.hd.ui.connection.data.Item ( connectionId != null ? connectionId : connectionString, itemId, connectionId != null ? org.eclipse.scada.hd.ui.connection.data.Item.Type.ID : org.eclipse.scada.hd.ui.connection.data.Item.Type.URI ) ), configuration );
         }
+        else
+        {
+            throw new ExecutionException ( String.format ( "The item type '%s' is unsupported", itemType ) );
+        }
 
         return null;
     }
 
     private Chart makeConfiguration ( final ExecutionEvent event )
     {
-        final String queryTimespec = event.getParameter ( "org.eclipse.scada.ui.chart.model.queryTimespec" ); //$NON-NLS-1$
+        final String queryTimespec = event.getParameter ( "org.eclipse.scada.ui.chart.queryTimespec" ); //$NON-NLS-1$
 
         final Chart configuration = Charts.makeDefaultConfiguration ();
 
