@@ -15,9 +15,10 @@
    <extension
          point="org.eclipse.ui.perspectives">
       <perspective
-            name="Administration Perspective"
             class="org.eclipse.scada.hmi.app.adminclient.app.Perspective"
-            id="org.eclipse.scada.hmi.app.adminclient.app.perspective">
+            icon="icons/nav_home.gif"
+            id="org.eclipse.scada.hmi.app.adminclient.app.perspective"
+            name="Administration Perspective">
       </perspective>
    </extension>
    <extension
@@ -74,14 +75,6 @@
       </product>
    </extension>
    
-	<extension
-		point="org.eclipse.ui.menus">
-		<menuContribution
-			allPopups="false"
-			locationURI="menu:file">
-		</menuContribution>
-	</extension>
-
 	<extension
 		point="org.eclipse.ui.intro">
   <introProductBinding
