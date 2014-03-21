@@ -17,14 +17,15 @@
             class="org.eclipse.scada.ui.chart.view.TransientChartView"
             icon="icons/chartView.gif"
             id="org.eclipse.scada.ui.chart.TransientChartView"
-            name="%view.chartView.name"
+            name="%view.transientChartView.name"
             restorable="false"/>
       <view
             allowMultiple="false"
             category="org.eclipse.scada.chart.ui"
             class="org.eclipse.scada.ui.chart.view.ChartControllerView"
+            icon="icons/chartController.gif"
             id="org.eclipse.scada.ui.chart.ChartController"
-            name="Chart Controller"
+            name="%view.chartController.name"
             restorable="true">
       </view>
       <view
@@ -32,7 +33,7 @@
             category="org.eclipse.scada.chart.ui"
             class="org.eclipse.scada.ui.chart.view.ChartConfiguratorView"
             id="org.eclipse.scada.ui.chart.ChartConfigurator"
-            name="Chart Configurator"
+            name="%view.chartConfigurator.name"
             restorable="true">
       </view>
       <view
@@ -40,7 +41,7 @@
             category="org.eclipse.scada.chart.ui"
             class="org.eclipse.scada.ui.chart.view.ChartInputSelectorView"
             id="org.eclipse.scada.ui.chart.selector.ChartConfigurationInputSelector"
-            name="Chart Input Selector"
+            name="%view.chartInputSelector.name"
             restorable="true">
       </view>
    </extension>
@@ -72,30 +73,30 @@
       <command
             categoryId="org.eclipse.scada.ui.chart"
             id="org.eclipse.scada.ui.chart.view.commands.OpenChartView"
-            name="Open Chart">
+            name="%command.openChart.name">
       </command>
       <command
             categoryId="org.eclipse.scada.ui.chart"
             id="org.eclipse.scada.ui.chart.view.commands.OpenParametersChartView"
-            name="Open Chart">
+            name="%command.openChartParameters.name">
          <commandParameter
                id="org.eclipse.scada.ui.chart.connectionId"
-               name="Connection Id"
+               name="%commandParameter.connectionId.name"
                optional="true">
          </commandParameter>
          <commandParameter
                id="org.eclipse.scada.ui.chart.connectionString"
-               name="Connection String (Uri)"
+               name="%commandParameter.connectionUri.name"
                optional="true">
          </commandParameter>
          <commandParameter
                id="org.eclipse.scada.ui.chart.itemId"
-               name="Item ID"
+               name="%commandParameter.itemId.name"
                optional="true">
          </commandParameter>
          <commandParameter
                id="org.eclipse.scada.ui.chart.itemType"
-               name="Item Type"
+               name="%commandParameter.itemType.name"
                optional="false">
             <values
                   class="org.eclipse.scada.ui.chart.view.command.ItemTypeParameters">
@@ -103,7 +104,7 @@
          </commandParameter>
          <commandParameter
                id="org.eclipse.scada.ui.chart.queryTimespec"
-               name="Query Timespec"
+               name="%commandParameter.queryTimespec.name"
                optional="true">
          </commandParameter>
       </command>
@@ -142,7 +143,7 @@
             locationURI="popup:org.eclipse.scada.core.ui.connection.ConnectionView#PopupMenu">
          <command
                commandId="org.eclipse.scada.ui.chart.view.commands.OpenChartView"
-               label="Open Chart View"
+               label="%command.openChartView.label"
                style="push">
             <visibleWhen
                   checkEnabled="false">
@@ -161,5 +162,19 @@
             </visibleWhen>
          </command>
       </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="help/contexts.xml"
+            plugin="org.eclipse.scada.ui.chart.view">
+      </contexts>
+   </extension>
+   <extension
+         point="org.eclipse.help.toc">
+      <toc
+            file="help/toc.xml"
+            primary="false">
+      </toc>
    </extension>
 </plugin>

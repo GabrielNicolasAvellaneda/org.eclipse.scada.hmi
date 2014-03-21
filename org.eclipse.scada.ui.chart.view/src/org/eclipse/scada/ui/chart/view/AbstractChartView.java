@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jface.action.Action;
-import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.action.IContributionManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
@@ -37,6 +37,7 @@ import org.eclipse.scada.ui.databinding.SelectionHelper;
 import org.eclipse.scada.ui.utils.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.printing.PrintDialog;
@@ -46,7 +47,11 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.ui.statushandlers.StatusManager;
 
 public abstract class AbstractChartView extends ViewPart
 {
@@ -56,15 +61,15 @@ public abstract class AbstractChartView extends ViewPart
 
     private Shell shell;
 
-    private Composite parent;
+    private Composite wrapper;
 
     public class CenterNowAction extends Action
     {
         public CenterNowAction ()
         {
             super ( "<now>" );
-            setDescription ( "Set center to now" );
-            setToolTipText ( "Set center to now" );
+            setDescription ( "Center chart to current time" );
+            setToolTipText ( "Center chart to current time" );
         }
 
         @Override
@@ -79,7 +84,7 @@ public abstract class AbstractChartView extends ViewPart
 
         public PrintAction ()
         {
-            super ( "Print…" );
+            super ( "Print…", AbstractUIPlugin.imageDescriptorFromPlugin ( Activator.PLUGIN_ID, "icons/print.gif" ) );
             setDescription ( "Print the current chart view" );
             setToolTipText ( "Print the current chart view" );
         }
@@ -88,6 +93,43 @@ public abstract class AbstractChartView extends ViewPart
         public void run ()
         {
             print ();
+        }
+    }
+
+    public class ControllerAction extends Action
+    {
+        public ControllerAction ()
+        {
+            super ( "Show controller", AbstractUIPlugin.imageDescriptorFromPlugin ( Activator.PLUGIN_ID, "icons/chartController.gif" ) );
+            setDescription ( "Show the chart controller view" );
+            setToolTipText ( "Show the chart controller view" );
+        }
+
+        @Override
+        public void run ()
+        {
+            try
+            {
+                getViewSite ().getWorkbenchWindow ().getActivePage ().showView ( ChartControllerView.VIEW_ID );
+            }
+            catch ( final PartInitException e )
+            {
+                StatusManager.getManager ().handle ( e.getStatus (), StatusManager.BLOCK );
+            }
+        }
+    }
+
+    public class HelpAction extends Action
+    {
+        public HelpAction ()
+        {
+            super ( "Help", AbstractUIPlugin.imageDescriptorFromPlugin ( Activator.PLUGIN_ID, "icons/help.gif" ) );
+        }
+
+        @Override
+        public void run ()
+        {
+            PlatformUI.getWorkbench ().getHelpSystem ().displayDynamicHelp ();
         }
     }
 
@@ -148,20 +190,29 @@ public abstract class AbstractChartView extends ViewPart
     @Override
     public void createPartControl ( final Composite parent )
     {
-        parent.setLayout ( GridLayoutFactory.slimStack () );
+        parent.setLayout ( new FillLayout () );
 
-        this.parent = parent;
+        this.wrapper = new Composite ( parent, SWT.NONE );
+        this.wrapper.setLayout ( GridLayoutFactory.slimStack () );
+
         this.shell = parent.getShell ();
 
+        PlatformUI.getWorkbench ().getHelpSystem ().setHelp ( this.wrapper, "org.eclipse.scada.ui.chart.view.chartView" ); //$NON-NLS-1$
+
+        fillMenu ( getViewSite ().getActionBars ().getMenuManager () );
         fillToolbar ( getViewSite ().getActionBars ().getToolBarManager () );
+
+        createChartControl ( parent );
     }
+
+    protected abstract void createChartControl ( Composite parent );
 
     protected void createView ( final Chart configuration )
     {
-        final Composite extensionSpace = new Composite ( this.parent, SWT.NONE );
+        final Composite extensionSpace = new Composite ( this.wrapper, SWT.NONE );
         extensionSpace.setLayoutData ( new GridData ( SWT.FILL, SWT.FILL, true, false ) );
         extensionSpace.setLayout ( new RowLayout ( SWT.HORIZONTAL ) );
-        this.chartArea = new ChartArea ( this.parent, SWT.NONE );
+        this.chartArea = new ChartArea ( this.wrapper, SWT.NONE );
         this.chartArea.setLayoutData ( new GridData ( SWT.FILL, SWT.FILL, true, true ) );
         this.viewer = new ChartViewer ( this.chartArea.getChartRenderer (), configuration, new CompositeExtensionSpace ( extensionSpace ), null );
 
@@ -186,29 +237,36 @@ public abstract class AbstractChartView extends ViewPart
         } );
     }
 
-    private void fillToolbar ( final IToolBarManager toolBarManager )
+    private void fillMenu ( final IContributionManager contributionManager )
     {
-        toolBarManager.add ( new SetTimespanAction ( 1, TimeUnit.MINUTES, "<1m>", "Scale to one minute" ) );
-        toolBarManager.add ( new SetTimespanAction ( 1, TimeUnit.HOURS, "<1h>", "Scale to one hour" ) );
-        toolBarManager.add ( new SetTimespanAction ( 1, TimeUnit.DAYS, "<1d>", "Scale to one day" ) );
+        contributionManager.add ( new PrintAction () );
+        contributionManager.add ( new ControllerAction () );
+    }
 
-        toolBarManager.add ( new CenterNowAction () );
+    private void fillToolbar ( final IContributionManager contributionManager )
+    {
+        contributionManager.add ( new SetTimespanAction ( 1, TimeUnit.MINUTES, "<1m>", "Scale to one minute" ) );
+        contributionManager.add ( new SetTimespanAction ( 1, TimeUnit.HOURS, "<1h>", "Scale to one hour" ) );
+        contributionManager.add ( new SetTimespanAction ( 1, TimeUnit.DAYS, "<1d>", "Scale to one day" ) );
 
-        toolBarManager.add ( new Separator () );
+        contributionManager.add ( new CenterNowAction () );
 
-        toolBarManager.add ( new PageTimespanAction ( -1, TimeUnit.DAYS, "<1d", "Move back 1 day" ) );
-        toolBarManager.add ( new PageTimespanAction ( -1, TimeUnit.HOURS, "<1h", "Move back 1 hour" ) );
-        toolBarManager.add ( new PageTimespanAction ( -1, TimeUnit.MINUTES, "<1m", "Move back 1 minute" ) );
+        contributionManager.add ( new Separator () );
 
-        toolBarManager.add ( new Separator () );
+        contributionManager.add ( new PageTimespanAction ( -1, TimeUnit.DAYS, "<1d", "Move back 1 day" ) );
+        contributionManager.add ( new PageTimespanAction ( -1, TimeUnit.HOURS, "<1h", "Move back 1 hour" ) );
+        contributionManager.add ( new PageTimespanAction ( -1, TimeUnit.MINUTES, "<1m", "Move back 1 minute" ) );
 
-        toolBarManager.add ( new PageTimespanAction ( 1, TimeUnit.MINUTES, "1m>", "Move forward 1 minute" ) );
-        toolBarManager.add ( new PageTimespanAction ( 1, TimeUnit.HOURS, "1h>", "Move forward 1 hour" ) );
-        toolBarManager.add ( new PageTimespanAction ( 1, TimeUnit.DAYS, "1d>", "Move forward 1 day" ) );
+        contributionManager.add ( new Separator () );
 
-        toolBarManager.add ( new Separator () );
+        contributionManager.add ( new PageTimespanAction ( 1, TimeUnit.MINUTES, "1m>", "Move forward 1 minute" ) );
+        contributionManager.add ( new PageTimespanAction ( 1, TimeUnit.HOURS, "1h>", "Move forward 1 hour" ) );
+        contributionManager.add ( new PageTimespanAction ( 1, TimeUnit.DAYS, "1d>", "Move forward 1 day" ) );
 
-        toolBarManager.add ( new PrintAction () );
+        contributionManager.add ( new Separator () );
+
+        contributionManager.add ( new HelpAction () );
+
     }
 
     @Override
