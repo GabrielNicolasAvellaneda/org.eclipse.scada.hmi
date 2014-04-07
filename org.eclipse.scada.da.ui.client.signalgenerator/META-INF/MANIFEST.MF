@@ -1,22 +1,22 @@
 Manifest-Version: 1.0
-Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.eclipse.sc
- ada.da.ui.common;bundle-version="0.1.0",org.eclipse.scada.da.client;b
- undle-version="0.1.0",org.eclipse.scada.core.client;bundle-version="0
- .1.0",org.eclipse.scada.da.ui;bundle-version="0.1.0",org.eclipse.scad
- a.da.ui.connection;bundle-version="0.1.0",org.eclipse.scada.ui.databi
- nding;bundle-version="0.1.0",org.eclipse.scada.utils;bundle-version="
- 0.1.0",org.eclipse.scada.core;bundle-version="0.1.0",org.eclipse.scad
- a.da.ui.widgets;bundle-version="0.1.0"
-Bundle-Vendor: Eclipse SCADA Project
-Bundle-ActivationPolicy: lazy
-Bundle-Version: 0.1.0.v20140317-1426
-Bundle-Localization: plugin
-Bundle-Name: Eclipse SCADA DA SignalGenerator Plug-in (Incubation)
-Bundle-Activator: org.eclipse.scada.da.ui.client.signalgenerator.Activ
- ator
 Bundle-ManifestVersion: 2
-Import-Package: org.eclipse.scada.da.core;version="0.1.0"
-Bundle-SymbolicName: org.eclipse.scada.da.ui.client.signalgenerator;si
- ngleton:=true
+Bundle-Name: Eclipse SCADA DA SignalGenerator Plug-in (Incubation)
+Bundle-SymbolicName: org.eclipse.scada.da.ui.client.signalgenerator;singleton:=true
+Bundle-Version: 0.1.0.qualifier
+Bundle-Activator: org.eclipse.scada.da.ui.client.signalgenerator.Activator
+Bundle-Vendor: Eclipse SCADA Project
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.scada.da.ui.common;bundle-version="0.1.0",
+ org.eclipse.scada.da.client;bundle-version="0.1.0",
+ org.eclipse.scada.core.client;bundle-version="0.1.0",
+ org.eclipse.scada.da.ui;bundle-version="0.1.0",
+ org.eclipse.scada.da.ui.connection;bundle-version="0.1.0",
+ org.eclipse.scada.ui.databinding;bundle-version="0.1.0",
+ org.eclipse.scada.utils;bundle-version="0.1.0",
+ org.eclipse.scada.core;bundle-version="0.1.0",
+ org.eclipse.scada.da.ui.widgets;bundle-version="0.1.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-
+Import-Package: org.eclipse.scada.da.core;version="0.1.0"
+Bundle-ActivationPolicy: lazy
