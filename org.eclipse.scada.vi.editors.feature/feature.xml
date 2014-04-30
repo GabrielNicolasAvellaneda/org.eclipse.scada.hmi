@@ -1,12 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<feature
-      id="org.eclipse.scada.vi.editors"
-      label="%featureName"
-      version="0.1.0.qualifier"
-      provider-name="%providerName"
-      plugin="org.eclipse.scada.hmi"
-      license-feature="org.eclipse.scada.license"
-      license-feature-version="0.1.0.qualifier">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><feature id="org.eclipse.scada.vi.editors" label="%featureName" license-feature="org.eclipse.scada.license" license-feature-version="0.1.0.qualifier" plugin="org.eclipse.scada.hmi" provider-name="%providerName" version="0.1.0.v20140430-1526">
 
    <description>
       %description
