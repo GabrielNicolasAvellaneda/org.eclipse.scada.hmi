@@ -5,10 +5,10 @@ Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.eclipse.sc
  ipse.ui.intro.universal;bundle-version="3.2.600"
 Bundle-Vendor: %Bundle-Vendor
 Bundle-ActivationPolicy: lazy
-Bundle-Version: 0.1.0.v20140506-1029
+Bundle-Version: 0.1.0.v20140506-1600
 Bundle-Name: %Bundle-Name
-Bundle-Activator: org.eclipse.scada.ui.singleviewer.app.Activator
 Bundle-ManifestVersion: 2
+Bundle-Activator: org.eclipse.scada.ui.singleviewer.app.Activator
 Bundle-SymbolicName: org.eclipse.scada.ui.singleViewer.app;singleton:=
  true
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

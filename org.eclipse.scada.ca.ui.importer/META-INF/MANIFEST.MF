@@ -6,10 +6,11 @@ Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.eclipse.co
  3.0",org.eclipse.scada.ca.ui;bundle-version="0.1.0"
 Bundle-Vendor: %Bundle-Vendor
 Bundle-ActivationPolicy: lazy
-Bundle-Version: 0.1.0.v20140506-1029
+Bundle-Version: 0.1.0.v20140506-1600
 Bundle-Name: %Bundle-Name
-Bundle-Activator: org.eclipse.scada.ca.ui.importer.Activator
 Bundle-ManifestVersion: 2
+Bundle-Activator: org.eclipse.scada.ca.ui.importer.Activator
+Bundle-SymbolicName: org.eclipse.scada.ca.ui.importer;singleton:=true
 Import-Package: com.google.common.base;version="1.0.0",com.google.comm
  on.collect;version="1.0.0",org.eclipse.scada.ca;version="0.1.0",org.e
  clipse.scada.ca.client;version="0.1.0",org.eclipse.scada.ca.connectio
@@ -24,6 +25,5 @@ Import-Package: com.google.common.base;version="1.0.0",com.google.comm
  s.concurrent;version="0.1.0",org.eclipse.scada.utils.concurrent.task;
  version="0.1.0",org.eclipse.scada.utils.lang;version="0.1.0",org.slf4
  j;version="1.5.0"
-Bundle-SymbolicName: org.eclipse.scada.ca.ui.importer;singleton:=true
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 

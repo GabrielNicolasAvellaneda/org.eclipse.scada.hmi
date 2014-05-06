@@ -2,16 +2,16 @@ Manifest-Version: 1.0
 Require-Bundle: org.eclipse.scada.core.ui.connection.creator;bundle-ve
  rsion="0.1.0"
 Bundle-Vendor: Eclipse SCADA Project
-Bundle-Version: 0.1.0.v20140506-1029
+Bundle-Version: 0.1.0.v20140506-1600
 Bundle-Name: Eclipse SCADA NextGenerationProtocol AE Connection Creato
  r (Incubation)
 Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.eclipse.scada.ae.ui.connection.creator.ngp;si
+ ngleton:=true
 Import-Package: org.eclipse.scada.ae.client;version="0.1.0",org.eclips
  e.scada.ae.client.ngp;version="0.1.0",org.eclipse.scada.ae.connection
  .provider;version="0.1.0",org.eclipse.scada.core;version="0.1.0",org.
  eclipse.scada.core.client;version="0.1.0",org.eclipse.scada.core.conn
  ection.provider;version="0.1.0"
-Bundle-SymbolicName: org.eclipse.scada.ae.ui.connection.creator.ngp;si
- ngleton:=true
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 

@@ -7,10 +7,12 @@ Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.eclipse.co
  rg.eclipse.scada.ui.databinding;bundle-version="0.1.0"
 Bundle-Vendor: Eclipse SCADA Project
 Bundle-ActivationPolicy: lazy
-Bundle-Version: 0.1.0.v20140506-1029
+Bundle-Version: 0.1.0.v20140506-1600
 Bundle-Name: Eclipse SCADA Summary Explorer (Incubation)
-Bundle-Activator: org.eclipse.scada.da.ui.summary.explorer.Activator
 Bundle-ManifestVersion: 2
+Bundle-Activator: org.eclipse.scada.da.ui.summary.explorer.Activator
+Bundle-SymbolicName: org.eclipse.scada.da.ui.summary.explorer;singleto
+ n:=true
 Import-Package: org.eclipse.scada.core;version="0.1.0",org.eclipse.sca
  da.core.connection.provider;version="0.1.0",org.eclipse.scada.core.ui
  .connection.data;version="0.1.0",org.eclipse.scada.core.ui.styles;ver
@@ -21,7 +23,5 @@ Import-Package: org.eclipse.scada.core;version="0.1.0",org.eclipse.sca
  ink;version="0.1.0",org.eclipse.scada.ui.databinding;version="0.1.0",
  org.eclipse.scada.utils.beans;version="0.1.0",org.slf4j;version="1.5.
  0"
-Bundle-SymbolicName: org.eclipse.scada.da.ui.summary.explorer;singleto
- n:=true
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 
