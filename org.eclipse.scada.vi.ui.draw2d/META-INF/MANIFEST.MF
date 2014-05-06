@@ -1,19 +1,18 @@
 Manifest-Version: 1.0
-Export-Package: org.eclipse.scada.vi.ui.draw2d;version="0.1.0",org.ecl
- ipse.scada.vi.ui.draw2d.loader;version="0.1.0",org.eclipse.scada.vi.u
- i.draw2d.primitives;version="0.1.0"
 Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.eclipse.dr
  aw2d;bundle-version="3.7.0",org.eclipse.scada.vi.model;bundle-version
  ="0.1.0",org.eclipse.emf.ecore.xmi;bundle-version="2.7.0",org.eclipse
  .ui.console;bundle-version="3.5.100",org.eclipse.scada.vi;bundle-vers
  ion="0.1.0"
+Export-Package: org.eclipse.scada.vi.ui.draw2d;version="0.1.0",org.ecl
+ ipse.scada.vi.ui.draw2d.loader;version="0.1.0",org.eclipse.scada.vi.u
+ i.draw2d.primitives;version="0.1.0"
 Bundle-Vendor: Eclipse SCADA Project
 Bundle-ActivationPolicy: lazy
-Bundle-Version: 0.1.0.v20140430-1536
+Bundle-Version: 0.1.0.v20140506-1029
 Bundle-Name: Dakara Draw2D Implementation
-Bundle-ManifestVersion: 2
 Bundle-Activator: org.eclipse.scada.vi.ui.draw2d.Activator
-Bundle-SymbolicName: org.eclipse.scada.vi.ui.draw2d;singleton:=true
+Bundle-ManifestVersion: 2
 Import-Package: com.google.common.io;version="0.6.0",com.google.gson;v
  ersion="1.4.0",org.apache.commons.beanutils;version="1.8.0",org.eclip
  se.scada.core;version="0.1.0",org.eclipse.scada.core.client;version="
@@ -27,5 +26,6 @@ Import-Package: com.google.common.io;version="0.6.0",com.google.gson;v
  g.eclipse.scada.ui.utils.status;version="0.1.0",org.eclipse.scada.uti
  ls.lang;version="0.1.0",org.eclipse.scada.utils.script;version="0.1.0
  ",org.slf4j;version="1.5.0"
+Bundle-SymbolicName: org.eclipse.scada.vi.ui.draw2d;singleton:=true
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 

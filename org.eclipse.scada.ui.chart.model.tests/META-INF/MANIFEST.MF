@@ -1,14 +1,14 @@
 Manifest-Version: 1.0
-Export-Package: org.eclipse.scada.ui.chart.model.tests
 Require-Bundle: org.eclipse.core.runtime,org.eclipse.scada.ui.chart.mo
  del;bundle-version="0.1.0";visibility:=reexport,org.eclipse.emf.ecore
  .xmi;visibility:=reexport,org.junit;visibility:=reexport
+Export-Package: org.eclipse.scada.ui.chart.model.tests
 Bundle-Vendor: %providerName
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
-Bundle-Version: 0.1.0.v20140430-1536
-Bundle-Name: %pluginName
+Bundle-Version: 0.1.0.v20140506-1029
 Bundle-Localization: plugin
+Bundle-Name: %pluginName
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.scada.ui.chart.model.tests;singleton:
  =true

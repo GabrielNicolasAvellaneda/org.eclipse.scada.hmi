@@ -6,11 +6,11 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.5.0",org.ec
  pse.scada.core.connection.provider;bundle-version="0.1.0"
 Bundle-Vendor: Eclipse SCADA Project
 Bundle-ActivationPolicy: lazy
-Bundle-Version: 0.1.0.v20140430-1536
+Bundle-Version: 0.1.0.v20140506-1029
 Bundle-Name: Eclipse SCADA UI Connection Provider (Incubation)
-Bundle-ManifestVersion: 2
 Bundle-Activator: org.eclipse.scada.core.ui.connection.provider.Activa
  tor
+Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.scada.core.ui.connection.provider;sin
  gleton:=true
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

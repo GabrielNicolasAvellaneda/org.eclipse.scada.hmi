@@ -1,20 +1,20 @@
 Manifest-Version: 1.0
-Export-Package: org.eclipse.scada.ui.chart.model.presentation;version=
- "0.1.0"
 Require-Bundle: org.eclipse.core.runtime,org.eclipse.core.resources;vi
  sibility:=reexport,org.eclipse.scada.ui.chart.model.edit;visibility:=
  reexport;bundle-version="0.1.0",org.eclipse.emf.ecore.xmi;visibility:
  =reexport,org.eclipse.emf.edit.ui;visibility:=reexport,org.eclipse.ui
  .ide;visibility:=reexport
+Export-Package: org.eclipse.scada.ui.chart.model.presentation;version=
+ "0.1.0"
 Bundle-Vendor: %providerName
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
-Bundle-Version: 0.1.0.v20140430-1536
-Bundle-Name: %pluginName
+Bundle-Version: 0.1.0.v20140506-1029
 Bundle-Localization: plugin
-Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
 Bundle-Activator: org.eclipse.scada.ui.chart.model.presentation.ChartE
  ditorPlugin$Implementation
+Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.scada.ui.chart.model.editor;singleton
  :=true
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

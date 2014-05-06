@@ -3,17 +3,17 @@ Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.eclipse.sc
  ada.sec.ui.providers;bundle-version="0.1.0"
 Bundle-Vendor: Eclipse SCADA Project
 Bundle-ActivationPolicy: lazy
-Bundle-Version: 0.1.0.v20140430-1536
+Bundle-Version: 0.1.0.v20140506-1029
 Eclipse-PlatformFilter: (osgi.os=win32)
 Bundle-Name: Eclipse SCADA Security Provider UI for Windows Certificat
  es (Incubation)
-Bundle-ManifestVersion: 2
 Bundle-Activator: org.eclipse.scada.sec.ui.providers.windows.Activator
-Bundle-SymbolicName: org.eclipse.scada.sec.ui.providers.windows;single
- ton:=true
+Bundle-ManifestVersion: 2
 Import-Package: org.eclipse.core.databinding.observable,org.eclipse.co
  re.databinding.observable.list,org.eclipse.scada.sec.callback;version
  ="0.1.0",org.eclipse.scada.ui.utils.status;version="0.1.0",org.eclips
  e.scada.utils.beans;version="0.1.0"
+Bundle-SymbolicName: org.eclipse.scada.sec.ui.providers.windows;single
+ ton:=true
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 

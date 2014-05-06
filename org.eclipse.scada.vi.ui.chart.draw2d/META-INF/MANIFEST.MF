@@ -1,6 +1,4 @@
 Manifest-Version: 1.0
-Export-Package: org.eclipse.scada.vi.ui.chart.draw2d.view;version="0.1
- .0"
 Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.eclipse.sc
  ada.vi.chart.model;bundle-version="0.1.0",org.eclipse.scada.vi.ui.dra
  w2d;bundle-version="0.1.0",org.eclipse.draw2d;bundle-version="3.7.0",
@@ -10,15 +8,17 @@ Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.eclipse.sc
  lipse.scada.ui.chart.model;bundle-version="0.1.0",org.eclipse.scada.v
  i.ui.user;bundle-version="0.1.0",org.eclipse.scada.ui.chart;bundle-ve
  rsion="0.1.0"
+Export-Package: org.eclipse.scada.vi.ui.chart.draw2d.view;version="0.1
+ .0"
 Bundle-Vendor: Eclipse SCADA Project
 Bundle-ActivationPolicy: lazy
-Bundle-Version: 0.1.0.v20140430-1536
+Bundle-Version: 0.1.0.v20140506-1029
 Bundle-Name: Draw2d View Element
-Bundle-ManifestVersion: 2
 Bundle-Activator: org.eclipse.scada.vi.ui.chart.draw2d.Activator
-Bundle-SymbolicName: org.eclipse.scada.vi.ui.chart.draw2d;singleton:=t
- rue
+Bundle-ManifestVersion: 2
 Import-Package: org.eclipse.scada.ui.utils;version="0.1.0",org.eclipse
  .scada.ui.utils.layout;version="0.1.0"
+Bundle-SymbolicName: org.eclipse.scada.vi.ui.chart.draw2d;singleton:=t
+ rue
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 

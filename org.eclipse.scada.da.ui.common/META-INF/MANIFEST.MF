@@ -1,14 +1,14 @@
 Manifest-Version: 1.0
-Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime
 Export-Package: org.eclipse.scada.da.ui.common;version="0.1.0"
+Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime
 Bundle-Vendor: Eclipse SCADA Project
 Bundle-ActivationPolicy: lazy
-Bundle-Version: 0.1.0.v20140430-1536
+Bundle-Version: 0.1.0.v20140506-1029
 Bundle-Name: Common DA UI Components (Incubation)
-Bundle-ManifestVersion: 2
 Bundle-Activator: org.eclipse.scada.da.ui.common.internal.Activator
-Bundle-SymbolicName: org.eclipse.scada.da.ui.common
+Bundle-ManifestVersion: 2
 Import-Package: org.eclipse.scada.core;version="0.1.0",org.eclipse.sca
  da.da.ui.connection.data;version="0.1.0"
+Bundle-SymbolicName: org.eclipse.scada.da.ui.common
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 

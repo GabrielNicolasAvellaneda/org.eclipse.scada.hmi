@@ -1,9 +1,4 @@
 Manifest-Version: 1.0
-Export-Package: org.eclipse.scada.ui.chart.selector;version="0.1.0",or
- g.eclipse.scada.ui.chart.viewer;version="0.1.0",org.eclipse.scada.ui.
- chart.viewer.controller;version="0.1.0",org.eclipse.scada.ui.chart.vi
- ewer.input;version="0.1.0",org.eclipse.scada.ui.chart.viewer.input.co
- mposite;version="0.1.0"
 Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.eclipse.sc
  ada.core.client;bundle-version="0.1.0",org.eclipse.scada.da.client;bu
  ndle-version="0.1.0",org.eclipse.scada.da.core.common;bundle-version=
@@ -26,17 +21,22 @@ Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.eclipse.sc
  f.ecore.xmi;bundle-version="2.7.0",org.eclipse.scada.ui.chart.model.e
  dit;bundle-version="0.1.0",org.eclipse.emf.edit.ui;bundle-version="2.
  7.0",org.eclipse.core.databinding.property;bundle-version="1.4.0"
+Export-Package: org.eclipse.scada.ui.chart.selector;version="0.1.0",or
+ g.eclipse.scada.ui.chart.viewer;version="0.1.0",org.eclipse.scada.ui.
+ chart.viewer.controller;version="0.1.0",org.eclipse.scada.ui.chart.vi
+ ewer.input;version="0.1.0",org.eclipse.scada.ui.chart.viewer.input.co
+ mposite;version="0.1.0"
 Bundle-Vendor: Eclipse SCADA Project
 Bundle-ActivationPolicy: lazy
-Bundle-Version: 0.1.0.v20140430-1536
+Bundle-Version: 0.1.0.v20140506-1029
 Bundle-Name: Eclipse SCADA DA Client Chart (Incubation)
-Bundle-ManifestVersion: 2
 Bundle-Activator: org.eclipse.scada.ui.chart.Activator
-Bundle-SymbolicName: org.eclipse.scada.ui.chart;singleton:=true
+Bundle-ManifestVersion: 2
 Import-Package: org.eclipse.scada.core.data;version="0.1.0",org.eclips
  e.scada.core.subscription;version="0.1.0",org.eclipse.scada.hd.data;v
  ersion="0.1.0",org.eclipse.scada.utils.beans;version="0.1.0",org.ecli
  pse.scada.utils.script;version="0.1.0",org.slf4j;version="1.5.0",org.
  slf4j.profiler;version="1.6.0"
+Bundle-SymbolicName: org.eclipse.scada.ui.chart;singleton:=true
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 

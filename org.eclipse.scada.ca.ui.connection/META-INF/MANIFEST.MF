@@ -12,17 +12,17 @@ Require-Bundle: org.eclipse.ui;bundle-version="3.5.0",org.eclipse.core
  version="0.1.0",org.eclipse.scada.ca;bundle-version="0.1.0"
 Bundle-Vendor: Eclipse SCADA Project
 Bundle-ActivationPolicy: lazy
-Bundle-Version: 0.1.0.v20140430-1536
+Bundle-Version: 0.1.0.v20140506-1029
 Bundle-Name: Eclipse SCADA CA Connection UI (Incubation)
-Bundle-ManifestVersion: 2
 Bundle-Activator: org.eclipse.scada.ca.ui.connection.Activator
-Bundle-SymbolicName: org.eclipse.scada.ca.ui.connection;singleton:=tru
- e
+Bundle-ManifestVersion: 2
 Import-Package: org.eclipse.scada.ca.client;version="0.1.0",org.eclips
  e.scada.ca.connection.provider;version="0.1.0",org.eclipse.scada.ca.d
  ata;version="0.1.0",org.eclipse.scada.ca.ui.data;version="0.1.0",org.
  eclipse.scada.ca.ui.editor;version="0.1.0",org.eclipse.scada.core;ver
  sion="0.1.0",org.eclipse.scada.ui.utils;version="0.1.0",org.slf4j;ver
  sion="1.5.0"
+Bundle-SymbolicName: org.eclipse.scada.ca.ui.connection;singleton:=tru
+ e
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 
