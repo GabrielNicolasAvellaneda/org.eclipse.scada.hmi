@@ -17,13 +17,13 @@ Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.eclipse.sc
  ="0.1.0",org.eclipse.scada.core.ui.styles;bundle-version="0.1.0",org.
  eclipse.scada.da.ui.styles;bundle-version="0.1.0"
 Bundle-Vendor: %Bundle-Vendor
-Bundle-Version: 0.1.0.v20140430-1526
+Bundle-Version: 0.1.0.v20140430-1536
 Bundle-ManifestVersion: 2
 Bundle-Activator: org.eclipse.scada.da.client.dataitem.details.extra.A
  ctivator
+Bundle-SymbolicName: org.eclipse.scada.da.ui.client.dataitem.details.e
+ xtra;singleton:=true
 Import-Package: org.eclipse.scada.core.data;version="0.1.0",org.eclips
  e.scada.sec.callback;version="0.1.0",org.eclipse.scada.sec.ui;version
  ="0.1.0",org.eclipse.scada.ui.blink;version="0.1.0"
-Bundle-SymbolicName: org.eclipse.scada.da.ui.client.dataitem.details.e
- xtra;singleton:=true
 

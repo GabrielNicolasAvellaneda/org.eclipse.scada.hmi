@@ -1,15 +1,15 @@
 Manifest-Version: 1.0
+Export-Package: org.eclipse.scada.da.ui.styles;version="0.1.0"
 Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.eclipse.sc
  ada.core.ui.styles;bundle-version="0.1.0"
-Export-Package: org.eclipse.scada.da.ui.styles;version="0.1.0"
 Bundle-Vendor: Eclipse SCADA Project
 Bundle-ActivationPolicy: lazy
-Bundle-Version: 0.1.0.v20140430-1526
+Bundle-Version: 0.1.0.v20140430-1536
 Bundle-Name: Eclipse SCADA DA Styles (Incubation)
-Bundle-Activator: org.eclipse.scada.da.ui.styles.Activator
 Bundle-ManifestVersion: 2
+Bundle-Activator: org.eclipse.scada.da.ui.styles.Activator
+Bundle-SymbolicName: org.eclipse.scada.da.ui.styles
 Import-Package: org.eclipse.scada.da.client;version="0.1.0",org.eclips
  e.scada.da.core;version="0.1.0"
-Bundle-SymbolicName: org.eclipse.scada.da.ui.styles
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 

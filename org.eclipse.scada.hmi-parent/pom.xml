@@ -5,11 +5,11 @@
   <parent>
     <groupId>org.eclipse.scada.releng</groupId>
     <artifactId>superParent</artifactId>
-    <version>0.1.0.RC2</version>
+    <version>0.1.0</version>
   </parent>
   <groupId>org.eclipse.scada.hmi</groupId>
   <artifactId>org.eclipse.scada.hmi-parent</artifactId>
-  <version>0.1.0.RC2</version>
+  <version>0.1.0</version>
   <packaging>pom</packaging>
   <modules>
     <module>../org.eclipse.scada.hmi-p2</module>
