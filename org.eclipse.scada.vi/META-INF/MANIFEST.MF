@@ -1,9 +1,10 @@
 Manifest-Version: 1.0
 Export-Package: org.eclipse.scada.vi.data;version="0.1.0"
 Bundle-Vendor: Eclipse SCADA Project
-Bundle-Version: 0.1.0.v20140506-1700
+Bundle-Version: 0.1.0.v20140520-1210
 Bundle-Name: Eclipse SCADA VI
 Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.eclipse.scada.vi
 Import-Package: org.eclipse.scada.core;version="0.1.0",org.eclipse.sca
  da.core.client;version="0.1.0",org.eclipse.scada.core.connection.prov
  ider;version="0.1.0",org.eclipse.scada.core.data;version="0.1.0",org.
@@ -13,6 +14,5 @@ Import-Package: org.eclipse.scada.core;version="0.1.0",org.eclipse.sca
  a.ui.connection.data;version="0.1.0",org.eclipse.scada.sec.callback;v
  ersion="0.1.0",org.eclipse.scada.utils.lang;version="0.1.0",org.osgi.
  framework;version="1.6.0",org.slf4j;version="1.5.0"
-Bundle-SymbolicName: org.eclipse.scada.vi
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 

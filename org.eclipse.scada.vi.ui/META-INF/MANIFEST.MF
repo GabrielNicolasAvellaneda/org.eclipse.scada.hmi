@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Require-Bundle: org.eclipse.ui
 Bundle-Vendor: Eclipse SCADA Project
-Bundle-Version: 0.1.0.v20140506-1700
+Bundle-Version: 0.1.0.v20140520-1210
 Bundle-Name: UI Base
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.scada.vi.ui;singleton:=true

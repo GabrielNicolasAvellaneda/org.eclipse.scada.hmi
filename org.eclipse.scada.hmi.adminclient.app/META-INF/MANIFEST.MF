@@ -4,10 +4,10 @@ Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.eclipse.ui
  ction;bundle-version="0.1.0"
 Bundle-Vendor: %Bundle-Vendor
 Bundle-ActivationPolicy: lazy
-Bundle-Version: 0.1.0.v20140506-1700
+Bundle-Version: 0.1.0.v20140520-1210
 Bundle-Name: %Bundle-Name
-Bundle-Activator: org.eclipse.scada.hmi.app.adminclient.app.Activator
 Bundle-ManifestVersion: 2
+Bundle-Activator: org.eclipse.scada.hmi.app.adminclient.app.Activator
 Bundle-SymbolicName: org.eclipse.scada.hmi.adminclient.app;singleton:=
  true
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
