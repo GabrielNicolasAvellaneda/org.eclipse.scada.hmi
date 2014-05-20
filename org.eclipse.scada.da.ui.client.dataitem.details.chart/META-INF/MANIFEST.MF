@@ -11,14 +11,14 @@ Require-Bundle: org.eclipse.scada.da.ui.client.dataitem.details;bundle
  rsion="0.1.0",org.eclipse.scada.ui.chart.model;bundle-version="0.1.0"
  ,org.eclipse.scada.ui.utils;bundle-version="0.1.0"
 Bundle-Vendor: %Bundle-Vendor
-Bundle-Version: 0.1.0.v20140506-1600
+Bundle-Version: 0.1.0.v20140506-1700
 Bundle-Name: %Bundle-Name
-Bundle-ManifestVersion: 2
 Bundle-Activator: org.eclipse.scada.da.client.dataitem.details.chart.A
  ctivator
-Bundle-SymbolicName: org.eclipse.scada.da.ui.client.dataitem.details.c
- hart;singleton:=true
+Bundle-ManifestVersion: 2
 Import-Package: org.eclipse.scada.ui.chart.viewer;version="0.1.0",org.
  eclipse.scada.utils;version="0.1.0",org.slf4j;version="1.5.0"
+Bundle-SymbolicName: org.eclipse.scada.da.ui.client.dataitem.details.c
+ hart;singleton:=true
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 

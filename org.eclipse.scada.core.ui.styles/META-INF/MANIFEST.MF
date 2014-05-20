@@ -1,17 +1,17 @@
 Manifest-Version: 1.0
-Export-Package: org.eclipse.scada.core.ui.styles;version="0.1.0",org.e
- clipse.scada.core.ui.styles.generator;version="0.1.0"
 Require-Bundle: org.eclipse.ui;bundle-version="3.7.0",org.eclipse.core
  .runtime;bundle-version="3.7.0",org.eclipse.scada.core.ui;bundle-vers
  ion="0.1.0"
+Export-Package: org.eclipse.scada.core.ui.styles;version="0.1.0",org.e
+ clipse.scada.core.ui.styles.generator;version="0.1.0"
 Bundle-Vendor: %Bundle-Vendor
 Bundle-ActivationPolicy: lazy
-Bundle-Version: 0.1.0.v20140506-1600
+Bundle-Version: 0.1.0.v20140506-1700
 Bundle-Name: %Bundle-Name
-Bundle-ManifestVersion: 2
 Bundle-Activator: org.eclipse.scada.core.ui.styles.Activator
-Bundle-SymbolicName: org.eclipse.scada.core.ui.styles;singleton:=true
+Bundle-ManifestVersion: 2
 Import-Package: org.eclipse.scada.ui.blink;version="0.1.0",org.slf4j;v
  ersion="1.6.0"
+Bundle-SymbolicName: org.eclipse.scada.core.ui.styles;singleton:=true
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 
