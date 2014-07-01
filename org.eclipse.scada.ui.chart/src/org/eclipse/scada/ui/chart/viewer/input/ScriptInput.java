@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2013 TH4 SYSTEMS GmbH and others.
+ * Copyright (c) 2012, 2014 TH4 SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,17 +7,16 @@
  *
  * Contributors:
  *     TH4 SYSTEMS GmbH - initial API and implementation
- *     IBH SYSTEMS GmbH - additional work, fix for bug 433409
+ *     IBH SYSTEMS GmbH - additional work, fix for bug 433409, enhancements for legends
+ *          fix for bug 432259
  *******************************************************************************/
 package org.eclipse.scada.ui.chart.viewer.input;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.script.ScriptContext;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
 import javax.script.SimpleScriptContext;
 
 import org.eclipse.jface.resource.ResourceManager;
@@ -30,7 +29,6 @@ import org.eclipse.scada.chart.swt.render.AbstractLineRender;
 import org.eclipse.scada.chart.swt.render.StepRenderer;
 import org.eclipse.scada.ui.chart.viewer.ChartViewer;
 import org.eclipse.scada.utils.script.ScriptExecutor;
-import org.eclipse.scada.utils.script.Scripts;
 
 public class ScriptInput extends LineInput
 {
@@ -41,8 +39,6 @@ public class ScriptInput extends LineInput
 
     private String script;
 
-    private ScriptEngineManager scriptEngineManager;
-
     private ScriptExecutor scriptExecutor;
 
     private AsyncFunctionSeriesData dataSeries;
@@ -50,7 +46,6 @@ public class ScriptInput extends LineInput
     public ScriptInput ( final ChartViewer viewer, final Realm realm, final ResourceManager resourceManager, final XAxis xAxis, final YAxis yAxis )
     {
         super ( resourceManager );
-        this.scriptEngineManager = Scripts.createManager ( ScriptInput.class.getClassLoader () );
 
         this.viewer = viewer;
 
@@ -114,11 +109,11 @@ public class ScriptInput extends LineInput
         try
         {
             this.scriptExecutor = null;
-            this.scriptExecutor = new ScriptExecutor ( this.scriptEngineManager, "JavaScript", script, getClass ().getClassLoader () ); //$NON-NLS-1$
+            this.scriptExecutor = new ScriptExecutor ( "JavaScript", script, getClass ().getClassLoader () ); //$NON-NLS-1$
             this.dataSeries.regenerate ();
             firePropertyChange ( ChartInput.PROP_STATE, null, getState () );
         }
-        catch ( final ScriptException e )
+        catch ( final Exception e )
         {
             throw new IllegalArgumentException ( e );
         }
@@ -135,24 +130,29 @@ public class ScriptInput extends LineInput
     }
 
     @Override
-    protected void setSelectedTimestamp ( final Date selectedTimestamp )
+    protected void setSelectedTimestamp ( final Calendar selectedTimestamp )
     {
-        super.setSelectedTimestamp ( selectedTimestamp );
-        final DataEntry value = this.dataSeries.getViewData ().getEntries ().lower ( new DataEntry ( selectedTimestamp.getTime (), null ) );
+
+        final DataEntry value = this.dataSeries.getViewData ().getEntries ().lower ( new DataEntry ( selectedTimestamp.getTimeInMillis (), null ) );
         if ( value == null )
         {
+            super.setSelectedTimestamp ( selectedTimestamp );
             setSelectedValue ( null );
         }
         else
         {
-            setSelectedValue ( value.toString () );
+            final Calendar c = Calendar.getInstance ();
+            c.setTimeInMillis ( value.getTimestamp () );
+            super.setSelectedTimestamp ( c );
+            setSelectedValue ( value.getValue () );
         }
 
     }
 
     @Override
-    public void tick ( final long now )
+    public boolean tick ( final long now )
     {
+        return false;
     }
 
     @Override

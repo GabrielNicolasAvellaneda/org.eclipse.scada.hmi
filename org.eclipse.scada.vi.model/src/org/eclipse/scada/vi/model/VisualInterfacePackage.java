@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011, 2012 TH4 SYSTEMS GmbH and others.
+ * Copyright (c) 2011, 2014 TH4 SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,6 +7,7 @@
  * 
  * Contributors:
  *     TH4 SYSTEMS GmbH - initial API and implementation
+ *     IBH SYSTEMS GmbH - add new mouse events
  */
 package org.eclipse.scada.vi.model;
 
@@ -21,10 +22,10 @@ import org.eclipse.emf.ecore.EReference;
  * The <b>Package</b> for the model.
  * It contains accessors for the meta objects to represent
  * <ul>
- *   <li>each class,</li>
- *   <li>each feature of each class,</li>
- *   <li>each enum,</li>
- *   <li>and each data type</li>
+ * <li>each class,</li>
+ * <li>each feature of each class,</li>
+ * <li>each enum,</li>
+ * <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
  * @see org.eclipse.scada.vi.model.VisualInterfaceFactory
@@ -56,6 +57,14 @@ public interface VisualInterfacePackage extends EPackage
      * @generated
      */
     String eNS_PREFIX = "visualInterface"; //$NON-NLS-1$
+
+    /**
+     * The package content type ID.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    String eCONTENT_TYPE = "org.eclipse.scada.hmi.vi"; //$NON-NLS-1$
 
     /**
      * The singleton instance of the package.
@@ -340,13 +349,58 @@ public interface VisualInterfacePackage extends EPackage
     int FIGURE__TOOL_TIP = PRIMITIVE_FEATURE_COUNT + 9;
 
     /**
+     * The feature id for the '<em><b>On Mouse In</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int FIGURE__ON_MOUSE_IN = PRIMITIVE_FEATURE_COUNT + 10;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Out</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int FIGURE__ON_MOUSE_OUT = PRIMITIVE_FEATURE_COUNT + 11;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Move</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int FIGURE__ON_MOUSE_MOVE = PRIMITIVE_FEATURE_COUNT + 12;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Hover</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int FIGURE__ON_MOUSE_HOVER = PRIMITIVE_FEATURE_COUNT + 13;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Drag</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int FIGURE__ON_MOUSE_DRAG = PRIMITIVE_FEATURE_COUNT + 14;
+
+    /**
      * The number of structural features of the '<em>Figure</em>' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int FIGURE_FEATURE_COUNT = PRIMITIVE_FEATURE_COUNT + 10;
+    int FIGURE_FEATURE_COUNT = PRIMITIVE_FEATURE_COUNT + 15;
 
     /**
      * The meta object id for the '{@link org.eclipse.scada.vi.model.impl.ShapeImpl <em>Shape</em>}' class.
@@ -456,6 +510,51 @@ public interface VisualInterfacePackage extends EPackage
      * @ordered
      */
     int SHAPE__TOOL_TIP = FIGURE__TOOL_TIP;
+
+    /**
+     * The feature id for the '<em><b>On Mouse In</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int SHAPE__ON_MOUSE_IN = FIGURE__ON_MOUSE_IN;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Out</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int SHAPE__ON_MOUSE_OUT = FIGURE__ON_MOUSE_OUT;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Move</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int SHAPE__ON_MOUSE_MOVE = FIGURE__ON_MOUSE_MOVE;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Hover</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int SHAPE__ON_MOUSE_HOVER = FIGURE__ON_MOUSE_HOVER;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Drag</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int SHAPE__ON_MOUSE_DRAG = FIGURE__ON_MOUSE_DRAG;
 
     /**
      * The feature id for the '<em><b>Line Width</b></em>' attribute.
@@ -621,6 +720,51 @@ public interface VisualInterfacePackage extends EPackage
     int RECTANGLE__TOOL_TIP = SHAPE__TOOL_TIP;
 
     /**
+     * The feature id for the '<em><b>On Mouse In</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int RECTANGLE__ON_MOUSE_IN = SHAPE__ON_MOUSE_IN;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Out</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int RECTANGLE__ON_MOUSE_OUT = SHAPE__ON_MOUSE_OUT;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Move</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int RECTANGLE__ON_MOUSE_MOVE = SHAPE__ON_MOUSE_MOVE;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Hover</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int RECTANGLE__ON_MOUSE_HOVER = SHAPE__ON_MOUSE_HOVER;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Drag</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int RECTANGLE__ON_MOUSE_DRAG = SHAPE__ON_MOUSE_DRAG;
+
+    /**
      * The feature id for the '<em><b>Line Width</b></em>' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -782,6 +926,51 @@ public interface VisualInterfacePackage extends EPackage
      * @ordered
      */
     int TEXT__TOOL_TIP = FIGURE__TOOL_TIP;
+
+    /**
+     * The feature id for the '<em><b>On Mouse In</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int TEXT__ON_MOUSE_IN = FIGURE__ON_MOUSE_IN;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Out</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int TEXT__ON_MOUSE_OUT = FIGURE__ON_MOUSE_OUT;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Move</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int TEXT__ON_MOUSE_MOVE = FIGURE__ON_MOUSE_MOVE;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Hover</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int TEXT__ON_MOUSE_HOVER = FIGURE__ON_MOUSE_HOVER;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Drag</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int TEXT__ON_MOUSE_DRAG = FIGURE__ON_MOUSE_DRAG;
 
     /**
      * The feature id for the '<em><b>Text</b></em>' attribute.
@@ -1147,6 +1336,51 @@ public interface VisualInterfacePackage extends EPackage
      * @ordered
      */
     int LINE__TOOL_TIP = SHAPE__TOOL_TIP;
+
+    /**
+     * The feature id for the '<em><b>On Mouse In</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int LINE__ON_MOUSE_IN = SHAPE__ON_MOUSE_IN;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Out</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int LINE__ON_MOUSE_OUT = SHAPE__ON_MOUSE_OUT;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Move</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int LINE__ON_MOUSE_MOVE = SHAPE__ON_MOUSE_MOVE;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Hover</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int LINE__ON_MOUSE_HOVER = SHAPE__ON_MOUSE_HOVER;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Drag</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int LINE__ON_MOUSE_DRAG = SHAPE__ON_MOUSE_DRAG;
 
     /**
      * The feature id for the '<em><b>Line Width</b></em>' attribute.
@@ -1807,6 +2041,51 @@ public interface VisualInterfacePackage extends EPackage
     int FIGURE_CONTAINER__TOOL_TIP = FIGURE__TOOL_TIP;
 
     /**
+     * The feature id for the '<em><b>On Mouse In</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int FIGURE_CONTAINER__ON_MOUSE_IN = FIGURE__ON_MOUSE_IN;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Out</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int FIGURE_CONTAINER__ON_MOUSE_OUT = FIGURE__ON_MOUSE_OUT;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Move</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int FIGURE_CONTAINER__ON_MOUSE_MOVE = FIGURE__ON_MOUSE_MOVE;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Hover</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int FIGURE_CONTAINER__ON_MOUSE_HOVER = FIGURE__ON_MOUSE_HOVER;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Drag</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int FIGURE_CONTAINER__ON_MOUSE_DRAG = FIGURE__ON_MOUSE_DRAG;
+
+    /**
      * The feature id for the '<em><b>Content</b></em>' containment reference.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1932,6 +2211,51 @@ public interface VisualInterfacePackage extends EPackage
      * @ordered
      */
     int IMAGE__TOOL_TIP = FIGURE__TOOL_TIP;
+
+    /**
+     * The feature id for the '<em><b>On Mouse In</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int IMAGE__ON_MOUSE_IN = FIGURE__ON_MOUSE_IN;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Out</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int IMAGE__ON_MOUSE_OUT = FIGURE__ON_MOUSE_OUT;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Move</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int IMAGE__ON_MOUSE_MOVE = FIGURE__ON_MOUSE_MOVE;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Hover</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int IMAGE__ON_MOUSE_HOVER = FIGURE__ON_MOUSE_HOVER;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Drag</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int IMAGE__ON_MOUSE_DRAG = FIGURE__ON_MOUSE_DRAG;
 
     /**
      * The feature id for the '<em><b>Uri</b></em>' attribute.
@@ -2068,6 +2392,51 @@ public interface VisualInterfacePackage extends EPackage
      * @ordered
      */
     int ELLIPSE__TOOL_TIP = SHAPE__TOOL_TIP;
+
+    /**
+     * The feature id for the '<em><b>On Mouse In</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ELLIPSE__ON_MOUSE_IN = SHAPE__ON_MOUSE_IN;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Out</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ELLIPSE__ON_MOUSE_OUT = SHAPE__ON_MOUSE_OUT;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Move</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ELLIPSE__ON_MOUSE_MOVE = SHAPE__ON_MOUSE_MOVE;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Hover</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ELLIPSE__ON_MOUSE_HOVER = SHAPE__ON_MOUSE_HOVER;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Drag</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ELLIPSE__ON_MOUSE_DRAG = SHAPE__ON_MOUSE_DRAG;
 
     /**
      * The feature id for the '<em><b>Line Width</b></em>' attribute.
@@ -2231,6 +2600,51 @@ public interface VisualInterfacePackage extends EPackage
      * @ordered
      */
     int ARC__TOOL_TIP = SHAPE__TOOL_TIP;
+
+    /**
+     * The feature id for the '<em><b>On Mouse In</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ARC__ON_MOUSE_IN = SHAPE__ON_MOUSE_IN;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Out</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ARC__ON_MOUSE_OUT = SHAPE__ON_MOUSE_OUT;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Move</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ARC__ON_MOUSE_MOVE = SHAPE__ON_MOUSE_MOVE;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Hover</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ARC__ON_MOUSE_HOVER = SHAPE__ON_MOUSE_HOVER;
+
+    /**
+     * The feature id for the '<em><b>On Mouse Drag</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ARC__ON_MOUSE_DRAG = SHAPE__ON_MOUSE_DRAG;
 
     /**
      * The feature id for the '<em><b>Line Width</b></em>' attribute.
@@ -3012,6 +3426,61 @@ public interface VisualInterfacePackage extends EPackage
     EAttribute getFigure_ToolTip ();
 
     /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.vi.model.Figure#getOnMouseIn <em>On Mouse In</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>On Mouse In</em>'.
+     * @see org.eclipse.scada.vi.model.Figure#getOnMouseIn()
+     * @see #getFigure()
+     * @generated
+     */
+    EAttribute getFigure_OnMouseIn ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.vi.model.Figure#getOnMouseOut <em>On Mouse Out</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>On Mouse Out</em>'.
+     * @see org.eclipse.scada.vi.model.Figure#getOnMouseOut()
+     * @see #getFigure()
+     * @generated
+     */
+    EAttribute getFigure_OnMouseOut ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.vi.model.Figure#getOnMouseMove <em>On Mouse Move</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>On Mouse Move</em>'.
+     * @see org.eclipse.scada.vi.model.Figure#getOnMouseMove()
+     * @see #getFigure()
+     * @generated
+     */
+    EAttribute getFigure_OnMouseMove ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.vi.model.Figure#getOnMouseHover <em>On Mouse Hover</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>On Mouse Hover</em>'.
+     * @see org.eclipse.scada.vi.model.Figure#getOnMouseHover()
+     * @see #getFigure()
+     * @generated
+     */
+    EAttribute getFigure_OnMouseHover ();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.scada.vi.model.Figure#getOnMouseDrag <em>On Mouse Drag</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>On Mouse Drag</em>'.
+     * @see org.eclipse.scada.vi.model.Figure#getOnMouseDrag()
+     * @see #getFigure()
+     * @generated
+     */
+    EAttribute getFigure_OnMouseDrag ();
+
+    /**
      * Returns the meta object for class '{@link org.eclipse.scada.vi.model.SymbolReference <em>Symbol Reference</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -3612,10 +4081,10 @@ public interface VisualInterfacePackage extends EPackage
      * <!-- begin-user-doc -->
      * Defines literals for the meta objects that represent
      * <ul>
-     *   <li>each class,</li>
-     *   <li>each feature of each class,</li>
-     *   <li>each enum,</li>
-     *   <li>and each data type</li>
+     * <li>each class,</li>
+     * <li>each feature of each class,</li>
+     * <li>each enum,</li>
+     * <li>and each data type</li>
      * </ul>
      * <!-- end-user-doc -->
      * @generated
@@ -4085,6 +4554,46 @@ public interface VisualInterfacePackage extends EPackage
          * @generated
          */
         EAttribute FIGURE__TOOL_TIP = eINSTANCE.getFigure_ToolTip ();
+
+        /**
+         * The meta object literal for the '<em><b>On Mouse In</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute FIGURE__ON_MOUSE_IN = eINSTANCE.getFigure_OnMouseIn ();
+
+        /**
+         * The meta object literal for the '<em><b>On Mouse Out</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute FIGURE__ON_MOUSE_OUT = eINSTANCE.getFigure_OnMouseOut ();
+
+        /**
+         * The meta object literal for the '<em><b>On Mouse Move</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute FIGURE__ON_MOUSE_MOVE = eINSTANCE.getFigure_OnMouseMove ();
+
+        /**
+         * The meta object literal for the '<em><b>On Mouse Hover</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute FIGURE__ON_MOUSE_HOVER = eINSTANCE.getFigure_OnMouseHover ();
+
+        /**
+         * The meta object literal for the '<em><b>On Mouse Drag</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute FIGURE__ON_MOUSE_DRAG = eINSTANCE.getFigure_OnMouseDrag ();
 
         /**
          * The meta object literal for the '{@link org.eclipse.scada.vi.model.impl.SymbolReferenceImpl <em>Symbol Reference</em>}' class.

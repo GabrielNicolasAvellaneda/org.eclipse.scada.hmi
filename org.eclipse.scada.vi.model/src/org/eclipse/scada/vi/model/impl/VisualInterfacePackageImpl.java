@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011, 2012 TH4 SYSTEMS GmbH and others.
+ * Copyright (c) 2011, 2014 TH4 SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,8 +7,11 @@
  * 
  * Contributors:
  *     TH4 SYSTEMS GmbH - initial API and implementation
+ *     IBH SYSTEMS GmbH - add new mouse events
  */
 package org.eclipse.scada.vi.model.impl;
+
+import static org.eclipse.scada.vi.model.VisualInterfacePackage.CONTAINER;
 
 import java.util.Map;
 
@@ -17,9 +20,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.eclipse.scada.vi.model.Alignment;
 import org.eclipse.scada.vi.model.Arc;
 import org.eclipse.scada.vi.model.BorderChild;
@@ -279,14 +280,15 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
 
     /**
      * Creates an instance of the model <b>Package</b>, registered with
-     * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
+     * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the
+     * package
      * package URI value.
-     * <p>Note: the correct way to create the package is via the static
-     * factory method {@link #init init()}, which also performs
-     * initialization of the package, or returns the registered package,
-     * if one already exists.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+     * <p>
+     * Note: the correct way to create the package is via the static factory
+     * method {@link #init init()}, which also performs initialization of the
+     * package, or returns the registered package, if one already exists. <!--
+     * begin-user-doc --> <!-- end-user-doc -->
+     * 
      * @see org.eclipse.emf.ecore.EPackage.Registry
      * @see org.eclipse.scada.vi.model.VisualInterfacePackage#eNS_URI
      * @see #init()
@@ -309,8 +311,8 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * 
      * <p>This method is used to initialize {@link VisualInterfacePackage#eINSTANCE} when that field is accessed.
      * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+     * <!-- begin-user-doc --> <!--
+     * end-user-doc -->
      * @see #eNS_URI
      * @see #createPackageContents()
      * @see #initializePackageContents()
@@ -345,6 +347,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getSymbol ()
     {
         return symbolEClass;
@@ -355,6 +358,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EReference getSymbol_Root ()
     {
         return (EReference)symbolEClass.getEStructuralFeatures ().get ( 0 );
@@ -365,6 +369,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EReference getSymbol_Properties ()
     {
         return (EReference)symbolEClass.getEStructuralFeatures ().get ( 1 );
@@ -375,6 +380,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getSymbol_OnInit ()
     {
         return (EAttribute)symbolEClass.getEStructuralFeatures ().get ( 2 );
@@ -385,6 +391,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getSymbol_OnDispose ()
     {
         return (EAttribute)symbolEClass.getEStructuralFeatures ().get ( 3 );
@@ -395,6 +402,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getSymbol_OnUpdate ()
     {
         return (EAttribute)symbolEClass.getEStructuralFeatures ().get ( 4 );
@@ -405,6 +413,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getSymbol_ScriptModules ()
     {
         return (EAttribute)symbolEClass.getEStructuralFeatures ().get ( 5 );
@@ -415,6 +424,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EReference getSymbol_Cursors ()
     {
         return (EReference)symbolEClass.getEStructuralFeatures ().get ( 6 );
@@ -425,6 +435,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getSymbol_BackgroundColor ()
     {
         return (EAttribute)symbolEClass.getEStructuralFeatures ().get ( 7 );
@@ -435,6 +446,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EReference getSymbol_DesignSize ()
     {
         return (EReference)symbolEClass.getEStructuralFeatures ().get ( 8 );
@@ -445,6 +457,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EReference getSymbol_Connections ()
     {
         return (EReference)symbolEClass.getEStructuralFeatures ().get ( 9 );
@@ -455,6 +468,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getPrimitive ()
     {
         return primitiveEClass;
@@ -465,6 +479,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getPrimitive_Name ()
     {
         return (EAttribute)primitiveEClass.getEStructuralFeatures ().get ( 0 );
@@ -475,6 +490,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getContainer ()
     {
         return containerEClass;
@@ -485,6 +501,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getShape ()
     {
         return shapeEClass;
@@ -495,6 +512,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getShape_LineWidth ()
     {
         return (EAttribute)shapeEClass.getEStructuralFeatures ().get ( 0 );
@@ -505,6 +523,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getShape_Antialias ()
     {
         return (EAttribute)shapeEClass.getEStructuralFeatures ().get ( 1 );
@@ -515,6 +534,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getShape_Alpha ()
     {
         return (EAttribute)shapeEClass.getEStructuralFeatures ().get ( 2 );
@@ -525,6 +545,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getShape_Fill ()
     {
         return (EAttribute)shapeEClass.getEStructuralFeatures ().get ( 3 );
@@ -535,6 +556,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getShape_Outline ()
     {
         return (EAttribute)shapeEClass.getEStructuralFeatures ().get ( 4 );
@@ -545,6 +567,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getRectangle ()
     {
         return rectangleEClass;
@@ -555,6 +578,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getText ()
     {
         return textEClass;
@@ -565,6 +589,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getText_Text ()
     {
         return (EAttribute)textEClass.getEStructuralFeatures ().get ( 0 );
@@ -575,6 +600,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getText_LabelAlignment ()
     {
         return (EAttribute)textEClass.getEStructuralFeatures ().get ( 1 );
@@ -585,6 +611,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getText_IconAlignment ()
     {
         return (EAttribute)textEClass.getEStructuralFeatures ().get ( 2 );
@@ -595,6 +622,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getText_TextAlignment ()
     {
         return (EAttribute)textEClass.getEStructuralFeatures ().get ( 3 );
@@ -605,6 +633,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getText_TextPlacement ()
     {
         return (EAttribute)textEClass.getEStructuralFeatures ().get ( 4 );
@@ -615,6 +644,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getText_FontName ()
     {
         return (EAttribute)textEClass.getEStructuralFeatures ().get ( 5 );
@@ -625,6 +655,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getText_FontSize ()
     {
         return (EAttribute)textEClass.getEStructuralFeatures ().get ( 6 );
@@ -635,6 +666,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getText_FontBold ()
     {
         return (EAttribute)textEClass.getEStructuralFeatures ().get ( 7 );
@@ -645,6 +677,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getText_FontItalic ()
     {
         return (EAttribute)textEClass.getEStructuralFeatures ().get ( 8 );
@@ -655,6 +688,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getChild ()
     {
         return childEClass;
@@ -665,6 +699,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EReference getChild_Element ()
     {
         return (EReference)childEClass.getEStructuralFeatures ().get ( 0 );
@@ -675,6 +710,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getChild_Name ()
     {
         return (EAttribute)childEClass.getEStructuralFeatures ().get ( 1 );
@@ -685,6 +721,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getXYChild ()
     {
         return xyChildEClass;
@@ -695,6 +732,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EReference getXYChild_Position ()
     {
         return (EReference)xyChildEClass.getEStructuralFeatures ().get ( 0 );
@@ -705,6 +743,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EReference getXYChild_Dimension ()
     {
         return (EReference)xyChildEClass.getEStructuralFeatures ().get ( 1 );
@@ -715,6 +754,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getXYContainer ()
     {
         return xyContainerEClass;
@@ -725,6 +765,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EReference getXYContainer_Children ()
     {
         return (EReference)xyContainerEClass.getEStructuralFeatures ().get ( 0 );
@@ -735,6 +776,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getPosition ()
     {
         return positionEClass;
@@ -745,6 +787,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getPosition_X ()
     {
         return (EAttribute)positionEClass.getEStructuralFeatures ().get ( 0 );
@@ -755,6 +798,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getPosition_Y ()
     {
         return (EAttribute)positionEClass.getEStructuralFeatures ().get ( 1 );
@@ -765,6 +809,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getLine ()
     {
         return lineEClass;
@@ -775,6 +820,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EReference getLine_Points ()
     {
         return (EReference)lineEClass.getEStructuralFeatures ().get ( 0 );
@@ -785,6 +831,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getFigure ()
     {
         return figureEClass;
@@ -795,6 +842,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getFigure_ForegroundColor ()
     {
         return (EAttribute)figureEClass.getEStructuralFeatures ().get ( 0 );
@@ -805,6 +853,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getFigure_BackgroundColor ()
     {
         return (EAttribute)figureEClass.getEStructuralFeatures ().get ( 1 );
@@ -815,6 +864,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EReference getFigure_Size ()
     {
         return (EReference)figureEClass.getEStructuralFeatures ().get ( 2 );
@@ -825,6 +875,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getFigure_OnClick ()
     {
         return (EAttribute)figureEClass.getEStructuralFeatures ().get ( 3 );
@@ -835,6 +886,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getFigure_OnDoubleClick ()
     {
         return (EAttribute)figureEClass.getEStructuralFeatures ().get ( 4 );
@@ -845,6 +897,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EReference getFigure_Cursor ()
     {
         return (EReference)figureEClass.getEStructuralFeatures ().get ( 5 );
@@ -855,6 +908,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getFigure_Visible ()
     {
         return (EAttribute)figureEClass.getEStructuralFeatures ().get ( 6 );
@@ -865,6 +919,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getFigure_Border ()
     {
         return (EAttribute)figureEClass.getEStructuralFeatures ().get ( 7 );
@@ -875,6 +930,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getFigure_Opaque ()
     {
         return (EAttribute)figureEClass.getEStructuralFeatures ().get ( 8 );
@@ -885,6 +941,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getFigure_ToolTip ()
     {
         return (EAttribute)figureEClass.getEStructuralFeatures ().get ( 9 );
@@ -895,6 +952,62 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
+    public EAttribute getFigure_OnMouseIn ()
+    {
+        return (EAttribute)figureEClass.getEStructuralFeatures ().get ( 10 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public EAttribute getFigure_OnMouseOut ()
+    {
+        return (EAttribute)figureEClass.getEStructuralFeatures ().get ( 11 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public EAttribute getFigure_OnMouseMove ()
+    {
+        return (EAttribute)figureEClass.getEStructuralFeatures ().get ( 12 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public EAttribute getFigure_OnMouseHover ()
+    {
+        return (EAttribute)figureEClass.getEStructuralFeatures ().get ( 13 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public EAttribute getFigure_OnMouseDrag ()
+    {
+        return (EAttribute)figureEClass.getEStructuralFeatures ().get ( 14 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
     public EClass getSymbolReference ()
     {
         return symbolReferenceEClass;
@@ -905,6 +1018,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getSymbolReference_Uri ()
     {
         return (EAttribute)symbolReferenceEClass.getEStructuralFeatures ().get ( 0 );
@@ -915,6 +1029,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getSymbolReference_Zoom ()
     {
         return (EAttribute)symbolReferenceEClass.getEStructuralFeatures ().get ( 1 );
@@ -925,6 +1040,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EReference getSymbolReference_Properties ()
     {
         return (EReference)symbolReferenceEClass.getEStructuralFeatures ().get ( 2 );
@@ -935,6 +1051,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getSymbolReference_OnCreateProperties ()
     {
         return (EAttribute)symbolReferenceEClass.getEStructuralFeatures ().get ( 3 );
@@ -945,6 +1062,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getStringToStringMap ()
     {
         return stringToStringMapEClass;
@@ -955,6 +1073,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getStringToStringMap_Key ()
     {
         return (EAttribute)stringToStringMapEClass.getEStructuralFeatures ().get ( 0 );
@@ -965,6 +1084,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getStringToStringMap_Value ()
     {
         return (EAttribute)stringToStringMapEClass.getEStructuralFeatures ().get ( 1 );
@@ -975,6 +1095,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getDimension ()
     {
         return dimensionEClass;
@@ -985,6 +1106,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getDimension_Width ()
     {
         return (EAttribute)dimensionEClass.getEStructuralFeatures ().get ( 0 );
@@ -995,6 +1117,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getDimension_Height ()
     {
         return (EAttribute)dimensionEClass.getEStructuralFeatures ().get ( 1 );
@@ -1005,6 +1128,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getCursor ()
     {
         return cursorEClass;
@@ -1015,6 +1139,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getSystemCursor ()
     {
         return systemCursorEClass;
@@ -1025,6 +1150,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getSystemCursor_Type ()
     {
         return (EAttribute)systemCursorEClass.getEStructuralFeatures ().get ( 0 );
@@ -1035,6 +1161,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getGridContainer ()
     {
         return gridContainerEClass;
@@ -1045,6 +1172,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getGridContainer_Columns ()
     {
         return (EAttribute)gridContainerEClass.getEStructuralFeatures ().get ( 0 );
@@ -1055,6 +1183,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getGridContainer_EqualWidth ()
     {
         return (EAttribute)gridContainerEClass.getEStructuralFeatures ().get ( 1 );
@@ -1065,6 +1194,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EReference getGridContainer_Children ()
     {
         return (EReference)gridContainerEClass.getEStructuralFeatures ().get ( 2 );
@@ -1075,6 +1205,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getGridContainer_HorizontalSpacing ()
     {
         return (EAttribute)gridContainerEClass.getEStructuralFeatures ().get ( 3 );
@@ -1085,6 +1216,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getGridContainer_VerticalSpacing ()
     {
         return (EAttribute)gridContainerEClass.getEStructuralFeatures ().get ( 4 );
@@ -1095,6 +1227,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getGridContainer_MarginWidth ()
     {
         return (EAttribute)gridContainerEClass.getEStructuralFeatures ().get ( 5 );
@@ -1105,6 +1238,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getGridContainer_MarginHeight ()
     {
         return (EAttribute)gridContainerEClass.getEStructuralFeatures ().get ( 6 );
@@ -1115,6 +1249,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getBorderContainer ()
     {
         return borderContainerEClass;
@@ -1125,6 +1260,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EReference getBorderContainer_Children ()
     {
         return (EReference)borderContainerEClass.getEStructuralFeatures ().get ( 0 );
@@ -1135,6 +1271,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getBorderContainer_VerticalSpacing ()
     {
         return (EAttribute)borderContainerEClass.getEStructuralFeatures ().get ( 1 );
@@ -1145,6 +1282,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getBorderContainer_HorizontalSpacing ()
     {
         return (EAttribute)borderContainerEClass.getEStructuralFeatures ().get ( 2 );
@@ -1155,6 +1293,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getBorderChild ()
     {
         return borderChildEClass;
@@ -1165,6 +1304,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getBorderChild_Alignment ()
     {
         return (EAttribute)borderChildEClass.getEStructuralFeatures ().get ( 0 );
@@ -1175,6 +1315,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getGridChild ()
     {
         return gridChildEClass;
@@ -1185,6 +1326,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getGridChild_HorizontalAlignment ()
     {
         return (EAttribute)gridChildEClass.getEStructuralFeatures ().get ( 0 );
@@ -1195,6 +1337,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getGridChild_VerticalAlignment ()
     {
         return (EAttribute)gridChildEClass.getEStructuralFeatures ().get ( 1 );
@@ -1205,6 +1348,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getGridChild_GrabHorizontalSpace ()
     {
         return (EAttribute)gridChildEClass.getEStructuralFeatures ().get ( 2 );
@@ -1215,6 +1359,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getGridChild_GrabVerticalSpace ()
     {
         return (EAttribute)gridChildEClass.getEStructuralFeatures ().get ( 3 );
@@ -1225,6 +1370,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getGridChild_SpanCols ()
     {
         return (EAttribute)gridChildEClass.getEStructuralFeatures ().get ( 4 );
@@ -1235,6 +1381,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getGridChild_SpanRows ()
     {
         return (EAttribute)gridChildEClass.getEStructuralFeatures ().get ( 5 );
@@ -1245,6 +1392,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getGridChild_WidthHint ()
     {
         return (EAttribute)gridChildEClass.getEStructuralFeatures ().get ( 6 );
@@ -1255,6 +1403,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getGridChild_HeightHint ()
     {
         return (EAttribute)gridChildEClass.getEStructuralFeatures ().get ( 7 );
@@ -1265,6 +1414,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getFigureContainer ()
     {
         return figureContainerEClass;
@@ -1275,6 +1425,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EReference getFigureContainer_Content ()
     {
         return (EReference)figureContainerEClass.getEStructuralFeatures ().get ( 0 );
@@ -1285,6 +1436,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getImage ()
     {
         return imageEClass;
@@ -1295,6 +1447,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getImage_Uri ()
     {
         return (EAttribute)imageEClass.getEStructuralFeatures ().get ( 0 );
@@ -1305,6 +1458,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getImage_ImageAlignment ()
     {
         return (EAttribute)imageEClass.getEStructuralFeatures ().get ( 1 );
@@ -1315,6 +1469,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getEllipse ()
     {
         return ellipseEClass;
@@ -1325,6 +1480,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getArc ()
     {
         return arcEClass;
@@ -1335,6 +1491,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getArc_Start ()
     {
         return (EAttribute)arcEClass.getEStructuralFeatures ().get ( 0 );
@@ -1345,6 +1502,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EAttribute getArc_Length ()
     {
         return (EAttribute)arcEClass.getEStructuralFeatures ().get ( 1 );
@@ -1355,6 +1513,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getConnection ()
     {
         return connectionEClass;
@@ -1365,6 +1524,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EReference getConnection_Start ()
     {
         return (EReference)connectionEClass.getEStructuralFeatures ().get ( 0 );
@@ -1375,6 +1535,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EReference getConnection_End ()
     {
         return (EReference)connectionEClass.getEStructuralFeatures ().get ( 1 );
@@ -1385,6 +1546,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EClass getStackContainer ()
     {
         return stackContainerEClass;
@@ -1395,6 +1557,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EReference getStackContainer_Children ()
     {
         return (EReference)stackContainerEClass.getEStructuralFeatures ().get ( 0 );
@@ -1405,6 +1568,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EEnum getAlignment ()
     {
         return alignmentEEnum;
@@ -1415,6 +1579,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EEnum getOrientation ()
     {
         return orientationEEnum;
@@ -1425,6 +1590,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EEnum getSystemCursorType ()
     {
         return systemCursorTypeEEnum;
@@ -1435,6 +1601,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public EEnum getGridAlignment ()
     {
         return gridAlignmentEEnum;
@@ -1445,6 +1612,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public VisualInterfaceFactory getVisualInterfaceFactory ()
     {
         return (VisualInterfaceFactory)getEFactoryInstance ();
@@ -1537,6 +1705,11 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
         createEAttribute ( figureEClass, FIGURE__BORDER );
         createEAttribute ( figureEClass, FIGURE__OPAQUE );
         createEAttribute ( figureEClass, FIGURE__TOOL_TIP );
+        createEAttribute ( figureEClass, FIGURE__ON_MOUSE_IN );
+        createEAttribute ( figureEClass, FIGURE__ON_MOUSE_OUT );
+        createEAttribute ( figureEClass, FIGURE__ON_MOUSE_MOVE );
+        createEAttribute ( figureEClass, FIGURE__ON_MOUSE_HOVER );
+        createEAttribute ( figureEClass, FIGURE__ON_MOUSE_DRAG );
 
         symbolReferenceEClass = createEClass ( SYMBOL_REFERENCE );
         createEAttribute ( symbolReferenceEClass, SYMBOL_REFERENCE__URI );
@@ -1728,6 +1901,11 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
         initEAttribute ( getFigure_Border (), ecorePackage.getEString (), "border", null, 0, 1, Figure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEAttribute ( getFigure_Opaque (), ecorePackage.getEBooleanObject (), "opaque", null, 0, 1, Figure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEAttribute ( getFigure_ToolTip (), ecorePackage.getEString (), "toolTip", null, 0, 1, Figure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getFigure_OnMouseIn (), ecorePackage.getEString (), "onMouseIn", null, 0, 1, Figure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getFigure_OnMouseOut (), ecorePackage.getEString (), "onMouseOut", null, 0, 1, Figure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getFigure_OnMouseMove (), ecorePackage.getEString (), "onMouseMove", null, 0, 1, Figure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getFigure_OnMouseHover (), ecorePackage.getEString (), "onMouseHover", null, 0, 1, Figure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getFigure_OnMouseDrag (), ecorePackage.getEString (), "onMouseDrag", null, 0, 1, Figure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
 
         initEClass ( symbolReferenceEClass, SymbolReference.class, "SymbolReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
         initEAttribute ( getSymbolReference_Uri (), ecorePackage.getEString (), "uri", null, 1, 1, SymbolReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$

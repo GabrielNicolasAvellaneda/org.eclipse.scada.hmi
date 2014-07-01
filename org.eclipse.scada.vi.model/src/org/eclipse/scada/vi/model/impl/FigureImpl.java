@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011, 2012 TH4 SYSTEMS GmbH and others.
+ * Copyright (c) 2011, 2014 TH4 SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,18 +7,16 @@
  * 
  * Contributors:
  *     TH4 SYSTEMS GmbH - initial API and implementation
+ *     IBH SYSTEMS GmbH - add new mouse events
  */
 package org.eclipse.scada.vi.model.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.scada.vi.model.Cursor;
 import org.eclipse.scada.vi.model.Dimension;
 import org.eclipse.scada.vi.model.Figure;
@@ -42,6 +40,11 @@ import org.eclipse.scada.vi.model.VisualInterfacePackage;
  *   <li>{@link org.eclipse.scada.vi.model.impl.FigureImpl#getBorder <em>Border</em>}</li>
  *   <li>{@link org.eclipse.scada.vi.model.impl.FigureImpl#getOpaque <em>Opaque</em>}</li>
  *   <li>{@link org.eclipse.scada.vi.model.impl.FigureImpl#getToolTip <em>Tool Tip</em>}</li>
+ *   <li>{@link org.eclipse.scada.vi.model.impl.FigureImpl#getOnMouseIn <em>On Mouse In</em>}</li>
+ *   <li>{@link org.eclipse.scada.vi.model.impl.FigureImpl#getOnMouseOut <em>On Mouse Out</em>}</li>
+ *   <li>{@link org.eclipse.scada.vi.model.impl.FigureImpl#getOnMouseMove <em>On Mouse Move</em>}</li>
+ *   <li>{@link org.eclipse.scada.vi.model.impl.FigureImpl#getOnMouseHover <em>On Mouse Hover</em>}</li>
+ *   <li>{@link org.eclipse.scada.vi.model.impl.FigureImpl#getOnMouseDrag <em>On Mouse Drag</em>}</li>
  * </ul>
  * </p>
  *
@@ -250,6 +253,106 @@ public abstract class FigureImpl extends EObjectImpl implements Figure
     protected String toolTip = TOOL_TIP_EDEFAULT;
 
     /**
+     * The default value of the '{@link #getOnMouseIn() <em>On Mouse In</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getOnMouseIn()
+     * @generated
+     * @ordered
+     */
+    protected static final String ON_MOUSE_IN_EDEFAULT = null;
+
+    /**
+     * The cached value of the '{@link #getOnMouseIn() <em>On Mouse In</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getOnMouseIn()
+     * @generated
+     * @ordered
+     */
+    protected String onMouseIn = ON_MOUSE_IN_EDEFAULT;
+
+    /**
+     * The default value of the '{@link #getOnMouseOut() <em>On Mouse Out</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getOnMouseOut()
+     * @generated
+     * @ordered
+     */
+    protected static final String ON_MOUSE_OUT_EDEFAULT = null;
+
+    /**
+     * The cached value of the '{@link #getOnMouseOut() <em>On Mouse Out</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getOnMouseOut()
+     * @generated
+     * @ordered
+     */
+    protected String onMouseOut = ON_MOUSE_OUT_EDEFAULT;
+
+    /**
+     * The default value of the '{@link #getOnMouseMove() <em>On Mouse Move</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getOnMouseMove()
+     * @generated
+     * @ordered
+     */
+    protected static final String ON_MOUSE_MOVE_EDEFAULT = null;
+
+    /**
+     * The cached value of the '{@link #getOnMouseMove() <em>On Mouse Move</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getOnMouseMove()
+     * @generated
+     * @ordered
+     */
+    protected String onMouseMove = ON_MOUSE_MOVE_EDEFAULT;
+
+    /**
+     * The default value of the '{@link #getOnMouseHover() <em>On Mouse Hover</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getOnMouseHover()
+     * @generated
+     * @ordered
+     */
+    protected static final String ON_MOUSE_HOVER_EDEFAULT = null;
+
+    /**
+     * The cached value of the '{@link #getOnMouseHover() <em>On Mouse Hover</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getOnMouseHover()
+     * @generated
+     * @ordered
+     */
+    protected String onMouseHover = ON_MOUSE_HOVER_EDEFAULT;
+
+    /**
+     * The default value of the '{@link #getOnMouseDrag() <em>On Mouse Drag</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getOnMouseDrag()
+     * @generated
+     * @ordered
+     */
+    protected static final String ON_MOUSE_DRAG_EDEFAULT = null;
+
+    /**
+     * The cached value of the '{@link #getOnMouseDrag() <em>On Mouse Drag</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getOnMouseDrag()
+     * @generated
+     * @ordered
+     */
+    protected String onMouseDrag = ON_MOUSE_DRAG_EDEFAULT;
+
+    /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
@@ -275,6 +378,7 @@ public abstract class FigureImpl extends EObjectImpl implements Figure
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public String getName ()
     {
         return name;
@@ -285,6 +389,7 @@ public abstract class FigureImpl extends EObjectImpl implements Figure
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void setName ( String newName )
     {
         String oldName = name;
@@ -298,6 +403,7 @@ public abstract class FigureImpl extends EObjectImpl implements Figure
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public String getForegroundColor ()
     {
         return foregroundColor;
@@ -308,6 +414,7 @@ public abstract class FigureImpl extends EObjectImpl implements Figure
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void setForegroundColor ( String newForegroundColor )
     {
         String oldForegroundColor = foregroundColor;
@@ -321,6 +428,7 @@ public abstract class FigureImpl extends EObjectImpl implements Figure
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public String getBackgroundColor ()
     {
         return backgroundColor;
@@ -331,6 +439,7 @@ public abstract class FigureImpl extends EObjectImpl implements Figure
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void setBackgroundColor ( String newBackgroundColor )
     {
         String oldBackgroundColor = backgroundColor;
@@ -344,6 +453,7 @@ public abstract class FigureImpl extends EObjectImpl implements Figure
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public Dimension getSize ()
     {
         return size;
@@ -374,6 +484,7 @@ public abstract class FigureImpl extends EObjectImpl implements Figure
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void setSize ( Dimension newSize )
     {
         if ( newSize != size )
@@ -396,6 +507,7 @@ public abstract class FigureImpl extends EObjectImpl implements Figure
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public String getOnClick ()
     {
         return onClick;
@@ -406,6 +518,7 @@ public abstract class FigureImpl extends EObjectImpl implements Figure
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void setOnClick ( String newOnClick )
     {
         String oldOnClick = onClick;
@@ -419,6 +532,7 @@ public abstract class FigureImpl extends EObjectImpl implements Figure
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public String getOnDoubleClick ()
     {
         return onDoubleClick;
@@ -429,6 +543,7 @@ public abstract class FigureImpl extends EObjectImpl implements Figure
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void setOnDoubleClick ( String newOnDoubleClick )
     {
         String oldOnDoubleClick = onDoubleClick;
@@ -442,6 +557,7 @@ public abstract class FigureImpl extends EObjectImpl implements Figure
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public Cursor getCursor ()
     {
         if ( cursor != null && cursor.eIsProxy () )
@@ -472,6 +588,7 @@ public abstract class FigureImpl extends EObjectImpl implements Figure
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void setCursor ( Cursor newCursor )
     {
         Cursor oldCursor = cursor;
@@ -485,6 +602,7 @@ public abstract class FigureImpl extends EObjectImpl implements Figure
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public boolean isVisible ()
     {
         return visible;
@@ -495,6 +613,7 @@ public abstract class FigureImpl extends EObjectImpl implements Figure
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void setVisible ( boolean newVisible )
     {
         boolean oldVisible = visible;
@@ -508,6 +627,7 @@ public abstract class FigureImpl extends EObjectImpl implements Figure
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public String getBorder ()
     {
         return border;
@@ -518,6 +638,7 @@ public abstract class FigureImpl extends EObjectImpl implements Figure
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void setBorder ( String newBorder )
     {
         String oldBorder = border;
@@ -531,6 +652,7 @@ public abstract class FigureImpl extends EObjectImpl implements Figure
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public Boolean getOpaque ()
     {
         return opaque;
@@ -541,6 +663,7 @@ public abstract class FigureImpl extends EObjectImpl implements Figure
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void setOpaque ( Boolean newOpaque )
     {
         Boolean oldOpaque = opaque;
@@ -554,6 +677,7 @@ public abstract class FigureImpl extends EObjectImpl implements Figure
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public String getToolTip ()
     {
         return toolTip;
@@ -564,12 +688,138 @@ public abstract class FigureImpl extends EObjectImpl implements Figure
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void setToolTip ( String newToolTip )
     {
         String oldToolTip = toolTip;
         toolTip = newToolTip;
         if ( eNotificationRequired () )
             eNotify ( new ENotificationImpl ( this, Notification.SET, VisualInterfacePackage.FIGURE__TOOL_TIP, oldToolTip, toolTip ) );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public String getOnMouseIn ()
+    {
+        return onMouseIn;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void setOnMouseIn ( String newOnMouseIn )
+    {
+        String oldOnMouseIn = onMouseIn;
+        onMouseIn = newOnMouseIn;
+        if ( eNotificationRequired () )
+            eNotify ( new ENotificationImpl ( this, Notification.SET, VisualInterfacePackage.FIGURE__ON_MOUSE_IN, oldOnMouseIn, onMouseIn ) );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public String getOnMouseOut ()
+    {
+        return onMouseOut;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void setOnMouseOut ( String newOnMouseOut )
+    {
+        String oldOnMouseOut = onMouseOut;
+        onMouseOut = newOnMouseOut;
+        if ( eNotificationRequired () )
+            eNotify ( new ENotificationImpl ( this, Notification.SET, VisualInterfacePackage.FIGURE__ON_MOUSE_OUT, oldOnMouseOut, onMouseOut ) );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public String getOnMouseMove ()
+    {
+        return onMouseMove;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void setOnMouseMove ( String newOnMouseMove )
+    {
+        String oldOnMouseMove = onMouseMove;
+        onMouseMove = newOnMouseMove;
+        if ( eNotificationRequired () )
+            eNotify ( new ENotificationImpl ( this, Notification.SET, VisualInterfacePackage.FIGURE__ON_MOUSE_MOVE, oldOnMouseMove, onMouseMove ) );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public String getOnMouseHover ()
+    {
+        return onMouseHover;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void setOnMouseHover ( String newOnMouseHover )
+    {
+        String oldOnMouseHover = onMouseHover;
+        onMouseHover = newOnMouseHover;
+        if ( eNotificationRequired () )
+            eNotify ( new ENotificationImpl ( this, Notification.SET, VisualInterfacePackage.FIGURE__ON_MOUSE_HOVER, oldOnMouseHover, onMouseHover ) );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public String getOnMouseDrag ()
+    {
+        return onMouseDrag;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void setOnMouseDrag ( String newOnMouseDrag )
+    {
+        String oldOnMouseDrag = onMouseDrag;
+        onMouseDrag = newOnMouseDrag;
+        if ( eNotificationRequired () )
+            eNotify ( new ENotificationImpl ( this, Notification.SET, VisualInterfacePackage.FIGURE__ON_MOUSE_DRAG, oldOnMouseDrag, onMouseDrag ) );
     }
 
     /**
@@ -622,6 +872,16 @@ public abstract class FigureImpl extends EObjectImpl implements Figure
                 return getOpaque ();
             case VisualInterfacePackage.FIGURE__TOOL_TIP:
                 return getToolTip ();
+            case VisualInterfacePackage.FIGURE__ON_MOUSE_IN:
+                return getOnMouseIn ();
+            case VisualInterfacePackage.FIGURE__ON_MOUSE_OUT:
+                return getOnMouseOut ();
+            case VisualInterfacePackage.FIGURE__ON_MOUSE_MOVE:
+                return getOnMouseMove ();
+            case VisualInterfacePackage.FIGURE__ON_MOUSE_HOVER:
+                return getOnMouseHover ();
+            case VisualInterfacePackage.FIGURE__ON_MOUSE_DRAG:
+                return getOnMouseDrag ();
         }
         return super.eGet ( featureID, resolve, coreType );
     }
@@ -668,6 +928,21 @@ public abstract class FigureImpl extends EObjectImpl implements Figure
                 return;
             case VisualInterfacePackage.FIGURE__TOOL_TIP:
                 setToolTip ( (String)newValue );
+                return;
+            case VisualInterfacePackage.FIGURE__ON_MOUSE_IN:
+                setOnMouseIn ( (String)newValue );
+                return;
+            case VisualInterfacePackage.FIGURE__ON_MOUSE_OUT:
+                setOnMouseOut ( (String)newValue );
+                return;
+            case VisualInterfacePackage.FIGURE__ON_MOUSE_MOVE:
+                setOnMouseMove ( (String)newValue );
+                return;
+            case VisualInterfacePackage.FIGURE__ON_MOUSE_HOVER:
+                setOnMouseHover ( (String)newValue );
+                return;
+            case VisualInterfacePackage.FIGURE__ON_MOUSE_DRAG:
+                setOnMouseDrag ( (String)newValue );
                 return;
         }
         super.eSet ( featureID, newValue );
@@ -716,6 +991,21 @@ public abstract class FigureImpl extends EObjectImpl implements Figure
             case VisualInterfacePackage.FIGURE__TOOL_TIP:
                 setToolTip ( TOOL_TIP_EDEFAULT );
                 return;
+            case VisualInterfacePackage.FIGURE__ON_MOUSE_IN:
+                setOnMouseIn ( ON_MOUSE_IN_EDEFAULT );
+                return;
+            case VisualInterfacePackage.FIGURE__ON_MOUSE_OUT:
+                setOnMouseOut ( ON_MOUSE_OUT_EDEFAULT );
+                return;
+            case VisualInterfacePackage.FIGURE__ON_MOUSE_MOVE:
+                setOnMouseMove ( ON_MOUSE_MOVE_EDEFAULT );
+                return;
+            case VisualInterfacePackage.FIGURE__ON_MOUSE_HOVER:
+                setOnMouseHover ( ON_MOUSE_HOVER_EDEFAULT );
+                return;
+            case VisualInterfacePackage.FIGURE__ON_MOUSE_DRAG:
+                setOnMouseDrag ( ON_MOUSE_DRAG_EDEFAULT );
+                return;
         }
         super.eUnset ( featureID );
     }
@@ -752,6 +1042,16 @@ public abstract class FigureImpl extends EObjectImpl implements Figure
                 return OPAQUE_EDEFAULT == null ? opaque != null : !OPAQUE_EDEFAULT.equals ( opaque );
             case VisualInterfacePackage.FIGURE__TOOL_TIP:
                 return TOOL_TIP_EDEFAULT == null ? toolTip != null : !TOOL_TIP_EDEFAULT.equals ( toolTip );
+            case VisualInterfacePackage.FIGURE__ON_MOUSE_IN:
+                return ON_MOUSE_IN_EDEFAULT == null ? onMouseIn != null : !ON_MOUSE_IN_EDEFAULT.equals ( onMouseIn );
+            case VisualInterfacePackage.FIGURE__ON_MOUSE_OUT:
+                return ON_MOUSE_OUT_EDEFAULT == null ? onMouseOut != null : !ON_MOUSE_OUT_EDEFAULT.equals ( onMouseOut );
+            case VisualInterfacePackage.FIGURE__ON_MOUSE_MOVE:
+                return ON_MOUSE_MOVE_EDEFAULT == null ? onMouseMove != null : !ON_MOUSE_MOVE_EDEFAULT.equals ( onMouseMove );
+            case VisualInterfacePackage.FIGURE__ON_MOUSE_HOVER:
+                return ON_MOUSE_HOVER_EDEFAULT == null ? onMouseHover != null : !ON_MOUSE_HOVER_EDEFAULT.equals ( onMouseHover );
+            case VisualInterfacePackage.FIGURE__ON_MOUSE_DRAG:
+                return ON_MOUSE_DRAG_EDEFAULT == null ? onMouseDrag != null : !ON_MOUSE_DRAG_EDEFAULT.equals ( onMouseDrag );
         }
         return super.eIsSet ( featureID );
     }
@@ -786,6 +1086,16 @@ public abstract class FigureImpl extends EObjectImpl implements Figure
         result.append ( opaque );
         result.append ( ", toolTip: " ); //$NON-NLS-1$
         result.append ( toolTip );
+        result.append ( ", onMouseIn: " ); //$NON-NLS-1$
+        result.append ( onMouseIn );
+        result.append ( ", onMouseOut: " ); //$NON-NLS-1$
+        result.append ( onMouseOut );
+        result.append ( ", onMouseMove: " ); //$NON-NLS-1$
+        result.append ( onMouseMove );
+        result.append ( ", onMouseHover: " ); //$NON-NLS-1$
+        result.append ( onMouseHover );
+        result.append ( ", onMouseDrag: " ); //$NON-NLS-1$
+        result.append ( onMouseDrag );
         result.append ( ')' );
         return result.toString ();
     }

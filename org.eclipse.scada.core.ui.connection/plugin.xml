@@ -120,21 +120,17 @@
             category="org.eclipse.scada.core.ui.category"
             class="org.eclipse.scada.core.ui.connection.wizards.AddConnectionWizard"
             hasPages="true"
+            icon="icons/new_connection.gif"
             id="org.eclipse.scada.core.ui.connection.AddConnection"
             name="%wizard.addConnection.name"
             project="false">
-         <selection
-               class="org.eclipse.scada.core.ui.connection.ConnectionStore">
-         </selection>
-         <selection
-               class="org.eclipse.scada.core.ui.connection.data.ConnectionHolder">
-         </selection>
       </wizard>
       <wizard
             canFinishEarly="true"
             category="org.eclipse.scada.core.ui.category"
             class="org.eclipse.scada.core.ui.connection.wizards.EditConnectionWizard"
             hasPages="true"
+            icon="icons/edit_connection.gif"
             id="org.eclipse.scada.core.ui.connection.EditConnection"
             name="%wizard.editConnection.name"
             project="false">
@@ -210,39 +206,6 @@
                   name="newWizardId"
                   value="org.eclipse.scada.core.ui.connection.AddConnection">
             </parameter>
-            <visibleWhen
-                  checkEnabled="false">
-                  <or>
-				  <iterate
-                        ifEmpty="false"
-                        operator="and">
-                        <test
-                              property="org.eclipse.scada.core.ui.connection.data.ConnectionDiscovererBean.isStore"
-                              value="true">
-                        </test>
-                  </iterate>
-                  </or>
-            </visibleWhen>
-         </command>
-         <command
-               commandId="org.eclipse.ui.newWizard"
-               label="%command.newConnection.label"
-               style="push">
-            <parameter
-                  name="newWizardId"
-                  value="org.eclipse.scada.core.ui.connection.AddConnection">
-            </parameter>
-            <visibleWhen
-                  checkEnabled="false">
-				   <iterate
-                        ifEmpty="false"
-                        operator="and">
-                        <test
-                              property="org.eclipse.scada.core.ui.connection.data.ConnectionHolder.stored"
-                              value="true">
-                        </test>
-                  </iterate>
-            </visibleWhen>
          </command>
          <command
                commandId="org.eclipse.scada.core.ui.connection.cancelConnection"
@@ -380,6 +343,15 @@
                type="org.eclipse.scada.core.connection.provider.ConnectionService">
          </adapter>
       </factory>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="*">
+         <newWizardShortcut
+               id="org.eclipse.scada.core.ui.connection.AddConnection">
+         </newWizardShortcut>
+      </perspectiveExtension>
    </extension>
 
 </plugin>

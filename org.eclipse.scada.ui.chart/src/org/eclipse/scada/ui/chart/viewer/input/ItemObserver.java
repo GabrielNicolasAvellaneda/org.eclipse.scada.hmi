@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2013 TH4 SYSTEMS GmbH and others.
+ * Copyright (c) 2012, 2014 TH4 SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -8,12 +8,12 @@
  * Contributors:
  *     TH4 SYSTEMS GmbH - initial API and implementation
  *     IBH SYSTEMS GmbH - additional work
+ *     IBH SYSTEMS GmbH - bug fixes and extensions, enhancements for legends
  *******************************************************************************/
 package org.eclipse.scada.ui.chart.viewer.input;
 
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 import java.util.LinkedList;
 
 import org.eclipse.jface.resource.ResourceManager;
@@ -36,7 +36,7 @@ import org.eclipse.scada.ui.chart.Activator;
 import org.eclipse.scada.ui.chart.viewer.ChartViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.LineAttributes;
-import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.graphics.RGB;
 
 public class ItemObserver extends LineInput implements DataSourceListener
 {
@@ -66,7 +66,7 @@ public class ItemObserver extends LineInput implements DataSourceListener
 
     private SubscriptionState state;
 
-    private Date originalSelectedTimestamp;
+    private Calendar originalSelectedTimestamp;
 
     private static class LevelRuler
     {
@@ -116,19 +116,19 @@ public class ItemObserver extends LineInput implements DataSourceListener
 
                 if ( !active )
                 {
-                    this.ruler.setColor ( Display.getDefault ().getSystemColor ( SWT.COLOR_GRAY ) );
+                    this.ruler.setColor ( new RGB ( 128, 128, 128 ) );
                 }
                 else if ( unsafe )
                 {
-                    this.ruler.setColor ( Display.getDefault ().getSystemColor ( SWT.COLOR_MAGENTA ) );
+                    this.ruler.setColor ( new RGB ( 255, 0, 255 ) );
                 }
                 else if ( error || alarm )
                 {
-                    this.ruler.setColor ( Display.getDefault ().getSystemColor ( SWT.COLOR_RED ) );
+                    this.ruler.setColor ( new RGB ( 255, 0, 0 ) );
                 }
                 else
                 {
-                    this.ruler.setColor ( Display.getDefault ().getSystemColor ( SWT.COLOR_GREEN ) );
+                    this.ruler.setColor ( new RGB ( 0, 255, 0 ) );
                 }
             }
         }
@@ -239,7 +239,7 @@ public class ItemObserver extends LineInput implements DataSourceListener
      * @see org.eclipse.scada.ui.chart.model.view.ChartInput#tick(long)
      */
     @Override
-    public void tick ( final long now )
+    public boolean tick ( final long now )
     {
         if ( this.lastTickMarker == null )
         {
@@ -247,7 +247,7 @@ public class ItemObserver extends LineInput implements DataSourceListener
             if ( newMarker.getTimestamp () > now )
             {
                 // don't add marker if the latest value is in the future
-                return;
+                return false;
             }
             this.lastTickMarker = newMarker;
         }
@@ -257,6 +257,8 @@ public class ItemObserver extends LineInput implements DataSourceListener
         }
         this.lastTickMarker = new DataEntry ( now, this.lastTickMarker.getValue () );
         this.valueSeries.getData ().add ( this.lastTickMarker );
+
+        return true;
     }
 
     public void connect ()
@@ -336,7 +338,7 @@ public class ItemObserver extends LineInput implements DataSourceListener
     }
 
     @Override
-    protected void setSelectedTimestamp ( final Date selectedTimestamp )
+    protected void setSelectedTimestamp ( final Calendar selectedTimestamp )
     {
         if ( selectedTimestamp == null )
         {
@@ -350,18 +352,20 @@ public class ItemObserver extends LineInput implements DataSourceListener
             return;
         }
 
-        final DataEntry value = this.valueSeries.getData ().getEntries ().lower ( new DataEntry ( selectedTimestamp.getTime (), null ) );
+        final DataEntry value = this.valueSeries.getData ().getEntries ().lower ( new DataEntry ( selectedTimestamp.getTimeInMillis (), null ) );
         if ( value == null )
         {
             setSelectedValue ( null );
             super.setSelectedTimestamp ( null );
-            setSelectedQuality ( Messages.ItemObserver_ZeroPercent );
+            setSelectedQuality ( 0.0 );
         }
         else
         {
-            setSelectedValue ( String.format ( Messages.ItemObserver_Format_Value, value.getValue () ) );
-            setSelectedQuality ( value.getValue () == null ? Messages.ItemObserver_ZeroPercent : Messages.ItemObserver_100Percent );
-            super.setSelectedTimestamp ( new Date ( value.getTimestamp () ) );
+            setSelectedValue ( value.getValue () );
+            setSelectedQuality ( value.getValue () == null ? 0.0 : 1.0 );
+            final Calendar c = Calendar.getInstance ();
+            c.setTimeInMillis ( value.getTimestamp () );
+            super.setSelectedTimestamp ( c );
         }
     }
 

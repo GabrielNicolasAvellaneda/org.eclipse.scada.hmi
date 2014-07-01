@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2013 TH4 SYSTEMS GmbH and others.
+ * Copyright (c) 2012, 2014 TH4 SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -8,23 +8,25 @@
  * Contributors:
  *     TH4 SYSTEMS GmbH - initial API and implementation
  *     IBH SYSTEMS GmbH - additional work
+ *     IBH SYSTEMS GmbH - bug fixes and enhancements
  *******************************************************************************/
 package org.eclipse.scada.vi.ui.chart.draw2d;
 
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.Graphics;
-import org.eclipse.scada.chart.swt.ChartRenderer;
+import org.eclipse.jface.resource.LocalResourceManager;
+import org.eclipse.jface.resource.ResourceManager;
 import org.eclipse.scada.ui.chart.model.Chart;
 import org.eclipse.scada.ui.chart.model.ChartFactory;
 import org.eclipse.scada.ui.chart.model.XAxis;
 import org.eclipse.scada.ui.chart.model.YAxis;
 import org.eclipse.scada.ui.chart.viewer.ChartViewer;
 import org.eclipse.scada.ui.chart.viewer.NullExtensionSpace;
-import org.eclipse.swt.graphics.Rectangle;
+import org.eclipse.swt.widgets.Display;
 
 public class ChartFigure extends Figure
 {
-    private ChartRenderer renderer;
+    private FigureRenderer renderer;
 
     private ChartViewer viewer;
 
@@ -32,8 +34,23 @@ public class ChartFigure extends Figure
 
     private boolean realize;
 
-    public ChartFigure ()
+    private final ResourceManager parentResourceManager;
+
+    private LocalResourceManager resourceManager;
+
+    private final Display display;
+
+    /**
+     * Create a new chart figure
+     *
+     * @param parentResourceManager
+     *            The resource manager that will act as parent when creating
+     *            resource managers
+     */
+    public ChartFigure ( final Display display, final ResourceManager parentResourceManager )
     {
+        this.display = display;
+        this.parentResourceManager = parentResourceManager;
     }
 
     public void setConfiguration ( final Chart configuration )
@@ -77,8 +94,8 @@ public class ChartFigure extends Figure
         x.setMaximum ( System.currentTimeMillis () + 900 * 1000 );
         configuration.getBottom ().add ( x );
 
-        configuration.setSelectedXAxis ( x );
-        configuration.setSelectedYAxis ( y );
+        configuration.getSelectedXAxis ().add ( x );
+        configuration.getSelectedYAxis ().add ( y );
 
         return configuration;
     }
@@ -101,6 +118,11 @@ public class ChartFigure extends Figure
             this.renderer.dispose ();
             this.renderer = null;
         }
+        if ( this.resourceManager != null )
+        {
+            this.resourceManager.dispose ();
+            this.resourceManager = null;
+        }
     }
 
     protected void createRenderer ()
@@ -112,8 +134,9 @@ public class ChartFigure extends Figure
 
     private void doCreateRenderer ()
     {
-        this.renderer = new FigureRenderer ( this );
-        this.viewer = new ChartViewer ( this.renderer, this.configuration != null ? this.configuration : makeDefaultConfiguration (), new NullExtensionSpace (), null );
+        this.resourceManager = new LocalResourceManager ( this.parentResourceManager );
+        this.renderer = new FigureRenderer ( this, this.resourceManager );
+        this.viewer = new ChartViewer ( this.display, this.renderer, this.configuration != null ? this.configuration : makeDefaultConfiguration (), new NullExtensionSpace (), null );
     }
 
     private void checkCreate ()
@@ -130,7 +153,7 @@ public class ChartFigure extends Figure
         super.setSize ( w, h );
         if ( this.renderer != null )
         {
-            this.renderer.resizeAll ( new Rectangle ( 0, 0, w, h ) );
+            this.renderer.handleResize ();
         }
     }
 
@@ -139,8 +162,15 @@ public class ChartFigure extends Figure
     {
         if ( this.renderer != null )
         {
-            final Draw2DGraphics g = new Draw2DGraphics ( graphics );
-            this.renderer.paint ( g );
+            final Draw2DGraphics g = new Draw2DGraphics ( graphics, this.resourceManager.getDevice () );
+            try
+            {
+                this.renderer.paint ( g );
+            }
+            finally
+            {
+                g.dispose ();
+            }
         }
     }
 }

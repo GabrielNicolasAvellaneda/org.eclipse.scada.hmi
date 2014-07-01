@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2013 TH4 SYSTEMS GmbH and others.
+ * Copyright (c) 2011, 2014 TH4 SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,6 +7,8 @@
  *
  * Contributors:
  *     TH4 SYSTEMS GmbH - initial API and implementation
+ *     IBH SYSTEMS GmbH - fix some bugs with border parser, add mouse
+ *          motion events, fix bug 437536
  *******************************************************************************/
 package org.eclipse.scada.vi.ui.draw2d.primitives;
 
@@ -14,8 +16,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-import javax.script.ScriptException;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -28,18 +28,14 @@ import org.eclipse.draw2d.LineBorder;
 import org.eclipse.draw2d.MarginBorder;
 import org.eclipse.draw2d.MouseEvent;
 import org.eclipse.draw2d.MouseListener;
+import org.eclipse.draw2d.MouseMotionListener;
 import org.eclipse.draw2d.TitleBarBorder;
 import org.eclipse.draw2d.geometry.PrecisionDimension;
 import org.eclipse.draw2d.geometry.PrecisionRectangle;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.jface.resource.ResourceManager;
-import org.eclipse.scada.utils.script.ScriptExecutor;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.RGB;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.statushandlers.StatusManager;
 import org.eclipse.scada.ui.blink.AbstractBlinker;
+import org.eclipse.scada.utils.script.ScriptExecutor;
 import org.eclipse.scada.vi.model.Cursor;
 import org.eclipse.scada.vi.model.Dimension;
 import org.eclipse.scada.vi.model.Figure;
@@ -48,6 +44,11 @@ import org.eclipse.scada.vi.model.VisualInterfaceFactory;
 import org.eclipse.scada.vi.ui.draw2d.Activator;
 import org.eclipse.scada.vi.ui.draw2d.Controller;
 import org.eclipse.scada.vi.ui.draw2d.SymbolController;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.RGB;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.statushandlers.StatusManager;
 
 /**
  * A figure controller
@@ -72,7 +73,7 @@ IFigure figure = new PolylineShape () {
 };
  * </pre></code>
  * </p>
- * 
+ *
  * @author Jens Reimann
  */
 public abstract class FigureController implements Controller
@@ -91,6 +92,41 @@ public abstract class FigureController implements Controller
         {
             handleOnDoubleClick ( me );
         }
+    }
+
+    public class MotionHandlerImpl implements MouseMotionListener
+    {
+
+        @Override
+        public void mouseDragged ( final MouseEvent me )
+        {
+            handleMouseDragged ( me );
+        }
+
+        @Override
+        public void mouseEntered ( final MouseEvent me )
+        {
+            handleMouseEntered ( me );
+        }
+
+        @Override
+        public void mouseExited ( final MouseEvent me )
+        {
+            handleMouseExited ( me );
+        }
+
+        @Override
+        public void mouseHover ( final MouseEvent me )
+        {
+            handleMouseHover ( me );
+        }
+
+        @Override
+        public void mouseMoved ( final MouseEvent me )
+        {
+            handleMouseMoved ( me );
+        }
+
     }
 
     private static interface ColorApplier
@@ -144,7 +180,7 @@ public abstract class FigureController implements Controller
         @Override
         public void stop ()
         {
-            // nothing to do  
+            // nothing to do
         }
     }
 
@@ -230,6 +266,16 @@ public abstract class FigureController implements Controller
 
     private boolean started;
 
+    private ScriptExecutor onMouseEnter;
+
+    private ScriptExecutor onMouseExit;
+
+    private ScriptExecutor onMouseMove;
+
+    private ScriptExecutor onMouseHover;
+
+    private ScriptExecutor onMouseDrag;
+
     public FigureController ( final SymbolController controller, final ResourceManager manager )
     {
         this.manager = manager;
@@ -243,7 +289,7 @@ public abstract class FigureController implements Controller
      * The figure returned is by default the same as the {@link #getFigure()}.
      * But in some cases it might be necessary to return a different figure.
      * </p>
-     * 
+     *
      * @return the figure that should the attributes applied
      */
     protected abstract IFigure getPropertyFigure ();
@@ -269,17 +315,26 @@ public abstract class FigureController implements Controller
 
         try
         {
-            this.onClick = this.controller.createScriptExecutor ( figure.getOnClick () );
-            this.onDoubleClick = this.controller.createScriptExecutor ( figure.getOnDoubleClick () );
+            this.onClick = this.controller.createScriptExecutor ( figure.getOnClick (), "onClick" );
+            this.onDoubleClick = this.controller.createScriptExecutor ( figure.getOnDoubleClick (), "onDoubleClick" );
+            this.onMouseEnter = this.controller.createScriptExecutor ( figure.getOnMouseIn (), "onMouseIn" );
+            this.onMouseExit = this.controller.createScriptExecutor ( figure.getOnMouseOut (), "onMouseOut" );
+            this.onMouseMove = this.controller.createScriptExecutor ( figure.getOnMouseMove (), "onMouseMove" );
+            this.onMouseHover = this.controller.createScriptExecutor ( figure.getOnMouseHover (), "onMouseHover" );
+            this.onMouseDrag = this.controller.createScriptExecutor ( figure.getOnMouseDrag (), "onMouseDrag" );
         }
-        catch ( final ScriptException e )
+        catch ( final Exception e )
         {
-            throw new RuntimeException ( "Failed to initialize", e );
+            throw new RuntimeException ( "Failed to initialize", e ); //$NON-NLS-1$
         }
 
         if ( this.onClick != null || this.onDoubleClick != null )
         {
             getPropertyFigure ().addMouseListener ( new ClickHandlerImpl () );
+        }
+        if ( this.onMouseEnter != null || this.onMouseExit != null || this.onMouseMove != null || this.onMouseHover != null || this.onMouseDrag != null )
+        {
+            getPropertyFigure ().addMouseMotionListener ( new MotionHandlerImpl () );
         }
     }
 
@@ -346,35 +401,55 @@ public abstract class FigureController implements Controller
         return null;
     }
 
-    protected void handleOnDoubleClick ( final MouseEvent me )
+    private void fireScriptEvent ( final ScriptExecutor script, final Object event, final String eventName )
     {
-        this.controller.debugLog ( String.format ( "Double click: %s", me ) );
+        this.controller.debugLog ( String.format ( "%s: %s", eventName, event ) ); //$NON-NLS-1$
+
         final Map<String, Object> scriptObjects = new LinkedHashMap<String, Object> ( 1 );
-        scriptObjects.put ( "event", me );
+        scriptObjects.put ( "event", event ); //$NON-NLS-1$
         try
         {
-            this.controller.execute ( this.onDoubleClick, scriptObjects );
+            this.controller.execute ( script, scriptObjects );
         }
         catch ( final Exception e )
         {
-            this.controller.errorLog ( "Failed to handle onDoubleClick", e );
+            this.controller.errorLog ( "Failed to handle event: " + eventName, e ); //$NON-NLS-1$
         }
+    }
+
+    protected void handleOnDoubleClick ( final MouseEvent me )
+    {
+        fireScriptEvent ( this.onDoubleClick, me, "Double click" ); //$NON-NLS-1$
     }
 
     protected void handleOnClick ( final MouseEvent me )
     {
-        this.controller.debugLog ( String.format ( "Click: %s", me ) );
-        final Map<String, Object> scriptObjects = new LinkedHashMap<String, Object> ( 1 );
-        scriptObjects.put ( "event", me );
+        fireScriptEvent ( this.onClick, me, "Click" ); //$NON-NLS-1$
+    }
 
-        try
-        {
-            this.controller.execute ( this.onClick, scriptObjects );
-        }
-        catch ( final Exception e )
-        {
-            this.controller.errorLog ( "Failed to handle onClick", e );
-        }
+    public void handleMouseMoved ( final MouseEvent me )
+    {
+        fireScriptEvent ( this.onMouseMove, me, "Mouse move" ); //$NON-NLS-1$
+    }
+
+    public void handleMouseHover ( final MouseEvent me )
+    {
+        fireScriptEvent ( this.onMouseHover, me, "Mouse hover" ); //$NON-NLS-1$
+    }
+
+    public void handleMouseExited ( final MouseEvent me )
+    {
+        fireScriptEvent ( this.onMouseExit, me, "Mouse exited" ); //$NON-NLS-1$
+    }
+
+    public void handleMouseEntered ( final MouseEvent me )
+    {
+        fireScriptEvent ( this.onMouseEnter, me, "Mouse entered" ); //$NON-NLS-1$
+    }
+
+    public void handleMouseDragged ( final MouseEvent me )
+    {
+        fireScriptEvent ( this.onMouseDrag, me, "Mouse dragged" ); //$NON-NLS-1$
     }
 
     public void setPreferredSize ( final double width, final double height )
@@ -451,13 +526,13 @@ public abstract class FigureController implements Controller
     public void setBackgroundColor ( final String color )
     {
         final ColorHandler colorHandler = makeColorHandler ( color, new BackgroundApplier () );
-        setColor ( "backgroundColor", colorHandler );
+        setColor ( "backgroundColor", colorHandler ); //$NON-NLS-1$
     }
 
     public void setForegroundColor ( final String color )
     {
         final ColorHandler colorHandler = makeColorHandler ( color, new ForegroundApplier () );
-        setColor ( "foregroundColor", colorHandler );
+        setColor ( "foregroundColor", colorHandler ); //$NON-NLS-1$
     }
 
     protected void setColor ( final Object key, final ColorHandler colorHandler )
@@ -528,15 +603,15 @@ public abstract class FigureController implements Controller
     /**
      * Create a new border
      * <p>
-     * 
+     *
      * <pre>
      * 3
      * GROUP:x
      * COMPOUND:[GROUP:2|GROUP:3]
      * </pre>
-     * 
+     *
      * </p>
-     * 
+     *
      * @param border
      * @return a new border
      */
@@ -547,33 +622,33 @@ public abstract class FigureController implements Controller
             return null;
         }
 
-        if ( border.matches ( "[0-9]+" ) )
+        if ( border.matches ( "[0-9]+" ) ) //$NON-NLS-1$
         {
             return new LineBorder ( Integer.parseInt ( border ) );
         }
 
-        if ( border.startsWith ( "LINE:" ) )
+        if ( border.startsWith ( "LINE:" ) ) //$NON-NLS-1$
         {
-            final Map<String, String> args = parseBorderArguments ( "lineWidth", border.substring ( "LINE:".length () ) );
+            final Map<String, String> args = parseBorderArguments ( "lineWidth", border.substring ( "LINE:".length () ) ); //$NON-NLS-1$ //$NON-NLS-2$
             final LineBorder lineBorder = new LineBorder ();
-            if ( args.containsKey ( "lineWidth" ) )
+            if ( args.containsKey ( "lineWidth" ) ) //$NON-NLS-1$
             {
-                lineBorder.setWidth ( Integer.parseInt ( args.get ( "lineWidth" ) ) );
+                lineBorder.setWidth ( Integer.parseInt ( args.get ( "lineWidth" ) ) ); //$NON-NLS-1$
             }
-            lineBorder.setColor ( createColor ( Helper.makeColor ( args.get ( "color" ) ) ) );
+            lineBorder.setColor ( createColor ( Helper.makeColor ( args.get ( "color" ) ) ) ); //$NON-NLS-1$
 
             return lineBorder;
         }
-        if ( border.startsWith ( "GROUP:" ) )
+        if ( border.startsWith ( "GROUP:" ) ) //$NON-NLS-1$
         {
             final GroupBoxBorder groupBorder = new GroupBoxBorder ();
 
-            final Map<String, String> args = parseBorderArguments ( "text", border.substring ( "GROUP:".length () ) );
-            if ( args.containsKey ( "text" ) )
+            final Map<String, String> args = parseBorderArguments ( "text", border.substring ( "GROUP:".length () ) ); //$NON-NLS-1$ //$NON-NLS-2$
+            if ( args.containsKey ( "text" ) ) //$NON-NLS-1$
             {
-                groupBorder.setLabel ( args.get ( "text" ) );
+                groupBorder.setLabel ( args.get ( "text" ) ); //$NON-NLS-1$
             }
-            final Color color = createColor ( Helper.makeColor ( args.get ( "textColor" ) ) );
+            final Color color = createColor ( Helper.makeColor ( args.get ( "textColor" ) ) ); //$NON-NLS-1$
             if ( color != null )
             {
                 groupBorder.setTextColor ( color );
@@ -581,21 +656,21 @@ public abstract class FigureController implements Controller
 
             return groupBorder;
         }
-        if ( border.startsWith ( "TITLE:" ) )
+        if ( border.startsWith ( "TITLE:" ) ) //$NON-NLS-1$
         {
             final TitleBarBorder titleBorder = new TitleBarBorder ();
 
-            final Map<String, String> args = parseBorderArguments ( "text", border.substring ( "TITLE:".length () ) );
-            if ( args.containsKey ( "text" ) )
+            final Map<String, String> args = parseBorderArguments ( "text", border.substring ( "TITLE:".length () ) ); //$NON-NLS-1$ //$NON-NLS-2$
+            if ( args.containsKey ( "text" ) ) //$NON-NLS-1$
             {
-                titleBorder.setLabel ( args.get ( "text" ) );
+                titleBorder.setLabel ( args.get ( "text" ) ); //$NON-NLS-1$
             }
-            final Color color = createColor ( Helper.makeColor ( args.get ( "textColor" ) ) );
+            final Color color = createColor ( Helper.makeColor ( args.get ( "textColor" ) ) ); //$NON-NLS-1$
             if ( color != null )
             {
                 titleBorder.setTextColor ( color );
             }
-            final Color backgroundColor = createColor ( Helper.makeColor ( args.get ( "backgroundColor" ) ) );
+            final Color backgroundColor = createColor ( Helper.makeColor ( args.get ( "backgroundColor" ) ) ); //$NON-NLS-1$
             if ( backgroundColor != null )
             {
                 titleBorder.setBackgroundColor ( backgroundColor );
@@ -603,35 +678,35 @@ public abstract class FigureController implements Controller
 
             return titleBorder;
         }
-        if ( border.startsWith ( "MARGIN:" ) )
+        if ( border.startsWith ( "MARGIN:" ) ) //$NON-NLS-1$
         {
-            final Map<String, String> args = parseBorderArguments ( "inset", border.substring ( "MARGIN:".length () ) );
-            if ( args.containsKey ( "inset" ) )
+            final Map<String, String> args = parseBorderArguments ( "inset", border.substring ( "MARGIN:".length () ) ); //$NON-NLS-1$ //$NON-NLS-2$
+            if ( args.containsKey ( "inset" ) ) //$NON-NLS-1$
             {
-                final String value = args.get ( "inset" );
-                if ( value.contains ( "," ) )
+                final String value = args.get ( "inset" ); //$NON-NLS-1$
+                if ( value.contains ( "," ) ) //$NON-NLS-1$
                 {
-                    final String[] insets = args.get ( "inset" ).split ( ", ?" );
+                    final String[] insets = args.get ( "inset" ).split ( ", ?" ); //$NON-NLS-1$ //$NON-NLS-2$
                     return new MarginBorder ( Integer.parseInt ( insets[0] ), Integer.parseInt ( insets[1] ), Integer.parseInt ( insets[2] ), Integer.parseInt ( insets[3] ) );
                 }
                 else
                 {
-                    return new MarginBorder ( Integer.parseInt ( args.get ( "inset" ) ) );
+                    return new MarginBorder ( Integer.parseInt ( args.get ( "inset" ) ) ); //$NON-NLS-1$
                 }
             }
-            else if ( args.containsKey ( "t" ) || args.containsKey ( "l" ) || args.containsKey ( "r" ) || args.containsKey ( "b" ) )
+            else if ( args.containsKey ( "t" ) || args.containsKey ( "l" ) || args.containsKey ( "r" ) || args.containsKey ( "b" ) ) //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
             {
-                return new MarginBorder ( makeInt ( args, "t", 0 ), makeInt ( args, "l", 0 ), makeInt ( args, "b", 0 ), makeInt ( args, "r", 0 ) );
+                return new MarginBorder ( makeInt ( args, "t", 0 ), makeInt ( args, "l", 0 ), makeInt ( args, "b", 0 ), makeInt ( args, "r", 0 ) ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
             }
             else
             {
                 return new MarginBorder ( 0 );
             }
         }
-        if ( border.startsWith ( "COMPOUND:" ) )
+        if ( border.startsWith ( "COMPOUND:" ) ) //$NON-NLS-1$
         {
-            final Map<String, String> args = parseBorderArguments ( "", border.substring ( "COMPOUND:".length () ) );
-            return new CompoundBorder ( makeBorder ( args.get ( "outer" ) ), makeBorder ( args.get ( "inner" ) ) );
+            final Map<String, String> args = parseBorderArguments ( "", border.substring ( "COMPOUND:".length () ) ); //$NON-NLS-1$ //$NON-NLS-2$
+            return new CompoundBorder ( makeBorder ( args.get ( "outer" ) ), makeBorder ( args.get ( "inner" ) ) ); //$NON-NLS-1$ //$NON-NLS-2$
         }
 
         StatusManager.getManager ().handle ( new Status ( IStatus.WARNING, Activator.PLUGIN_ID, "Invalid border string: " + border ), StatusManager.LOG );
@@ -648,24 +723,85 @@ public abstract class FigureController implements Controller
         return Integer.parseInt ( value );
     }
 
-    protected Map<String, String> parseBorderArguments ( final String singleArgumentName, final String border )
+    protected static Map<String, String> parseBorderArguments ( final String singleArgumentName, final String border )
     {
         if ( border == null || border.isEmpty () )
         {
             return Collections.emptyMap ();
         }
-        if ( border.startsWith ( "[" ) && border.endsWith ( "]" ) )
+        if ( border.startsWith ( "[" ) && border.endsWith ( "]" ) ) //$NON-NLS-1$ //$NON-NLS-2$
         {
             final Map<String, String> result = new LinkedHashMap<String, String> ();
             final String str = border.substring ( 1, border.length () - 1 );
-            for ( final String tok : str.split ( "[, \\t\\n\\r]" ) )
+
+            String key = null;
+            StringBuilder temp = null;
+
+            int levels = 0;
+
+            for ( int i = 0; i < str.length (); i++ )
             {
-                final String[] ele = tok.split ( "=", 2 );
-                if ( ele.length > 1 )
+                final char c = str.charAt ( i );
+                switch ( c )
                 {
-                    result.put ( ele[0], ele[1] );
+                    case '[':
+                        temp = add ( temp, c );
+                        levels++;
+                        break;
+                    case ']':
+                        temp = add ( temp, c );
+                        levels--;
+                        break;
+                    case '=':
+                        if ( levels == 0 )
+                        {
+                            if ( key == null )
+                            {
+                                key = temp != null ? temp.toString () : ""; //$NON-NLS-1$
+                                temp = null;
+                            }
+                            else
+                            {
+                                temp = add ( temp, c );
+                            }
+                        }
+                        else
+                        {
+                            temp = add ( temp, c );
+                        }
+                        break;
+                    case ',':
+                        if ( levels == 0 )
+                        {
+                            if ( key != null && temp != null )
+                            {
+                                result.put ( key, temp.toString () );
+                            }
+                            key = null;
+                            temp = null;
+                        }
+                        else
+                        {
+                            temp = add ( temp, c );
+                        }
+                        break;
+                    default:
+                        temp = add ( temp, c );
+                        break;
                 }
             }
+
+            if ( levels > 0 )
+            {
+                throw new IllegalArgumentException ( "Unbalanced brackets" );
+            }
+
+            // the end
+            if ( key != null && temp != null )
+            {
+                result.put ( key, temp.toString () );
+            }
+
             return result;
         }
         else
@@ -673,6 +809,19 @@ public abstract class FigureController implements Controller
             final Map<String, String> result = new LinkedHashMap<String, String> ( 1 );
             result.put ( singleArgumentName, border );
             return result;
+        }
+    }
+
+    private static StringBuilder add ( final StringBuilder temp, final char c )
+    {
+        if ( temp == null )
+        {
+            return new StringBuilder ().append ( c );
+        }
+        else
+        {
+            temp.append ( c );
+            return temp;
         }
     }
 
@@ -692,13 +841,13 @@ public abstract class FigureController implements Controller
             return new DefaultColor ( getPropertyFigure (), applier );
         }
 
-        if ( color.startsWith ( "#" ) && !color.contains ( "|" ) )
+        if ( color.startsWith ( "#" ) && !color.contains ( "|" ) ) //$NON-NLS-1$ //$NON-NLS-2$
         {
             return new StaticColor ( getPropertyFigure (), applier, createColor ( Helper.makeColor ( color ) ) );
         }
-        else if ( ( color.startsWith ( "#" ) || color.startsWith ( "|" ) ) && color.contains ( "|" ) )
+        else if ( ( color.startsWith ( "#" ) || color.startsWith ( "|" ) ) && color.contains ( "|" ) ) //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
         {
-            final String tok[] = color.split ( "\\|", -1 );
+            final String tok[] = color.split ( "\\|", -1 ); //$NON-NLS-1$
 
             final Color[] colors = new Color[tok.length];
             int i = 0;

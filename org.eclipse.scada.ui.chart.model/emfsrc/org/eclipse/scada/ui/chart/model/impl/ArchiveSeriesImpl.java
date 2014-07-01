@@ -34,26 +34,21 @@ import org.eclipse.scada.ui.chart.model.LineProperties;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.eclipse.scada.ui.chart.model.impl.ArchiveSeriesImpl#getChannels
- * <em>Channels</em>}</li>
- * <li>
- * {@link org.eclipse.scada.ui.chart.model.impl.ArchiveSeriesImpl#getLineProperties
- * <em>Line Properties</em>}</li>
+ *   <li>{@link org.eclipse.scada.ui.chart.model.impl.ArchiveSeriesImpl#getChannels <em>Channels</em>}</li>
+ *   <li>{@link org.eclipse.scada.ui.chart.model.impl.ArchiveSeriesImpl#getLineProperties <em>Line Properties</em>}</li>
+ *   <li>{@link org.eclipse.scada.ui.chart.model.impl.ArchiveSeriesImpl#isIgnoreFuture <em>Ignore Future</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class ArchiveSeriesImpl extends ItemDataSeriesImpl implements
         ArchiveSeries
 {
     /**
-     * The cached value of the '{@link #getChannels() <em>Channels</em>}'
-     * containment reference list.
+     * The cached value of the '{@link #getChannels() <em>Channels</em>}' containment reference list.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @see #getChannels()
      * @generated
      * @ordered
@@ -61,16 +56,34 @@ public class ArchiveSeriesImpl extends ItemDataSeriesImpl implements
     protected EList<ArchiveChannel> channels;
 
     /**
-     * The cached value of the '{@link #getLineProperties()
-     * <em>Line Properties</em>}' containment reference.
+     * The cached value of the '{@link #getLineProperties() <em>Line Properties</em>}' containment reference.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @see #getLineProperties()
      * @generated
      * @ordered
      */
     protected LineProperties lineProperties;
+
+    /**
+     * The default value of the '{@link #isIgnoreFuture() <em>Ignore Future</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #isIgnoreFuture()
+     * @generated
+     * @ordered
+     */
+    protected static final boolean IGNORE_FUTURE_EDEFAULT = false;
+
+    /**
+     * The cached value of the '{@link #isIgnoreFuture() <em>Ignore Future</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #isIgnoreFuture()
+     * @generated
+     * @ordered
+     */
+    protected boolean ignoreFuture = IGNORE_FUTURE_EDEFAULT;
 
     /**
      * <!-- begin-user-doc -->
@@ -87,7 +100,6 @@ public class ArchiveSeriesImpl extends ItemDataSeriesImpl implements
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
@@ -99,101 +111,74 @@ public class ArchiveSeriesImpl extends ItemDataSeriesImpl implements
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public EList<ArchiveChannel> getChannels ()
     {
-        if ( this.channels == null )
+        if ( channels == null )
         {
-            this.channels = new EObjectContainmentEList.Resolving<ArchiveChannel> (
-                    ArchiveChannel.class, this,
-                    ChartPackage.ARCHIVE_SERIES__CHANNELS );
+            channels = new EObjectContainmentEList.Resolving<ArchiveChannel> ( ArchiveChannel.class, this, ChartPackage.ARCHIVE_SERIES__CHANNELS );
         }
-        return this.channels;
+        return channels;
     }
 
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
     public LineProperties getLineProperties ()
     {
-        if ( this.lineProperties != null && this.lineProperties.eIsProxy () )
+        if ( lineProperties != null && lineProperties.eIsProxy () )
         {
-            InternalEObject oldLineProperties = (InternalEObject)this.lineProperties;
-            this.lineProperties = (LineProperties)eResolveProxy ( oldLineProperties );
-            if ( this.lineProperties != oldLineProperties )
+            InternalEObject oldLineProperties = (InternalEObject)lineProperties;
+            lineProperties = (LineProperties)eResolveProxy ( oldLineProperties );
+            if ( lineProperties != oldLineProperties )
             {
-                InternalEObject newLineProperties = (InternalEObject)this.lineProperties;
-                NotificationChain msgs = oldLineProperties.eInverseRemove ( this,
-                        EOPPOSITE_FEATURE_BASE
-                                - ChartPackage.ARCHIVE_SERIES__LINE_PROPERTIES,
-                        null, null );
+                InternalEObject newLineProperties = (InternalEObject)lineProperties;
+                NotificationChain msgs = oldLineProperties.eInverseRemove ( this, EOPPOSITE_FEATURE_BASE - ChartPackage.ARCHIVE_SERIES__LINE_PROPERTIES, null, null );
                 if ( newLineProperties.eInternalContainer () == null )
                 {
-                    msgs = newLineProperties
-                            .eInverseAdd (
-                                    this,
-                                    EOPPOSITE_FEATURE_BASE
-                                            - ChartPackage.ARCHIVE_SERIES__LINE_PROPERTIES,
-                                    null, msgs );
+                    msgs = newLineProperties.eInverseAdd ( this, EOPPOSITE_FEATURE_BASE - ChartPackage.ARCHIVE_SERIES__LINE_PROPERTIES, null, msgs );
                 }
                 if ( msgs != null )
-                {
                     msgs.dispatch ();
-                }
                 if ( eNotificationRequired () )
-                {
-                    eNotify ( new ENotificationImpl ( this, Notification.RESOLVE,
-                            ChartPackage.ARCHIVE_SERIES__LINE_PROPERTIES,
-                            oldLineProperties, this.lineProperties ) );
-                }
+                    eNotify ( new ENotificationImpl ( this, Notification.RESOLVE, ChartPackage.ARCHIVE_SERIES__LINE_PROPERTIES, oldLineProperties, lineProperties ) );
             }
         }
-        return this.lineProperties;
+        return lineProperties;
     }
 
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @generated
      */
     public LineProperties basicGetLineProperties ()
     {
-        return this.lineProperties;
+        return lineProperties;
     }
 
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @generated
      */
     public NotificationChain basicSetLineProperties (
-            final LineProperties newLineProperties, NotificationChain msgs )
+            LineProperties newLineProperties, NotificationChain msgs )
     {
-        LineProperties oldLineProperties = this.lineProperties;
-        this.lineProperties = newLineProperties;
+        LineProperties oldLineProperties = lineProperties;
+        lineProperties = newLineProperties;
         if ( eNotificationRequired () )
         {
-            ENotificationImpl notification = new ENotificationImpl ( this,
-                    Notification.SET,
-                    ChartPackage.ARCHIVE_SERIES__LINE_PROPERTIES,
-                    oldLineProperties, newLineProperties );
+            ENotificationImpl notification = new ENotificationImpl ( this, Notification.SET, ChartPackage.ARCHIVE_SERIES__LINE_PROPERTIES, oldLineProperties, newLineProperties );
             if ( msgs == null )
-            {
                 msgs = notification;
-            }
             else
-            {
                 msgs.add ( notification );
-            }
         }
         return msgs;
     }
@@ -201,58 +186,61 @@ public class ArchiveSeriesImpl extends ItemDataSeriesImpl implements
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
-    public void setLineProperties ( final LineProperties newLineProperties )
+    public void setLineProperties ( LineProperties newLineProperties )
     {
-        if ( newLineProperties != this.lineProperties )
+        if ( newLineProperties != lineProperties )
         {
             NotificationChain msgs = null;
-            if ( this.lineProperties != null )
-            {
-                msgs = ( (InternalEObject)this.lineProperties ).eInverseRemove ( this,
-                        EOPPOSITE_FEATURE_BASE
-                                - ChartPackage.ARCHIVE_SERIES__LINE_PROPERTIES,
-                        null, msgs );
-            }
+            if ( lineProperties != null )
+                msgs = ( (InternalEObject)lineProperties ).eInverseRemove ( this, EOPPOSITE_FEATURE_BASE - ChartPackage.ARCHIVE_SERIES__LINE_PROPERTIES, null, msgs );
             if ( newLineProperties != null )
-            {
-                msgs = ( (InternalEObject)newLineProperties ).eInverseAdd ( this,
-                        EOPPOSITE_FEATURE_BASE
-                                - ChartPackage.ARCHIVE_SERIES__LINE_PROPERTIES,
-                        null, msgs );
-            }
+                msgs = ( (InternalEObject)newLineProperties ).eInverseAdd ( this, EOPPOSITE_FEATURE_BASE - ChartPackage.ARCHIVE_SERIES__LINE_PROPERTIES, null, msgs );
             msgs = basicSetLineProperties ( newLineProperties, msgs );
             if ( msgs != null )
-            {
                 msgs.dispatch ();
-            }
         }
         else if ( eNotificationRequired () )
-        {
-            eNotify ( new ENotificationImpl ( this, Notification.SET,
-                    ChartPackage.ARCHIVE_SERIES__LINE_PROPERTIES,
-                    newLineProperties, newLineProperties ) );
-        }
+            eNotify ( new ENotificationImpl ( this, Notification.SET, ChartPackage.ARCHIVE_SERIES__LINE_PROPERTIES, newLineProperties, newLineProperties ) );
     }
 
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
+     * @generated
+     */
+    public boolean isIgnoreFuture ()
+    {
+        return ignoreFuture;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void setIgnoreFuture ( boolean newIgnoreFuture )
+    {
+        boolean oldIgnoreFuture = ignoreFuture;
+        ignoreFuture = newIgnoreFuture;
+        if ( eNotificationRequired () )
+            eNotify ( new ENotificationImpl ( this, Notification.SET, ChartPackage.ARCHIVE_SERIES__IGNORE_FUTURE, oldIgnoreFuture, ignoreFuture ) );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
     @Override
-    public NotificationChain eInverseRemove ( final InternalEObject otherEnd,
-            final int featureID, final NotificationChain msgs )
+    public NotificationChain eInverseRemove ( InternalEObject otherEnd, int featureID, NotificationChain msgs )
     {
         switch ( featureID )
         {
             case ChartPackage.ARCHIVE_SERIES__CHANNELS:
-                return ( (InternalEList<?>)getChannels () ).basicRemove ( otherEnd,
-                        msgs );
+                return ( (InternalEList<?>)getChannels () ).basicRemove ( otherEnd, msgs );
             case ChartPackage.ARCHIVE_SERIES__LINE_PROPERTIES:
                 return basicSetLineProperties ( null, msgs );
         }
@@ -262,11 +250,10 @@ public class ArchiveSeriesImpl extends ItemDataSeriesImpl implements
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
-    public Object eGet ( final int featureID, final boolean resolve, final boolean coreType )
+    public Object eGet ( int featureID, boolean resolve, boolean coreType )
     {
         switch ( featureID )
         {
@@ -274,10 +261,10 @@ public class ArchiveSeriesImpl extends ItemDataSeriesImpl implements
                 return getChannels ();
             case ChartPackage.ARCHIVE_SERIES__LINE_PROPERTIES:
                 if ( resolve )
-                {
                     return getLineProperties ();
-                }
                 return basicGetLineProperties ();
+            case ChartPackage.ARCHIVE_SERIES__IGNORE_FUTURE:
+                return isIgnoreFuture ();
         }
         return super.eGet ( featureID, resolve, coreType );
     }
@@ -285,22 +272,23 @@ public class ArchiveSeriesImpl extends ItemDataSeriesImpl implements
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @generated
      */
     @SuppressWarnings ( "unchecked" )
     @Override
-    public void eSet ( final int featureID, final Object newValue )
+    public void eSet ( int featureID, Object newValue )
     {
         switch ( featureID )
         {
             case ChartPackage.ARCHIVE_SERIES__CHANNELS:
                 getChannels ().clear ();
-                getChannels ().addAll (
-                        (Collection<? extends ArchiveChannel>)newValue );
+                getChannels ().addAll ( (Collection<? extends ArchiveChannel>)newValue );
                 return;
             case ChartPackage.ARCHIVE_SERIES__LINE_PROPERTIES:
                 setLineProperties ( (LineProperties)newValue );
+                return;
+            case ChartPackage.ARCHIVE_SERIES__IGNORE_FUTURE:
+                setIgnoreFuture ( (Boolean)newValue );
                 return;
         }
         super.eSet ( featureID, newValue );
@@ -309,11 +297,10 @@ public class ArchiveSeriesImpl extends ItemDataSeriesImpl implements
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
-    public void eUnset ( final int featureID )
+    public void eUnset ( int featureID )
     {
         switch ( featureID )
         {
@@ -323,6 +310,9 @@ public class ArchiveSeriesImpl extends ItemDataSeriesImpl implements
             case ChartPackage.ARCHIVE_SERIES__LINE_PROPERTIES:
                 setLineProperties ( (LineProperties)null );
                 return;
+            case ChartPackage.ARCHIVE_SERIES__IGNORE_FUTURE:
+                setIgnoreFuture ( IGNORE_FUTURE_EDEFAULT );
+                return;
         }
         super.eUnset ( featureID );
     }
@@ -330,20 +320,39 @@ public class ArchiveSeriesImpl extends ItemDataSeriesImpl implements
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @generated
      */
     @Override
-    public boolean eIsSet ( final int featureID )
+    public boolean eIsSet ( int featureID )
     {
         switch ( featureID )
         {
             case ChartPackage.ARCHIVE_SERIES__CHANNELS:
-                return this.channels != null && !this.channels.isEmpty ();
+                return channels != null && !channels.isEmpty ();
             case ChartPackage.ARCHIVE_SERIES__LINE_PROPERTIES:
-                return this.lineProperties != null;
+                return lineProperties != null;
+            case ChartPackage.ARCHIVE_SERIES__IGNORE_FUTURE:
+                return ignoreFuture != IGNORE_FUTURE_EDEFAULT;
         }
         return super.eIsSet ( featureID );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public String toString ()
+    {
+        if ( eIsProxy () )
+            return super.toString ();
+
+        StringBuffer result = new StringBuffer ( super.toString () );
+        result.append ( " (ignoreFuture: " ); //$NON-NLS-1$
+        result.append ( ignoreFuture );
+        result.append ( ')' );
+        return result.toString ();
     }
 
 } //ArchiveSeriesImpl

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2013 TH4 SYSTEMS GmbH and others.
+ * Copyright (c) 2012, 2014 TH4 SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,7 +7,7 @@
  *
  * Contributors:
  *     TH4 SYSTEMS GmbH - initial API and implementation
- *     IBH SYSTEMS GmbH - additional work
+ *     IBH SYSTEMS GmbH - additional work, enhancements for legends
  *******************************************************************************/
 package org.eclipse.scada.ui.chart.viewer.input;
 
@@ -40,11 +40,22 @@ public class ArchiveInput extends QueryInput
         this.data = querySeriesData;
 
         this.renderer = new StepRenderer ( this.viewer.getChartRenderer (), querySeriesData );
+
         viewer.getChartRenderer ().addRenderer ( this.renderer );
 
         attachHover ( viewer, querySeriesData.getXAxis () );
 
         setQuery ( querySeriesData.getQuery (), "AVG" ); //$NON-NLS-1$
+    }
+
+    public void setNoFuture ( final boolean noFuture )
+    {
+        this.renderer.setNoFuture ( noFuture );
+    }
+
+    public boolean isNoFuture ()
+    {
+        return this.renderer.isNoFuture ();
     }
 
     public QuerySeriesData getData ()
@@ -99,11 +110,6 @@ public class ArchiveInput extends QueryInput
         }
 
         super.dispose ();
-    }
-
-    @Override
-    public void tick ( final long now )
-    {
     }
 
 }
