@@ -1,16 +1,15 @@
 Manifest-Version: 1.0
-Export-Package: org.eclipse.scada.da.ui.widgets.realtime;version="0.1.
- 0"
 Require-Bundle: org.eclipse.ui;bundle-version="3.5.0",org.eclipse.core
  .runtime;bundle-version="3.5.0",org.eclipse.ui.views;bundle-version="
  3.4.0"
+Export-Package: org.eclipse.scada.da.ui.widgets.realtime;version="0.1.
+ 0"
 Bundle-Vendor: Eclipse SCADA Project
 Bundle-ActivationPolicy: lazy
-Bundle-Version: 0.1.0.v20140520-1210
+Bundle-Version: 0.1.0.v20140520-1338
 Bundle-Name: Eclipse SCADA DA UI Widgets (Incubation)
-Bundle-ManifestVersion: 2
 Bundle-Activator: org.eclipse.scada.da.ui.widgets.Activator
-Bundle-SymbolicName: org.eclipse.scada.da.ui.widgets;singleton:=true
+Bundle-ManifestVersion: 2
 Import-Package: org.eclipse.core.expressions,org.eclipse.scada.core;ve
  rsion="0.1.0",org.eclipse.scada.core.data;version="0.1.0",org.eclipse
  .scada.core.subscription;version="0.1.0",org.eclipse.scada.core.ui.co
@@ -26,5 +25,6 @@ Import-Package: org.eclipse.core.expressions,org.eclipse.scada.core;ve
  atus;version="0.1.0",org.eclipse.scada.utils;version="0.1.0",org.ecli
  pse.scada.utils.concurrent;version="0.1.0",org.eclipse.scada.utils.co
  ncurrent.task;version="0.1.0",org.slf4j;version="[1.5.8,2.0.0)"
+Bundle-SymbolicName: org.eclipse.scada.da.ui.widgets;singleton:=true
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 

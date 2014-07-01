@@ -1,9 +1,4 @@
 Manifest-Version: 1.0
-Export-Package: org.eclipse.scada.da.ui.connection;version="0.1.0",org
- .eclipse.scada.da.ui.connection.commands;version="0.1.0",org.eclipse.
- scada.da.ui.connection.data;version="0.1.0",org.eclipse.scada.da.ui.c
- onnection.dnd;version="0.1.0",org.eclipse.scada.da.ui.connection.view
- s;version="0.1.0"
 Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.eclipse.sc
  ada.core.ui.connection;bundle-version="0.1.0",org.eclipse.core.databi
  nding;bundle-version="1.2.0",org.eclipse.ui.navigator;bundle-version=
@@ -17,17 +12,22 @@ Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.eclipse.sc
  rg.eclipse.scada.utils;bundle-version="0.1.0",org.eclipse.scada.core.
  ui;bundle-version="0.1.0",org.eclipse.scada.utils.osgi;bundle-version
  ="0.1.0",org.eclipse.scada.core.client;bundle-version="0.1.0"
+Export-Package: org.eclipse.scada.da.ui.connection;version="0.1.0",org
+ .eclipse.scada.da.ui.connection.commands;version="0.1.0",org.eclipse.
+ scada.da.ui.connection.data;version="0.1.0",org.eclipse.scada.da.ui.c
+ onnection.dnd;version="0.1.0",org.eclipse.scada.da.ui.connection.view
+ s;version="0.1.0"
 Bundle-Vendor: Eclipse SCADA Project
 Bundle-ActivationPolicy: lazy
-Bundle-Version: 0.1.0.v20140520-1210
+Bundle-Version: 0.1.0.v20140520-1338
 Bundle-Name: Eclipse SCADA DA Connection UI (Incubation)
-Bundle-ManifestVersion: 2
 Bundle-Activator: org.eclipse.scada.da.ui.connection.Activator
-Bundle-SymbolicName: org.eclipse.scada.da.ui.connection;singleton:=tru
- e
+Bundle-ManifestVersion: 2
 Import-Package: org.eclipse.scada.core;version="0.1.0",org.eclipse.sca
  da.core.data;version="0.1.0",org.eclipse.scada.core.subscription;vers
  ion="0.1.0",org.eclipse.scada.da.data;version="0.1.0",org.eclipse.sca
  da.sec.callback;version="0.1.0",org.slf4j;version="1.5.0"
+Bundle-SymbolicName: org.eclipse.scada.da.ui.connection;singleton:=tru
+ e
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 

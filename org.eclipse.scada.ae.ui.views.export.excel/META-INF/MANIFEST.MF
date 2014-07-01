@@ -4,13 +4,13 @@ Require-Bundle: org.eclipse.ui;bundle-version="3.6.0",org.eclipse.core
  le-version="0.1.0",org.apache.poi;bundle-version="3.9.0"
 Bundle-Vendor: %Bundle-Vendor
 Bundle-ActivationPolicy: lazy
-Bundle-Version: 0.1.0.v20140520-1210
+Bundle-Version: 0.1.0.v20140520-1338
 Bundle-Name: %Bundle-Name
-Bundle-ManifestVersion: 2
 Bundle-Activator: org.eclipse.scada.ae.ui.views.export.excel.Activator
-Bundle-SymbolicName: org.eclipse.scada.ae.ui.views.export.excel;single
- ton:=true
+Bundle-ManifestVersion: 2
 Import-Package: org.eclipse.scada.ae;version="0.1.0",org.eclipse.scada
  .core;version="0.1.0",org.slf4j;version="1.5.0"
+Bundle-SymbolicName: org.eclipse.scada.ae.ui.views.export.excel;single
+ ton:=true
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 

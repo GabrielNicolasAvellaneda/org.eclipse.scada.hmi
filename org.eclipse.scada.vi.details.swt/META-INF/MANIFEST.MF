@@ -1,4 +1,15 @@
 Manifest-Version: 1.0
+Require-Bundle: org.eclipse.ui;bundle-version="3.7.0",org.eclipse.core
+ .runtime;bundle-version="3.7.0",org.eclipse.scada.vi.details;bundle-v
+ ersion="0.1.0",org.eclipse.emf.ecore;bundle-version="2.7.0",org.eclip
+ se.scada.vi.details.model;bundle-version="0.1.0",org.eclipse.emf.ecor
+ e.xmi;bundle-version="2.7.0",org.eclipse.scada.da.ui.widgets;bundle-v
+ ersion="0.1.0",org.eclipse.scada.da.ui.client.dataitem.details;bundle
+ -version="0.1.0",org.eclipse.core.databinding;bundle-version="1.4.0",
+ org.eclipse.core.databinding.beans;bundle-version="1.2.100",org.eclip
+ se.core.databinding.observable;bundle-version="1.4.0",org.eclipse.sca
+ da.swt;bundle-version="0.1.0",org.eclipse.scada.ui.chart.view;bundle-
+ version="0.1.0",org.eclipse.ui.views;bundle-version="3.6.100"
 Export-Package: org.eclipse.scada.vi.details.swt;version="0.1.0"; uses
  :="org.eclipse.core.databinding.observable.set,  org.eclipse.jface.re
  source,  org.eclipse.scada.vi.details.swt.impl.visibility,  org.eclip
@@ -20,24 +31,12 @@ Export-Package: org.eclipse.scada.vi.details.swt;version="0.1.0"; uses
  details.swt.data,  org.eclipse.scada.vi.details.model,  org.eclipse.s
  cada.vi.details.swt,  org.eclipse.scada.vi.details.swt.impl,  org.ecl
  ipse.swt.widgets,  org.eclipse.scada.vi.data,  javax.script"
-Require-Bundle: org.eclipse.ui;bundle-version="3.7.0",org.eclipse.core
- .runtime;bundle-version="3.7.0",org.eclipse.scada.vi.details;bundle-v
- ersion="0.1.0",org.eclipse.emf.ecore;bundle-version="2.7.0",org.eclip
- se.scada.vi.details.model;bundle-version="0.1.0",org.eclipse.emf.ecor
- e.xmi;bundle-version="2.7.0",org.eclipse.scada.da.ui.widgets;bundle-v
- ersion="0.1.0",org.eclipse.scada.da.ui.client.dataitem.details;bundle
- -version="0.1.0",org.eclipse.core.databinding;bundle-version="1.4.0",
- org.eclipse.core.databinding.beans;bundle-version="1.2.100",org.eclip
- se.core.databinding.observable;bundle-version="1.4.0",org.eclipse.sca
- da.swt;bundle-version="0.1.0",org.eclipse.scada.ui.chart.view;bundle-
- version="0.1.0",org.eclipse.ui.views;bundle-version="3.6.100"
 Bundle-Vendor: Eclipse SCADA Project
 Bundle-ActivationPolicy: lazy
-Bundle-Version: 0.1.0.v20140520-1210
+Bundle-Version: 0.1.0.v20140520-1338
 Bundle-Name: Eclipse SCADA VI SWT Details Views
-Bundle-ManifestVersion: 2
 Bundle-Activator: org.eclipse.scada.vi.details.swt.Activator
-Bundle-SymbolicName: org.eclipse.scada.vi.details.swt;singleton:=true
+Bundle-ManifestVersion: 2
 Import-Package: org.eclipse.scada.ae;version="0.1.0",org.eclipse.scada
  .ae.client;version="0.1.0",org.eclipse.scada.ae.connection.provider;v
  ersion="0.1.0",org.eclipse.scada.core;version="0.1.0",org.eclipse.sca
@@ -56,5 +55,6 @@ Import-Package: org.eclipse.scada.ae;version="0.1.0",org.eclipse.scada
  clipse.scada.utils.concurrent;version="0.1.0",org.eclipse.scada.utils
  .script;version="0.1.0",org.eclipse.scada.utils.str;version="0.1.0",o
  rg.eclipse.scada.vi.data;version="0.1.0",org.slf4j;version="1.5.0"
+Bundle-SymbolicName: org.eclipse.scada.vi.details.swt;singleton:=true
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 

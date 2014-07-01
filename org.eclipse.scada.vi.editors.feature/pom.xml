@@ -10,6 +10,6 @@
   </parent>
   <groupId>org.eclipse.scada.hmi.features</groupId>
   <artifactId>org.eclipse.scada.vi.editors</artifactId>
-  <version>0.1.2.v20140520-1210</version>
+  <version>0.1.2.v20140520-1338</version>
   <packaging>eclipse-feature</packaging>
 </project>
