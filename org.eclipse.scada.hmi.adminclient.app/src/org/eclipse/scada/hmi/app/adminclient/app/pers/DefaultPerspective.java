@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 TH4 SYSTEMS GmbH and others.
+ * Copyright (c) 2009, 2011 TH4 SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -8,18 +8,16 @@
  * Contributors:
  *     TH4 SYSTEMS GmbH - initial API and implementation
  *******************************************************************************/
-package org.eclipse.scada.chart.ui;
+package org.eclipse.scada.hmi.app.adminclient.app.pers;
 
 import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IPerspectiveFactory;
 
-public class PerspectiveFactory implements IPerspectiveFactory
+public class DefaultPerspective implements IPerspectiveFactory
 {
-
     @Override
-    public void createInitialLayout ( final IPageLayout layout )
+    public void createInitialLayout ( final IPageLayout factory )
     {
-        layout.setEditorAreaVisible ( false );
+        factory.setEditorAreaVisible ( false );
     }
-
 }
