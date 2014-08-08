@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2013 TH4 SYSTEMS GmbH and others.
+ * Copyright (c) 2012, 2014 TH4 SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,6 +7,7 @@
  *
  * Contributors:
  *     TH4 SYSTEMS GmbH - initial API and implementation
+ *     IBH SYSTEMS GmbH - add browser component
  *******************************************************************************/
 package org.eclipse.scada.vi.details.model.util;
 
@@ -14,7 +15,45 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.scada.vi.details.model.*;
+import org.eclipse.scada.vi.details.model.AndTransformer;
+import org.eclipse.scada.vi.details.model.BoolLEDComponent;
+import org.eclipse.scada.vi.details.model.BrowserComponent;
+import org.eclipse.scada.vi.details.model.ButtonComponent;
+import org.eclipse.scada.vi.details.model.CheckComponent;
+import org.eclipse.scada.vi.details.model.Component;
+import org.eclipse.scada.vi.details.model.CompositeComponent;
+import org.eclipse.scada.vi.details.model.CompositeTransformer;
+import org.eclipse.scada.vi.details.model.DetailViewPackage;
+import org.eclipse.scada.vi.details.model.FillLayoutComponent;
+import org.eclipse.scada.vi.details.model.GenericComponent;
+import org.eclipse.scada.vi.details.model.GroupEntry;
+import org.eclipse.scada.vi.details.model.GroupGridComponent;
+import org.eclipse.scada.vi.details.model.GroupGridEntry;
+import org.eclipse.scada.vi.details.model.HiddenComponent;
+import org.eclipse.scada.vi.details.model.Invisible;
+import org.eclipse.scada.vi.details.model.ItemValueSource;
+import org.eclipse.scada.vi.details.model.LabelComponent;
+import org.eclipse.scada.vi.details.model.LinkComponent;
+import org.eclipse.scada.vi.details.model.NotTransformer;
+import org.eclipse.scada.vi.details.model.OrTransformer;
+import org.eclipse.scada.vi.details.model.PermissionVisibility;
+import org.eclipse.scada.vi.details.model.ProgressComponent;
+import org.eclipse.scada.vi.details.model.ReadableComponent;
+import org.eclipse.scada.vi.details.model.Registration;
+import org.eclipse.scada.vi.details.model.ScriptModule;
+import org.eclipse.scada.vi.details.model.ScriptVisibility;
+import org.eclipse.scada.vi.details.model.SimpleGridComponent;
+import org.eclipse.scada.vi.details.model.TestVisibility;
+import org.eclipse.scada.vi.details.model.TextComponent;
+import org.eclipse.scada.vi.details.model.TextInputComponent;
+import org.eclipse.scada.vi.details.model.TextInputMultiComponent;
+import org.eclipse.scada.vi.details.model.URLImageComponent;
+import org.eclipse.scada.vi.details.model.ValueComponent;
+import org.eclipse.scada.vi.details.model.ValueSetComponent;
+import org.eclipse.scada.vi.details.model.ValueSource;
+import org.eclipse.scada.vi.details.model.View;
+import org.eclipse.scada.vi.details.model.Visibility;
+import org.eclipse.scada.vi.details.model.WriteableComponent;
 
 /**
  * <!-- begin-user-doc -->
@@ -300,6 +339,12 @@ public class DetailViewAdapterFactory extends AdapterFactoryImpl
         public Adapter caseScriptModule ( ScriptModule object )
         {
             return createScriptModuleAdapter ();
+        }
+
+        @Override
+        public Adapter caseBrowserComponent ( BrowserComponent object )
+        {
+            return createBrowserComponentAdapter ();
         }
 
         @Override
@@ -948,6 +993,23 @@ public class DetailViewAdapterFactory extends AdapterFactoryImpl
      * @generated
      */
     public Adapter createScriptModuleAdapter ()
+    {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.scada.vi.details.model.BrowserComponent <em>Browser Component</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore
+     * cases;
+     * it's useful to ignore a case when inheritance will catch all the cases
+     * anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.scada.vi.details.model.BrowserComponent
+     * @generated
+     */
+    public Adapter createBrowserComponentAdapter ()
     {
         return null;
     }

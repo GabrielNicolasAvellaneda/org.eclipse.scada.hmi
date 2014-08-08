@@ -12,7 +12,6 @@ package org.eclipse.scada.vi.details.model.provider;
 
 import java.util.Collection;
 import java.util.List;
-
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
@@ -64,6 +63,7 @@ public class URLImageComponentItemProvider extends ComponentItemProvider impleme
             addFallbackImageUrlPropertyDescriptor ( object );
             addWidthPropertyDescriptor ( object );
             addHeightPropertyDescriptor ( object );
+            addReloadTimerPropertyDescriptor ( object );
         }
         return itemPropertyDescriptors;
     }
@@ -184,6 +184,29 @@ public class URLImageComponentItemProvider extends ComponentItemProvider impleme
     }
 
     /**
+     * This adds a property descriptor for the Reload Timer feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected void addReloadTimerPropertyDescriptor ( Object object )
+    {
+        itemPropertyDescriptors.add
+                ( createItemPropertyDescriptor
+                ( ( (ComposeableAdapterFactory)adapterFactory ).getRootAdapterFactory (),
+                        getResourceLocator (),
+                        getString ( "_UI_URLImageComponent_reloadTimer_feature" ), //$NON-NLS-1$
+                        getString ( "_UI_PropertyDescriptor_description", "_UI_URLImageComponent_reloadTimer_feature", "_UI_URLImageComponent_type" ), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                        DetailViewPackage.Literals.URL_IMAGE_COMPONENT__RELOAD_TIMER,
+                        true,
+                        false,
+                        false,
+                        ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+                        getString ( "_UI_formatPropertyCategory" ), //$NON-NLS-1$
+                        null ) );
+    }
+
+    /**
      * This returns URLImageComponent.gif.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -229,6 +252,7 @@ public class URLImageComponentItemProvider extends ComponentItemProvider impleme
             case DetailViewPackage.URL_IMAGE_COMPONENT__FALLBACK_IMAGE_URL:
             case DetailViewPackage.URL_IMAGE_COMPONENT__WIDTH:
             case DetailViewPackage.URL_IMAGE_COMPONENT__HEIGHT:
+            case DetailViewPackage.URL_IMAGE_COMPONENT__RELOAD_TIMER:
                 fireNotifyChanged ( new ViewerNotification ( notification, notification.getNotifier (), false, true ) );
                 return;
         }

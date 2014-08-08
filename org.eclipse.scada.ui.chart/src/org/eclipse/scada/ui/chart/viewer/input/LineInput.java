@@ -15,6 +15,7 @@ package org.eclipse.scada.ui.chart.viewer.input;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.jface.resource.ColorDescriptor;
 import org.eclipse.jface.resource.LocalResourceManager;
 import org.eclipse.jface.resource.ResourceManager;
 import org.eclipse.scada.chart.swt.render.AbstractLineRender;
@@ -29,6 +30,8 @@ import org.eclipse.swt.widgets.Display;
 
 public abstract class LineInput extends AbstractInput implements LinePropertiesSupporter
 {
+    private static final RGB DEFAULT_COLOR = new RGB ( 0, 0, 0 );
+
     private final LocalResourceManager resourceManager;
 
     private RGB lineColor;
@@ -119,7 +122,12 @@ public abstract class LineInput extends AbstractInput implements LinePropertiesS
         final Image img = this.previews.get ( p );
         if ( img == null )
         {
-            final Color color = this.resourceManager.createColor ( getLineRenderer ().getLineColor () );
+            RGB rgb = getLineRenderer ().getLineColor ();
+            if ( rgb == null )
+            {
+                rgb = DEFAULT_COLOR;
+            }
+            final Color color = (Color)this.resourceManager.get ( ColorDescriptor.createFrom ( getLineRenderer ().getLineColor () ) );
             final Image newImage = makePreview ( Display.getDefault (), getLineRenderer ().getLineAttributes (), color, p );
             this.previews.put ( p, newImage );
             return newImage;

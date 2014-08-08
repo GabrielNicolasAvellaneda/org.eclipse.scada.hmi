@@ -685,6 +685,10 @@
         <element xmi:type="ecore:EAttribute" href="DetailView.ecore#//URLImageComponent/height"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_HFsKN-YMEeGX3co0P9TG0Q"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_vXOpgB4jEeSMyf7yDRt03g" type="2001">
+        <element xmi:type="ecore:EAttribute" href="DetailView.ecore#//URLImageComponent/reloadTimer"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_vXOpgR4jEeSMyf7yDRt03g"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_HFrjIuYMEeGX3co0P9TG0Q"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_HFrjI-YMEeGX3co0P9TG0Q"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_HFrjJOYMEeGX3co0P9TG0Q"/>
@@ -696,7 +700,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_HFq8G-YMEeGX3co0P9TG0Q" fontColor="4210752" fontName="Ubuntu" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="DetailView.ecore#//URLImageComponent"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HFq8HOYMEeGX3co0P9TG0Q" x="864" y="168"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HFq8HOYMEeGX3co0P9TG0Q" x="816" y="168" width="211" height="147"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_HFsxQOYMEeGX3co0P9TG0Q" type="1001">
     <children xmi:type="notation:Node" xmi:id="_HFsxQ-YMEeGX3co0P9TG0Q" type="4001"/>
@@ -900,6 +904,22 @@
     <styles xmi:type="notation:ShapeStyle" xmi:id="_BSDv8WxZEeKxct69HEvdNQ" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EEnum" href="DetailView.ecore#//TabStyle"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BSDv8mxZEeKxct69HEvdNQ" x="1190" y="-179"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_sj5mQB4jEeSMyf7yDRt03g" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_skKsAB4jEeSMyf7yDRt03g" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_skLTEB4jEeSMyf7yDRt03g" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_skLTER4jEeSMyf7yDRt03g"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_skLTEh4jEeSMyf7yDRt03g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_skLTEx4jEeSMyf7yDRt03g"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_skLTFB4jEeSMyf7yDRt03g" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_skLTFR4jEeSMyf7yDRt03g"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_skLTFh4jEeSMyf7yDRt03g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_skLTFx4jEeSMyf7yDRt03g"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_sj5mQR4jEeSMyf7yDRt03g" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="DetailView.ecore#//BrowserComponent"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_sj5mQh4jEeSMyf7yDRt03g" x="1056" y="168"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_HE3DwOYMEeGX3co0P9TG0Q"/>
   <element xmi:type="ecore:EPackage" href="DetailView.ecore#/"/>
@@ -1315,5 +1335,11 @@
     <element xmi:type="ecore:EReference" href="DetailView.ecore#//View/scriptModule"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_bd3tc-0hEeG_s5hayBYAlQ" points="[20, 20, -66, -62]$[87, 65, 1, -17]"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_bd6wwO0hEeG_s5hayBYAlQ" id="(0.21568627450980393,0.42857142857142855)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_slKKgB4jEeSMyf7yDRt03g" type="3003" source="_sj5mQB4jEeSMyf7yDRt03g" target="_HFRTcOYMEeGX3co0P9TG0Q">
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_slKKgR4jEeSMyf7yDRt03g" routing="Rectilinear" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_slKKgh4jEeSMyf7yDRt03g" fontName="Sans"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_slKKgx4jEeSMyf7yDRt03g" points="[1, 0, -1538, -45]$[1489, 43, -50, -2]"/>
   </edges>
 </notation:Diagram>

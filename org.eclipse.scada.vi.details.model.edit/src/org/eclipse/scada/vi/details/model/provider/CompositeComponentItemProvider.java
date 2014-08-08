@@ -12,7 +12,6 @@ package org.eclipse.scada.vi.details.model.provider;
 
 import java.util.Collection;
 import java.util.List;
-
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -215,6 +214,11 @@ public class CompositeComponentItemProvider extends ComponentItemProvider implem
                 ( createChildParameter
                 ( DetailViewPackage.Literals.COMPOSITE_COMPONENT__CHILDREN,
                         DetailViewFactory.eINSTANCE.createProgressComponent () ) );
+
+        newChildDescriptors.add
+                ( createChildParameter
+                ( DetailViewPackage.Literals.COMPOSITE_COMPONENT__CHILDREN,
+                        DetailViewFactory.eINSTANCE.createBrowserComponent () ) );
     }
 
 }

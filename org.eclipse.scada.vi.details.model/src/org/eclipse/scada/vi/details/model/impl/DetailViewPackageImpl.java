@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.scada.vi.details.model.AndTransformer;
 import org.eclipse.scada.vi.details.model.BoolLEDComponent;
+import org.eclipse.scada.vi.details.model.BrowserComponent;
 import org.eclipse.scada.vi.details.model.ButtonComponent;
 import org.eclipse.scada.vi.details.model.CheckComponent;
 import org.eclipse.scada.vi.details.model.Component;
@@ -323,6 +324,13 @@ public class DetailViewPackageImpl extends EPackageImpl implements DetailViewPac
      * @generated
      */
     private EClass scriptModuleEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass browserComponentEClass = null;
 
     /**
      * <!-- begin-user-doc -->
@@ -1462,6 +1470,16 @@ public class DetailViewPackageImpl extends EPackageImpl implements DetailViewPac
      * <!-- end-user-doc -->
      * @generated
      */
+    public EAttribute getURLImageComponent_ReloadTimer ()
+    {
+        return (EAttribute)urlImageComponentEClass.getEStructuralFeatures ().get ( 5 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     public EClass getProgressComponent ()
     {
         return progressComponentEClass;
@@ -1672,6 +1690,56 @@ public class DetailViewPackageImpl extends EPackageImpl implements DetailViewPac
      * <!-- end-user-doc -->
      * @generated
      */
+    public EClass getBrowserComponent ()
+    {
+        return browserComponentEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getBrowserComponent_Url ()
+    {
+        return (EAttribute)browserComponentEClass.getEStructuralFeatures ().get ( 0 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getBrowserComponent_Width ()
+    {
+        return (EAttribute)browserComponentEClass.getEStructuralFeatures ().get ( 1 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getBrowserComponent_Height ()
+    {
+        return (EAttribute)browserComponentEClass.getEStructuralFeatures ().get ( 2 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getBrowserComponent_ReloadTimer ()
+    {
+        return (EAttribute)browserComponentEClass.getEStructuralFeatures ().get ( 3 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     public EEnum getTabStyle ()
     {
         return tabStyleEEnum;
@@ -1842,6 +1910,7 @@ public class DetailViewPackageImpl extends EPackageImpl implements DetailViewPac
         createEAttribute ( urlImageComponentEClass, URL_IMAGE_COMPONENT__FALLBACK_IMAGE_URL );
         createEAttribute ( urlImageComponentEClass, URL_IMAGE_COMPONENT__WIDTH );
         createEAttribute ( urlImageComponentEClass, URL_IMAGE_COMPONENT__HEIGHT );
+        createEAttribute ( urlImageComponentEClass, URL_IMAGE_COMPONENT__RELOAD_TIMER );
 
         progressComponentEClass = createEClass ( PROGRESS_COMPONENT );
         createEAttribute ( progressComponentEClass, PROGRESS_COMPONENT__DESCRIPTOR );
@@ -1871,6 +1940,12 @@ public class DetailViewPackageImpl extends EPackageImpl implements DetailViewPac
         createEAttribute ( scriptModuleEClass, SCRIPT_MODULE__SCRIPT_LANGUAGE );
         createEAttribute ( scriptModuleEClass, SCRIPT_MODULE__CODE );
         createEAttribute ( scriptModuleEClass, SCRIPT_MODULE__CODE_URI );
+
+        browserComponentEClass = createEClass ( BROWSER_COMPONENT );
+        createEAttribute ( browserComponentEClass, BROWSER_COMPONENT__URL );
+        createEAttribute ( browserComponentEClass, BROWSER_COMPONENT__WIDTH );
+        createEAttribute ( browserComponentEClass, BROWSER_COMPONENT__HEIGHT );
+        createEAttribute ( browserComponentEClass, BROWSER_COMPONENT__RELOAD_TIMER );
 
         // Create enums
         tabStyleEEnum = createEEnum ( TAB_STYLE );
@@ -1934,6 +2009,7 @@ public class DetailViewPackageImpl extends EPackageImpl implements DetailViewPac
         permissionVisibilityEClass.getESuperTypes ().add ( this.getVisibility () );
         invisibleEClass.getESuperTypes ().add ( this.getVisibility () );
         testVisibilityEClass.getESuperTypes ().add ( this.getVisibility () );
+        browserComponentEClass.getESuperTypes ().add ( this.getComponent () );
 
         // Initialize classes and features; add operations and parameters
         initEClass ( viewEClass, View.class, "View", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
@@ -2070,6 +2146,7 @@ public class DetailViewPackageImpl extends EPackageImpl implements DetailViewPac
         initEAttribute ( getURLImageComponent_FallbackImageUrl (), ecorePackage.getEString (), "fallbackImageUrl", null, 0, 1, URLImageComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEAttribute ( getURLImageComponent_Width (), ecorePackage.getEIntegerObject (), "width", null, 0, 1, URLImageComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEAttribute ( getURLImageComponent_Height (), ecorePackage.getEIntegerObject (), "height", null, 0, 1, URLImageComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getURLImageComponent_ReloadTimer (), ecorePackage.getELongObject (), "reloadTimer", null, 0, 1, URLImageComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
 
         initEClass ( progressComponentEClass, ProgressComponent.class, "ProgressComponent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
         initEAttribute ( getProgressComponent_Descriptor (), ecorePackage.getEString (), "descriptor", null, 1, 1, ProgressComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
@@ -2099,6 +2176,12 @@ public class DetailViewPackageImpl extends EPackageImpl implements DetailViewPac
         initEAttribute ( getScriptModule_ScriptLanguage (), ecorePackage.getEString (), "scriptLanguage", null, 0, 1, ScriptModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEAttribute ( getScriptModule_Code (), ecorePackage.getEString (), "code", null, 0, 1, ScriptModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEAttribute ( getScriptModule_CodeUri (), ecorePackage.getEString (), "codeUri", null, 0, 1, ScriptModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+
+        initEClass ( browserComponentEClass, BrowserComponent.class, "BrowserComponent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
+        initEAttribute ( getBrowserComponent_Url (), ecorePackage.getEString (), "url", null, 1, 1, BrowserComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getBrowserComponent_Width (), ecorePackage.getEIntegerObject (), "width", null, 0, 1, BrowserComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getBrowserComponent_Height (), ecorePackage.getEIntegerObject (), "height", null, 0, 1, BrowserComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getBrowserComponent_ReloadTimer (), ecorePackage.getELongObject (), "reloadTimer", null, 0, 1, BrowserComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
 
         // Initialize enums and add enum literals
         initEEnum ( tabStyleEEnum, TabStyle.class, "TabStyle" ); //$NON-NLS-1$

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2013 TH4 SYSTEMS GmbH and others.
+ * Copyright (c) 2012, 2014 TH4 SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,13 +7,52 @@
  *
  * Contributors:
  *     TH4 SYSTEMS GmbH - initial API and implementation
+ *     IBH SYSTEMS GmbH - add browser component
  *******************************************************************************/
 package org.eclipse.scada.vi.details.model.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
-import org.eclipse.scada.vi.details.model.*;
+import org.eclipse.scada.vi.details.model.AndTransformer;
+import org.eclipse.scada.vi.details.model.BoolLEDComponent;
+import org.eclipse.scada.vi.details.model.BrowserComponent;
+import org.eclipse.scada.vi.details.model.ButtonComponent;
+import org.eclipse.scada.vi.details.model.CheckComponent;
+import org.eclipse.scada.vi.details.model.Component;
+import org.eclipse.scada.vi.details.model.CompositeComponent;
+import org.eclipse.scada.vi.details.model.CompositeTransformer;
+import org.eclipse.scada.vi.details.model.DetailViewPackage;
+import org.eclipse.scada.vi.details.model.FillLayoutComponent;
+import org.eclipse.scada.vi.details.model.GenericComponent;
+import org.eclipse.scada.vi.details.model.GroupEntry;
+import org.eclipse.scada.vi.details.model.GroupGridComponent;
+import org.eclipse.scada.vi.details.model.GroupGridEntry;
+import org.eclipse.scada.vi.details.model.HiddenComponent;
+import org.eclipse.scada.vi.details.model.Invisible;
+import org.eclipse.scada.vi.details.model.ItemValueSource;
+import org.eclipse.scada.vi.details.model.LabelComponent;
+import org.eclipse.scada.vi.details.model.LinkComponent;
+import org.eclipse.scada.vi.details.model.NotTransformer;
+import org.eclipse.scada.vi.details.model.OrTransformer;
+import org.eclipse.scada.vi.details.model.PermissionVisibility;
+import org.eclipse.scada.vi.details.model.ProgressComponent;
+import org.eclipse.scada.vi.details.model.ReadableComponent;
+import org.eclipse.scada.vi.details.model.Registration;
+import org.eclipse.scada.vi.details.model.ScriptModule;
+import org.eclipse.scada.vi.details.model.ScriptVisibility;
+import org.eclipse.scada.vi.details.model.SimpleGridComponent;
+import org.eclipse.scada.vi.details.model.TestVisibility;
+import org.eclipse.scada.vi.details.model.TextComponent;
+import org.eclipse.scada.vi.details.model.TextInputComponent;
+import org.eclipse.scada.vi.details.model.TextInputMultiComponent;
+import org.eclipse.scada.vi.details.model.URLImageComponent;
+import org.eclipse.scada.vi.details.model.ValueComponent;
+import org.eclipse.scada.vi.details.model.ValueSetComponent;
+import org.eclipse.scada.vi.details.model.ValueSource;
+import org.eclipse.scada.vi.details.model.View;
+import org.eclipse.scada.vi.details.model.Visibility;
+import org.eclipse.scada.vi.details.model.WriteableComponent;
 
 /**
  * <!-- begin-user-doc -->
@@ -456,6 +495,16 @@ public class DetailViewSwitch<T> extends Switch<T>
             {
                 ScriptModule scriptModule = (ScriptModule)theEObject;
                 T result = caseScriptModule ( scriptModule );
+                if ( result == null )
+                    result = defaultCase ( theEObject );
+                return result;
+            }
+            case DetailViewPackage.BROWSER_COMPONENT:
+            {
+                BrowserComponent browserComponent = (BrowserComponent)theEObject;
+                T result = caseBrowserComponent ( browserComponent );
+                if ( result == null )
+                    result = caseComponent ( browserComponent );
                 if ( result == null )
                     result = defaultCase ( theEObject );
                 return result;
@@ -1053,6 +1102,22 @@ public class DetailViewSwitch<T> extends Switch<T>
      * @generated
      */
     public T caseScriptModule ( ScriptModule object )
+    {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Browser Component</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Browser Component</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseBrowserComponent ( BrowserComponent object )
     {
         return null;
     }
