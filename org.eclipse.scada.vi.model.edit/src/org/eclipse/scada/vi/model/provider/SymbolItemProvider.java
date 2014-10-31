@@ -220,6 +220,7 @@ public class SymbolItemProvider extends ItemProviderAdapter implements IEditingD
             case VisualInterfacePackage.SYMBOL__ON_DISPOSE:
             case VisualInterfacePackage.SYMBOL__ON_UPDATE:
             case VisualInterfacePackage.SYMBOL__BACKGROUND_COLOR:
+            case VisualInterfacePackage.SYMBOL__BACKGROUND_IMAGE:
                 fireNotifyChanged ( new ViewerNotification ( notification, notification.getNotifier (), false, true ) );
                 return;
             case VisualInterfacePackage.SYMBOL__ROOT:

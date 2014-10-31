@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2013 TH4 SYSTEMS GmbH and others.
+ * Copyright (c) 2011, 2014 TH4 SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -8,13 +8,18 @@
  * Contributors:
  *     TH4 SYSTEMS GmbH - initial API and implementation
  *     Jens Reimann - additional work
+ *     IBH SYSTEMS GmbH - add factory context
  *******************************************************************************/
 package org.eclipse.scada.vi.ui.draw2d;
 
+import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.draw2d.ConnectionLayer;
 import org.eclipse.draw2d.FigureCanvas;
@@ -25,6 +30,7 @@ import org.eclipse.draw2d.ScalableLayeredPane;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.PrecisionDimension;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.resource.LocalResourceManager;
 import org.eclipse.scada.ui.utils.status.StatusHelper;
@@ -37,10 +43,12 @@ import org.eclipse.scada.vi.ui.draw2d.loader.StaticSymbolLoader;
 import org.eclipse.scada.vi.ui.draw2d.loader.SymbolLoader;
 import org.eclipse.scada.vi.ui.draw2d.loader.XMISymbolLoader;
 import org.eclipse.scada.vi.ui.draw2d.preferences.PreferenceConstants;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
@@ -78,9 +86,13 @@ public class VisualInterfaceViewer extends Composite implements SummaryProvider
 
     private ConnectionLayer connectionLayer;
 
+    private final Set<org.eclipse.emf.common.util.URI> loadedResources = new HashSet<> ();
+
+    private final FactoryContext factoryContext;
+
     /**
      * Create a new viewer
-     * 
+     *
      * @param parent
      *            the parent composite
      * @param style
@@ -102,7 +114,7 @@ public class VisualInterfaceViewer extends Composite implements SummaryProvider
 
     /**
      * Create a new viewer
-     * 
+     *
      * @param parent
      *            the parent composite
      * @param style
@@ -129,10 +141,17 @@ public class VisualInterfaceViewer extends Composite implements SummaryProvider
 
     public VisualInterfaceViewer ( final Composite parent, final int style, final SymbolLoader symbolLoader, final Map<String, Object> scriptObjects, final Map<String, String> properties )
     {
+        this ( parent, style, symbolLoader, scriptObjects, properties, null );
+    }
+
+    public VisualInterfaceViewer ( final Composite parent, final int style, final SymbolLoader symbolLoader, final Map<String, Object> scriptObjects, final Map<String, String> properties, final FactoryContext factoryContext )
+    {
         super ( parent, style );
 
         this.initialProperties = properties == null ? Collections.<String, String> emptyMap () : properties;
         this.scriptObjects = scriptObjects;
+
+        this.factoryContext = factoryContext;
 
         this.manager = new LocalResourceManager ( JFaceResources.getResources () );
 
@@ -149,7 +168,7 @@ public class VisualInterfaceViewer extends Composite implements SummaryProvider
         this.canvas = createCanvas ();
         setZooming ( null );
 
-        this.factory = new BasicViewElementFactory ( this.canvas, this.manager, symbolLoader );
+        this.factory = new BasicViewElementFactory ( this.canvas, this.manager, symbolLoader, this.factoryContext );
 
         try
         {
@@ -163,7 +182,8 @@ public class VisualInterfaceViewer extends Composite implements SummaryProvider
 
             this.symbol = symbolLoader.loadSymbol ();
             create ( symbolLoader );
-            applyColor ( symbolLoader.loadSymbol () );
+            applyColor ( this.symbol );
+            applyImage ( this.symbol, symbolLoader );
         }
         catch ( final Exception e )
         {
@@ -172,6 +192,21 @@ public class VisualInterfaceViewer extends Composite implements SummaryProvider
 
             this.canvas.setContents ( Helper.createErrorFigure ( e ) );
         }
+    }
+
+    /**
+     * Gets the loaded resources <br/>
+     * Note that this method does not return the symbol resource which was
+     * passed to the constructor. Only the resources loaded by building up that
+     * symbol. <br/>
+     * Also if the process of loading and building the symbol fails, the list if
+     * resources may be incomplete.
+     *
+     * @return the loaded resources
+     */
+    public Set<org.eclipse.emf.common.util.URI> getResources ()
+    {
+        return this.loadedResources;
     }
 
     private ScalableLayeredPane createPane ()
@@ -206,9 +241,48 @@ public class VisualInterfaceViewer extends Composite implements SummaryProvider
         }
     }
 
+    private void applyImage ( final Symbol symbol, final SymbolLoader symbolLoader )
+    {
+        if ( symbol.getBackgroundImage () == null || symbol.getBackgroundImage ().isEmpty () )
+        {
+            return;
+        }
+
+        logInfo ( "Trying to load background image: " + symbol.getBackgroundImage () );
+        final String uriString = symbolLoader.resolveUri ( symbol.getBackgroundImage () );
+
+        final org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createURI ( uriString );
+        this.loadedResources.add ( uri );
+        try
+        {
+            final Image img = this.manager.createImageWithDefault ( ImageDescriptor.createFromURL ( new URL ( uriString ) ) );
+            this.canvas.setBackgroundImage ( img );
+        }
+        catch ( final MalformedURLException e )
+        {
+            logError ( "Loading background image: " + uriString, e ); //$NON-NLS-1$
+        }
+    }
+
+    private void logInfo ( final String string )
+    {
+        if ( this.controller != null )
+        {
+            this.controller.debugLog ( string );
+        }
+    }
+
+    private void logError ( final String string, final Throwable e )
+    {
+        if ( this.controller != null )
+        {
+            this.controller.errorLog ( string, e );
+        }
+    }
+
     protected FigureCanvas createCanvas ()
     {
-        final FigureCanvas canvas = new FigureCanvas ( this );
+        final FigureCanvas canvas = new FigureCanvas ( this, SWT.H_SCROLL | SWT.V_SCROLL | SWT.NO_REDRAW_RESIZE );
 
         addControlListener ( new ControlAdapter () {
             @Override
@@ -283,7 +357,7 @@ public class VisualInterfaceViewer extends Composite implements SummaryProvider
             }
             properties.putAll ( this.initialProperties );
 
-            this.controller = new SymbolController ( getShell (), symbolLoader, properties, this.scriptObjects );
+            this.controller = new SymbolController ( getShell (), symbolLoader, properties, this.scriptObjects, this.factoryContext );
 
             final Controller controller = create ( this.symbol.getRoot () );
 

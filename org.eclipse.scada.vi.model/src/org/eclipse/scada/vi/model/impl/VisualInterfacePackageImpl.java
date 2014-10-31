@@ -484,6 +484,16 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      * <!-- end-user-doc -->
      * @generated
      */
+    public EAttribute getSymbol_BackgroundImage ()
+    {
+        return (EAttribute)symbolEClass.getEStructuralFeatures ().get ( 10 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     @Override
     public EClass getPrimitive ()
     {
@@ -697,6 +707,16 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
     public EAttribute getText_FontItalic ()
     {
         return (EAttribute)textEClass.getEStructuralFeatures ().get ( 8 );
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getText_Alpha ()
+    {
+        return (EAttribute)textEClass.getEStructuralFeatures ().get ( 9 );
     }
 
     /**
@@ -1706,6 +1726,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
         createEAttribute ( symbolEClass, SYMBOL__BACKGROUND_COLOR );
         createEReference ( symbolEClass, SYMBOL__DESIGN_SIZE );
         createEReference ( symbolEClass, SYMBOL__CONNECTIONS );
+        createEAttribute ( symbolEClass, SYMBOL__BACKGROUND_IMAGE );
 
         primitiveEClass = createEClass ( PRIMITIVE );
         createEAttribute ( primitiveEClass, PRIMITIVE__NAME );
@@ -1731,6 +1752,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
         createEAttribute ( textEClass, TEXT__FONT_SIZE );
         createEAttribute ( textEClass, TEXT__FONT_BOLD );
         createEAttribute ( textEClass, TEXT__FONT_ITALIC );
+        createEAttribute ( textEClass, TEXT__ALPHA );
 
         childEClass = createEClass ( CHILD );
         createEReference ( childEClass, CHILD__ELEMENT );
@@ -1910,6 +1932,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
         initEAttribute ( getSymbol_BackgroundColor (), ecorePackage.getEString (), "backgroundColor", null, 0, 1, Symbol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEReference ( getSymbol_DesignSize (), this.getDimension (), null, "designSize", null, 0, 1, Symbol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEReference ( getSymbol_Connections (), this.getConnection (), null, "connections", null, 0, -1, Symbol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
+        initEAttribute ( getSymbol_BackgroundImage (), ecorePackage.getEString (), "backgroundImage", null, 0, 1, Symbol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
 
         initEClass ( primitiveEClass, Primitive.class, "Primitive", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
         initEAttribute ( getPrimitive_Name (), ecorePackage.getEString (), "name", null, 0, 1, Primitive.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
@@ -1935,6 +1958,7 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
         initEAttribute ( getText_FontSize (), ecorePackage.getEInt (), "fontSize", null, 0, 1, Text.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
         initEAttribute ( getText_FontBold (), ecorePackage.getEBoolean (), "fontBold", "false", 1, 1, Text.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$ //$NON-NLS-2$
         initEAttribute ( getText_FontItalic (), ecorePackage.getEBoolean (), "fontItalic", "false", 1, 1, Text.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$ //$NON-NLS-2$
+        initEAttribute ( getText_Alpha (), ecorePackage.getEDoubleObject (), "alpha", null, 0, 1, Text.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
 
         initEClass ( childEClass, Child.class, "Child", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS ); //$NON-NLS-1$
         initEReference ( getChild_Element (), this.getPrimitive (), null, "element", null, 0, 1, Child.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED ); //$NON-NLS-1$
@@ -2084,18 +2108,12 @@ public class VisualInterfacePackageImpl extends EPackageImpl implements VisualIn
      */
     protected void createExtendedMetaDataAnnotations ()
     {
-        String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData"; //$NON-NLS-1$			
-        addAnnotation ( getChild_Element (),
-                source,
-                new String[]
-                {       "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
-                        "name", "element" //$NON-NLS-1$ //$NON-NLS-2$
-                } );
-        addAnnotation ( getXYChild_Position (),
-                source,
-                new String[]
-                {       "kind", "element" //$NON-NLS-1$ //$NON-NLS-2$
-                } );
+        String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData"; //$NON-NLS-1$	
+        addAnnotation ( getChild_Element (), source, new String[] { "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+        "name", "element" //$NON-NLS-1$ //$NON-NLS-2$
+        } );
+        addAnnotation ( getXYChild_Position (), source, new String[] { "kind", "element" //$NON-NLS-1$ //$NON-NLS-2$
+        } );
     }
 
 } //VisualInterfacePackageImpl

@@ -341,7 +341,7 @@ public abstract class FigureController implements Controller
 
     public void setToolTip ( final String string )
     {
-        if ( string == null )
+        if ( string == null || string.isEmpty () )
         {
             getPropertyFigure ().setToolTip ( null );
         }
@@ -848,7 +848,7 @@ public abstract class FigureController implements Controller
 
     protected ColorHandler makeColorHandler ( final String color, final ColorApplier applier )
     {
-        if ( color == null )
+        if ( color == null || color.isEmpty () )
         {
             return new DefaultColor ( getPropertyFigure (), applier );
         }

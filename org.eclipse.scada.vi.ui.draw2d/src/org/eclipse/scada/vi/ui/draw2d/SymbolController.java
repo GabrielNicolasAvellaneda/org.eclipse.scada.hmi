@@ -31,6 +31,7 @@ import javax.script.ScriptContext;
 import javax.script.ScriptEngine;
 import javax.script.SimpleScriptContext;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.scada.core.Variant;
 import org.eclipse.scada.core.ui.styles.StyleGenerator;
 import org.eclipse.scada.core.ui.styles.StyleGenerator.GeneratorListener;
@@ -129,18 +130,22 @@ public class SymbolController implements Listener
 
     private PrintWriter errorPrintWriter;
 
-    public SymbolController ( final Shell shell, final SymbolLoader symbolLoader, final Map<String, String> properties, final Map<String, Object> scriptObjects ) throws Exception
+    private final FactoryContext factoryContext;
+
+    public SymbolController ( final Shell shell, final SymbolLoader symbolLoader, final Map<String, String> properties, final Map<String, Object> scriptObjects, final FactoryContext factoryContext ) throws Exception
     {
-        this ( shell, null, symbolLoader, properties, scriptObjects );
+        this ( shell, null, symbolLoader, properties, scriptObjects, factoryContext );
     }
 
-    public SymbolController ( final Shell shell, final SymbolController parentController, final SymbolLoader symbolLoader, final Map<String, String> properties, final Map<String, Object> scriptObjects ) throws Exception
+    public SymbolController ( final Shell shell, final SymbolController parentController, final SymbolLoader symbolLoader, final Map<String, String> properties, final Map<String, Object> scriptObjects, final FactoryContext factoryContext ) throws Exception
     {
         this.shell = shell;
         this.symbolLoader = symbolLoader;
         this.symbolInfoName = symbolLoader.getSourceName ();
         this.parentController = parentController;
         this.classLoader = symbolLoader.getClassLoader ();
+
+        this.factoryContext = factoryContext;
 
         this.generator = org.eclipse.scada.core.ui.styles.Activator.getDefaultStyleGenerator ();
 
@@ -308,14 +313,37 @@ public class SymbolController implements Listener
     {
         this.logStream.println ( String.format ( "Loading script module: %s", module ) );
 
-        final String moduleSource = this.symbolLoader.loadStringResource ( module );
+        // fire load event
 
+        try
+        {
+            final String uri = this.symbolLoader.resolveUri ( module );
+            this.factoryContext.loadedResource ( URI.createURI ( uri ) );
+        }
+        catch ( final Exception e )
+        {
+        }
+
+        // load
+
+        final String moduleSource = this.symbolLoader.loadStringResource ( module );
         new ScriptExecutor ( this.scriptEngine, moduleSource, this.classLoader, module ).execute ( this.scriptContext );
     }
 
     public void init () throws Exception
     {
-        this.onInit.execute ( this.scriptContext );
+        if ( this.onInit != null )
+        {
+            try
+            {
+                this.onInit.execute ( this.scriptContext );
+            }
+            catch ( final Exception e )
+            {
+                errorLog ( "Failed to run init", e );
+                throw new InvocationTargetException ( e );
+            }
+        }
         for ( final SymbolController controller : this.controllers )
         {
             controller.init ();
@@ -535,11 +563,15 @@ public class SymbolController implements Listener
         logger.debug ( "Running update: {}", this.nameHierarchy );
         try
         {
-            this.onUpdate.execute ( this.scriptContext );
+            if ( this.onUpdate != null )
+            {
+                this.onUpdate.execute ( this.scriptContext );
+            }
         }
         catch ( final Exception e )
         {
             StatusManager.getManager ().handle ( StatusHelper.convertStatus ( Activator.PLUGIN_ID, e ), StatusManager.LOG );
+            errorLog ( "Failed to run update", e );
         }
         notifySummaryListeners ();
 
@@ -635,7 +667,7 @@ public class SymbolController implements Listener
         errorLog ( string, null );
     }
 
-    public void errorLog ( final String string, final Exception e )
+    public void errorLog ( final String string, final Throwable e )
     {
         this.errorPrintWriter.println ( string );
         if ( e != null )
