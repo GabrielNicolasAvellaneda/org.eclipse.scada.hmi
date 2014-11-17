@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2013 TH4 SYSTEMS GmbH and others.
+ * Copyright (c) 2012, 2014 TH4 SYSTEMS GmbH and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -8,6 +8,7 @@
  * Contributors:
  *     TH4 SYSTEMS GmbH - initial API and implementation
  *     Jens Reimann - additional work
+ *     IBH SYSTEMS GmbH - allow setting the chart configuration
  *******************************************************************************/
 package org.eclipse.scada.ui.chart.view;
 
@@ -23,6 +24,7 @@ import org.eclipse.emf.common.command.CommandStackListener;
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
@@ -59,6 +61,7 @@ import org.eclipse.ui.views.properties.IPropertySheetPage;
 
 public class ChartConfiguratorView extends AbstractChartManagePart implements IViewerProvider, IEditingDomainProvider, IMenuListener
 {
+    public static final String VIEW_ID = "org.eclipse.scada.ui.chart.ChartConfigurator"; //$NON-NLS-1$
 
     private TreeViewer viewer;
 
@@ -130,22 +133,39 @@ public class ChartConfiguratorView extends AbstractChartManagePart implements IV
     }
 
     @Override
-    protected void setChartViewer ( final ChartViewer chartViewer )
+    public void setChartViewer ( final ChartViewer chartViewer )
     {
         if ( chartViewer == null )
+        {
+            setChartConfiguration ( null );
+        }
+        else
+        {
+            setChartConfiguration ( chartViewer.getChartConfiguration () );
+        }
+    }
+
+    public void setChartConfiguration ( final Chart chart )
+    {
+        if ( chart == null )
         {
             this.viewer.setInput ( null );
         }
         else
         {
-            final Chart element = chartViewer.getChartConfiguration ();
-
-            if ( element.eResource () == null || element.eResource ().getURI () == null )
+            if ( chart.eResource () == null )
             {
-                element.eResource ().setURI ( URI.createURI ( "urn:dummy" ) );
+                final ResourceSetImpl rs = new ResourceSetImpl ();
+                final Resource r = rs.createResource ( URI.createURI ( "urn:dummy" ) );
+                r.getContents ().add ( chart );
             }
 
-            this.viewer.setInput ( element.eResource () );
+            if ( chart.eResource ().getURI () == null )
+            {
+                chart.eResource ().setURI ( URI.createURI ( "urn:dummy" ) );
+            }
+
+            this.viewer.setInput ( chart.eResource () );
         }
     }
 
